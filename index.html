@@ -1,46 +1,895 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>AutoSup — учёт автомобиля</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AutoSup — Умный учёт вашего автомобиля</title>
+  <meta name="description" content="AutoSup — мобильное приложение для владельцев автомобилей. Учёт топлива, ТО, расходов и документов. iOS и Android." />
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #080b18;
+      --surface: #0f1428;
+      --surface2: #141830;
+      --surface3: #1a1f3a;
+      --border: rgba(99, 120, 255, 0.14);
+      --border2: rgba(99, 120, 255, 0.25);
+      --accent1: #4f7dff;
+      --accent2: #8b5cf6;
+      --text: #e8eaf6;
+      --subtext: #8892b0;
+      --muted: #4a5270;
+      --green: #34d399;
+      --yellow: #fbbf24;
+      --red: #f87171;
+    }
+
+    html { scroll-behavior: smooth; }
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: linear-gradient(160deg, #0b1220 0%, #12243b 100%);
-      color: #eaf2ff; min-height: 100vh;
-      display: flex; align-items: center; justify-content: center; padding: 24px;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
     }
-    .card { max-width: 420px; text-align: center; }
-    .logo { font-size: 34px; font-weight: 800; letter-spacing: -0.5px; color: #00e5b8; }
-    .tagline { margin-top: 8px; font-size: 16px; color: #9fb3cc; }
-    .desc { margin-top: 24px; font-size: 15px; line-height: 1.5; color: #cdd9ea; }
-    .stores { margin-top: 32px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-    .btn {
-      display: inline-block; padding: 12px 20px; border-radius: 12px;
-      background: #00e5b8; color: #06202b; font-weight: 700; text-decoration: none; font-size: 15px;
+
+    /* ── UTILS ── */
+    .gradient-text {
+      background: linear-gradient(135deg, var(--accent1), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
-    .btn.secondary { background: rgba(255,255,255,0.1); color: #eaf2ff; }
-    .footer { margin-top: 40px; font-size: 12px; color: #5f7591; }
-    .footer a { color: #9fb3cc; }
+    .section-wrap { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+    .section-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--accent1); margin-bottom: 10px;
+    }
+    .section-title {
+      font-size: clamp(26px, 4vw, 42px); font-weight: 800;
+      line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 14px;
+    }
+    .section-sub { font-size: 16px; color: var(--subtext); max-width: 560px; }
+    .divider { height: 1px; background: var(--border); margin: 0 24px; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(8, 11, 24, 0.88);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      height: 60px; display: flex; align-items: center;
+      padding: 0 24px; justify-content: space-between;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 9px; text-decoration: none; }
+    .nav-logo img { width: 30px; height: 30px; border-radius: 8px; }
+    .nav-logo span { font-size: 17px; font-weight: 700; }
+    .nav-links { display: flex; align-items: center; gap: 24px; }
+    .nav-links a { color: var(--subtext); text-decoration: none; font-size: 14px; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta {
+      background: linear-gradient(135deg, var(--accent1), var(--accent2));
+      color: #fff !important; padding: 7px 16px; border-radius: 18px;
+      font-weight: 600; font-size: 13px !important;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; padding: 130px 24px 80px;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute;
+      width: 700px; height: 700px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(79,125,255,0.10) 0%, transparent 65%);
+      top: 50%; left: 50%; transform: translate(-50%,-50%);
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(79,125,255,0.1); border: 1px solid rgba(79,125,255,0.22);
+      color: #7fa8ff; font-size: 12px; font-weight: 600;
+      padding: 5px 14px; border-radius: 20px; margin-bottom: 20px;
+      letter-spacing: 0.05em; text-transform: uppercase;
+    }
+    .hero-icon {
+      width: 108px; height: 108px; border-radius: 26px; margin-bottom: 28px;
+      box-shadow: 0 0 60px rgba(79,125,255,0.28), 0 20px 50px rgba(0,0,0,0.5);
+    }
+    .hero h1 { font-size: clamp(36px, 6vw, 66px); font-weight: 800; line-height: 1.1; margin-bottom: 20px; letter-spacing: -0.025em; }
+    .hero-sub { font-size: clamp(16px, 2vw, 19px); color: var(--subtext); max-width: 520px; margin: 0 auto 40px; }
+    .hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: linear-gradient(135deg, var(--accent1), var(--accent2));
+      color: #fff; text-decoration: none; padding: 14px 28px;
+      border-radius: 14px; font-size: 15px; font-weight: 700;
+      box-shadow: 0 8px 30px rgba(79,125,255,0.3);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(79,125,255,0.42); }
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--surface); border: 1px solid var(--border2);
+      color: var(--text); text-decoration: none; padding: 14px 28px;
+      border-radius: 14px; font-size: 15px; font-weight: 600;
+      transition: background 0.2s;
+    }
+    .btn-outline:hover { background: var(--surface2); }
+    .hero-stats { display: flex; gap: 48px; justify-content: center; margin-top: 64px; flex-wrap: wrap; }
+    .hstat-val { font-size: 30px; font-weight: 800; }
+    .hstat-lab { font-size: 12px; color: var(--subtext); margin-top: 2px; }
+
+    /* ── TABS NAV (screens section) ── */
+    .screens-section { padding: 100px 0; }
+    .tabs-header { padding: 0 24px; margin-bottom: 48px; }
+    .tabs-nav {
+      display: flex; gap: 6px; overflow-x: auto;
+      padding: 0 24px; margin-bottom: 0;
+      scrollbar-width: none; -ms-overflow-style: none;
+    }
+    .tabs-nav::-webkit-scrollbar { display: none; }
+    .tab-btn {
+      display: flex; align-items: center; gap: 7px;
+      background: var(--surface); border: 1px solid var(--border);
+      color: var(--subtext); padding: 10px 18px; border-radius: 10px;
+      font-size: 14px; font-weight: 600; cursor: pointer; white-space: nowrap;
+      transition: all 0.2s; flex-shrink: 0;
+    }
+    .tab-btn ion-icon { font-size: 17px; }
+    .tab-btn.active {
+      background: linear-gradient(135deg, rgba(79,125,255,0.15), rgba(139,92,246,0.15));
+      border-color: var(--border2); color: var(--text);
+    }
+    .tab-panel { display: none; padding: 0 24px; }
+    .tab-panel.active { display: block; }
+    .screen-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .screen-main { grid-column: 1 / 3; }
+
+    .screen-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 18px; padding: 24px; position: relative; overflow: hidden;
+    }
+    .screen-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(99,120,255,0.35), transparent);
+    }
+    .screen-card-head {
+      display: flex; align-items: center; gap: 12px; margin-bottom: 18px;
+    }
+    .screen-icon {
+      width: 44px; height: 44px; border-radius: 12px; flex-shrink: 0;
+      background: linear-gradient(135deg, rgba(79,125,255,0.15), rgba(139,92,246,0.15));
+      border: 1px solid rgba(99,120,255,0.2);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .screen-icon ion-icon { font-size: 22px; color: var(--accent1); }
+    .screen-card h3 { font-size: 18px; font-weight: 700; }
+    .screen-card .screen-desc { color: var(--subtext); font-size: 14px; margin-bottom: 20px; }
+    .feat-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .feat-list li {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: 14px; color: var(--subtext);
+    }
+    .feat-list li ion-icon { color: var(--accent1); font-size: 16px; flex-shrink: 0; margin-top: 2px; }
+    .feat-list li strong { color: var(--text); }
+
+    .mini-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 16px; }
+    .mini-card {
+      background: var(--surface3); border: 1px solid var(--border);
+      border-radius: 12px; padding: 14px;
+    }
+    .mini-card-icon { font-size: 20px; margin-bottom: 6px; }
+    .mini-card h4 { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+    .mini-card p { font-size: 12px; color: var(--subtext); }
+
+    .status-row { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+    .status-badge {
+      display: flex; align-items: center; gap: 5px;
+      padding: 5px 10px; border-radius: 8px; font-size: 12px; font-weight: 600;
+    }
+    .status-ok { background: rgba(52,211,153,0.12); color: var(--green); border: 1px solid rgba(52,211,153,0.2); }
+    .status-warn { background: rgba(251,191,36,0.12); color: var(--yellow); border: 1px solid rgba(251,191,36,0.2); }
+    .status-err { background: rgba(248,113,113,0.12); color: var(--red); border: 1px solid rgba(248,113,113,0.2); }
+
+    /* ── FEATURES GRID ── */
+    .features-section { padding: 100px 0; background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .feat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-top: 52px; }
+    .feat-card {
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 18px; padding: 24px; transition: border-color 0.3s, transform 0.3s;
+    }
+    .feat-card:hover { border-color: var(--border2); transform: translateY(-3px); }
+    .feat-card-icon {
+      width: 46px; height: 46px; border-radius: 13px; margin-bottom: 14px;
+      background: linear-gradient(135deg, rgba(79,125,255,0.13), rgba(139,92,246,0.13));
+      border: 1px solid rgba(99,120,255,0.18);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .feat-card-icon ion-icon { font-size: 22px; color: var(--accent1); }
+    .feat-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 7px; }
+    .feat-card p { font-size: 13px; color: var(--subtext); line-height: 1.6; }
+
+    /* ── CUSTOMIZATION ── */
+    .custom-section { padding: 100px 0; }
+    .theme-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 40px; }
+    .theme-card {
+      border-radius: 18px; padding: 24px; border: 1px solid var(--border);
+      text-align: center;
+    }
+    .theme-classic { background: #111; }
+    .theme-glass { background: linear-gradient(135deg, rgba(15,20,40,0.9), rgba(25,30,55,0.9)); }
+    .theme-iris { background: linear-gradient(135deg, rgba(15,20,45,0.9), rgba(40,20,60,0.9)); }
+    .theme-preview {
+      width: 60px; height: 60px; border-radius: 14px; margin: 0 auto 12px;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .theme-card h4 { font-size: 15px; font-weight: 700; margin-bottom: 5px; }
+    .theme-card p { font-size: 12px; color: var(--subtext); }
+
+    .lang-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 10px; margin-top: 32px; }
+    .lang-item {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 10px; padding: 10px 14px; font-size: 13px;
+      display: flex; align-items: center; gap: 8px; color: var(--subtext);
+    }
+    .lang-item span { font-size: 18px; }
+
+    /* ── SCREENSHOTS ── */
+    .shots-section { padding: 100px 0; background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); overflow: hidden; }
+    .shots-scroll {
+      display: flex; gap: 16px; margin-top: 48px;
+      overflow-x: auto; scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding: 16px 48px 32px;
+      scrollbar-width: none;
+    }
+    .shots-scroll::-webkit-scrollbar { display: none; }
+    .shot-frame {
+      position: relative; flex-shrink: 0;
+      border-radius: 36px; overflow: hidden;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(99,120,255,0.15);
+      transition: transform 0.3s;
+      scroll-snap-align: start;
+    }
+    .shot-frame:hover { transform: translateY(-6px) scale(1.02); }
+    .shot-frame img {
+      display: block; width: 180px; height: auto; border-radius: 36px;
+    }
+
+    /* ── DOWNLOAD ── */
+    .download-section { padding: 100px 24px; text-align: center; }
+    .download-section h2 { font-size: clamp(28px, 4vw, 46px); font-weight: 800; margin-bottom: 14px; }
+    .download-section p { color: var(--subtext); font-size: 17px; margin-bottom: 40px; }
+    .store-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .store-btn {
+      display: flex; align-items: center; gap: 12px;
+      background: var(--surface); border: 1px solid var(--border2);
+      border-radius: 16px; padding: 14px 24px; text-decoration: none;
+      color: var(--text); min-width: 170px; transition: border-color 0.2s, background 0.2s;
+    }
+    .store-btn:hover { border-color: rgba(99,120,255,0.4); background: var(--surface2); }
+    .store-btn.soon { opacity: 0.45; pointer-events: none; }
+    .store-btn ion-icon { font-size: 30px; color: var(--subtext); }
+    .store-btn-sub { font-size: 10px; color: var(--subtext); text-transform: uppercase; letter-spacing: 0.06em; }
+    .store-btn-name { font-size: 17px; font-weight: 700; }
+
+    /* ── FOOTER ── */
+    footer { padding: 40px 24px; border-top: 1px solid var(--border); }
+    .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+    .footer-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; }
+    .footer-logo img { width: 26px; height: 26px; border-radius: 7px; }
+    .footer-logo span { font-size: 15px; font-weight: 700; }
+    .footer-links { display: flex; gap: 22px; flex-wrap: wrap; }
+    .footer-links a { color: var(--subtext); text-decoration: none; font-size: 13px; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--text); }
+    .footer-copy { color: var(--muted); font-size: 12px; width: 100%; margin-top: 14px; text-align: center; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 700px) {
+      .nav-links { display: none; }
+      .screen-grid, .mini-cards { grid-template-columns: 1fr; }
+      .screen-main { grid-column: 1; }
+      .theme-cards { grid-template-columns: 1fr; }
+      .footer-inner { flex-direction: column; align-items: center; text-align: center; }
+    }
+
+    /* ── PREMIUM EFFECTS ── */
+    /* Scroll-reveal: элементы плавно всплывают при появлении в viewport */
+    .reveal { opacity: 0; transform: translateY(26px);
+      transition: opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1); }
+    .reveal.revealed { opacity: 1; transform: none; }
+    /* Лёгкий stagger внутри сеток */
+    .feat-card:nth-child(2n) { transition-delay: .06s; }
+    .feat-card:nth-child(3n) { transition-delay: .12s; }
+    .shot-frame:nth-child(2n) { transition-delay: .05s; }
+
+    /* Hover-lift для карточек */
+    .feat-card, .theme-card, .mini-card, .shot-frame {
+      transition: transform .35s cubic-bezier(.16,1,.3,1), box-shadow .35s ease, border-color .35s ease,
+                  opacity .7s cubic-bezier(.16,1,.3,1); }
+    .feat-card:hover, .theme-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--border2);
+      box-shadow: 0 18px 44px -14px rgba(79,125,255,0.30); }
+    .mini-card:hover { transform: translateY(-4px); }
+    .shot-frame:hover { transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 22px 50px -16px rgba(79,125,255,0.35); }
+
+    /* Живое движущееся свечение в hero */
+    @keyframes heroGlow {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: .85; }
+      50% { transform: translate(-50%, -53%) scale(1.14); opacity: 1; } }
+    .hero::before { animation: heroGlow 9s ease-in-out infinite; }
+
+    /* Плавное подчёркивание ссылок навигации */
+    .nav-links a:not(.nav-cta) { position: relative; }
+    .nav-links a:not(.nav-cta)::after {
+      content: ''; position: absolute; left: 0; bottom: -4px; height: 2px; width: 0;
+      background: linear-gradient(135deg, var(--accent1), var(--accent2));
+      transition: width .3s cubic-bezier(.16,1,.3,1); }
+    .nav-links a:not(.nav-cta):hover::after { width: 100%; }
+
+    /* Уважаем настройку «уменьшить движение» */
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+      .hero::before { animation: none; }
+      html { scroll-behavior: auto; }
+    }
   </style>
 </head>
 <body>
-  <div class="card">
-    <div class="logo">AutoSup</div>
-    <div class="tagline">Учёт автомобиля: топливо, ТО, расходы</div>
-    <div class="desc">
-      Ведите историю обслуживания, расход топлива и зарядки, документы и напоминания —
-      для бензиновых, гибридных и электромобилей.
+
+<!-- ── NAV ── -->
+<nav>
+  <a class="nav-logo" href="#">
+    <img src="icon.png" alt="AutoSup" />
+    <span class="gradient-text">AutoSup</span>
+  </a>
+  <div class="nav-links">
+    <a href="#screens">Экраны</a>
+    <a href="#features">Функции</a>
+    <a href="#customize">Настройки</a>
+    <a href="#download" class="nav-cta">Скачать</a>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-badge">
+    <ion-icon name="phone-portrait-outline"></ion-icon>
+    iOS &amp; Android
+  </div>
+  <img class="hero-icon" src="icon.png" alt="AutoSup" />
+  <h1>Умный учёт<br/><span class="gradient-text">вашего автомобиля</span></h1>
+  <p class="hero-sub">Всё об автомобиле в одном месте — топливо, техническое обслуживание, расходы, документы. Красивый интерфейс, облачная синхронизация, 13 языков.</p>
+  <div class="hero-btns">
+    <a href="#download" class="btn-primary">
+      <ion-icon name="download-outline"></ion-icon> Скачать приложение
+    </a>
+    <a href="#screens" class="btn-outline">
+      Узнать больше <ion-icon name="arrow-forward-outline"></ion-icon>
+    </a>
+  </div>
+  <div class="hero-stats">
+    <div>
+      <div class="hstat-val gradient-text">5</div>
+      <div class="hstat-lab">разделов приложения</div>
     </div>
-    <div class="stores">
-      <a class="btn" href="#">App Store</a>
-      <a class="btn secondary" href="#">Google Play</a>
+    <div>
+      <div class="hstat-val gradient-text">13</div>
+      <div class="hstat-lab">языков интерфейса</div>
     </div>
-    <div class="footer">
-      © AutoSup · <a href="/privacy">Конфиденциальность</a>
+    <div>
+      <div class="hstat-val gradient-text">3</div>
+      <div class="hstat-lab">темы оформления</div>
+    </div>
+    <div>
+      <div class="hstat-val gradient-text">100%</div>
+      <div class="hstat-lab">ваши данные</div>
     </div>
   </div>
+</section>
+
+<!-- ── SCREENS ── -->
+<section class="screens-section" id="screens">
+  <div class="tabs-header section-wrap">
+    <div class="section-label">Разделы приложения</div>
+    <h2 class="section-title">Пять экранов —<br/>полный контроль</h2>
+    <p class="section-sub">Навигация по вкладкам в нижней панели. Каждый раздел решает свою задачу.</p>
+  </div>
+
+  <div class="tabs-nav" id="tabsNav">
+    <button class="tab-btn active" onclick="showTab('home', this)">
+      <ion-icon name="home-outline"></ion-icon> Главная
+    </button>
+    <button class="tab-btn" onclick="showTab('fuel', this)">
+      <ion-icon name="flame-outline"></ion-icon> Топливо
+    </button>
+    <button class="tab-btn" onclick="showTab('service', this)">
+      <ion-icon name="construct-outline"></ion-icon> Сервис
+    </button>
+    <button class="tab-btn" onclick="showTab('journal', this)">
+      <ion-icon name="book-outline"></ion-icon> Журнал
+    </button>
+    <button class="tab-btn" onclick="showTab('profile', this)">
+      <ion-icon name="person-outline"></ion-icon> Профиль
+    </button>
+  </div>
+
+  <!-- HOME -->
+  <div class="tab-panel active" id="tab-home">
+    <div class="section-wrap" style="margin-top:28px;">
+      <div class="screen-grid">
+        <div class="screen-card screen-main">
+          <div class="screen-card-head">
+            <div class="screen-icon"><ion-icon name="home-outline"></ion-icon></div>
+            <div>
+              <h3>Главная</h3>
+              <div style="font-size:13px;color:var(--subtext)">Дашборд вашего автомобиля</div>
+            </div>
+          </div>
+          <p class="screen-desc">Главный экран показывает всё важное об активном автомобиле одним взглядом. Карточка авто с маркой, моделью и фотографией, текущий пробег, быстрые кнопки для добавления записей и сводная статистика по всем разделам.</p>
+          <ul class="feat-list">
+            <li><ion-icon name="car-outline"></ion-icon><span><strong>Карточка автомобиля</strong> — марка, модель, год, госномер, фото. Быстрый доступ к редактированию.</span></li>
+            <li><ion-icon name="speedometer-outline"></ion-icon><span><strong>Пробег</strong> — текущий одометр и кнопка обновления показаний.</span></li>
+            <li><ion-icon name="flash-outline"></ion-icon><span><strong>Быстрые действия</strong> — добавить заправку, ТО или расход прямо с главного экрана.</span></li>
+            <li><ion-icon name="flame-outline"></ion-icon><span><strong>Последняя заправка</strong> — дата, литры, сумма и АЗС последней заправки.</span></li>
+            <li><ion-icon name="construct-outline"></ion-icon><span><strong>Сетка ТО</strong> — статусы ключевых работ: масло, шины, тормоза, ремень ГРМ и другие. Цветовая индикация: зелёный / жёлтый / красный.</span></li>
+            <li><ion-icon name="notifications-outline"></ion-icon><span><strong>Алерты документов</strong> — уведомления о скором истечении страховки, техосмотра, водительских прав.</span></li>
+          </ul>
+          <div class="status-row">
+            <div class="status-badge status-ok"><ion-icon name="checkmark-circle-outline"></ion-icon> В норме</div>
+            <div class="status-badge status-warn"><ion-icon name="time-outline"></ion-icon> Скоро</div>
+            <div class="status-badge status-err"><ion-icon name="alert-circle-outline"></ion-icon> Просрочено</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FUEL -->
+  <div class="tab-panel" id="tab-fuel">
+    <div class="section-wrap" style="margin-top:28px;">
+      <div class="screen-grid">
+        <div class="screen-card screen-main">
+          <div class="screen-card-head">
+            <div class="screen-icon"><ion-icon name="flame-outline"></ion-icon></div>
+            <div>
+              <h3>Топливо</h3>
+              <div style="font-size:13px;color:var(--subtext)">Заправки, расход и аналитика</div>
+            </div>
+          </div>
+          <p class="screen-desc">Раздел для детального учёта заправок. Интерактивные графики по дням и месяцам, статистика расхода топлива, топ АЗС по частоте посещений.</p>
+          <ul class="feat-list">
+            <li><ion-icon name="bar-chart-outline"></ion-icon><span><strong>График по дням</strong> — столбчатая диаграмма расхода в литрах за каждую заправку. Тап по столбцу — тултип с датой, литрами, суммой и АЗС.</span></li>
+            <li><ion-icon name="stats-chart-outline"></ion-icon><span><strong>График по месяцам</strong> — расход за 1, 6 месяцев или год. Навигация по периодам.</span></li>
+            <li><ion-icon name="trending-down-outline"></ion-icon><span><strong>График расхода</strong> — динамика л/100км во времени, автоматический расчёт по показаниям одометра.</span></li>
+            <li><ion-icon name="location-outline"></ion-icon><span><strong>Топ АЗС</strong> — список станций с количеством заправок и средней ценой.</span></li>
+            <li><ion-icon name="list-outline"></ion-icon><span><strong>История заправок</strong> — полный список с датой, литрами, типом топлива, ценой и пробегом. Свайп для удаления.</span></li>
+            <li><ion-icon name="add-circle-outline"></ion-icon><span><strong>Добавление заправки</strong> — дата, литры, сумма, тип топлива, пробег, АЗС. Автодополнение названий станций.</span></li>
+          </ul>
+        </div>
+        <div class="screen-card">
+          <h3 style="margin-bottom:12px;font-size:15px;">Статистика</h3>
+          <div class="mini-cards" style="margin-top:0;">
+            <div class="mini-card">
+              <div class="mini-card-icon"><ion-icon name="cash-outline" style="font-size:20px;color:var(--accent1)"></ion-icon></div>
+              <h4>Сумма ₸</h4>
+              <p>Общая стоимость топлива за период</p>
+            </div>
+            <div class="mini-card">
+              <div class="mini-card-icon"><ion-icon name="water-outline" style="font-size:20px;color:var(--accent1)"></ion-icon></div>
+              <h4>Литры</h4>
+              <p>Общий объём залитого топлива</p>
+            </div>
+            <div class="mini-card">
+              <div class="mini-card-icon"><ion-icon name="speedometer-outline" style="font-size:20px;color:var(--accent1)"></ion-icon></div>
+              <h4>Расход</h4>
+              <p>Средний расход л/100км</p>
+            </div>
+            <div class="mini-card">
+              <div class="mini-card-icon"><ion-icon name="pricetag-outline" style="font-size:20px;color:var(--accent1)"></ion-icon></div>
+              <h4>₸/л</h4>
+              <p>Средняя цена литра</p>
+            </div>
+          </div>
+        </div>
+        <div class="screen-card">
+          <h3 style="margin-bottom:12px;font-size:15px;">Типы топлива</h3>
+          <ul class="feat-list">
+            <li><ion-icon name="ellipse-outline"></ion-icon><span>Бензин</span></li>
+            <li><ion-icon name="ellipse-outline"></ion-icon><span>Дизель</span></li>
+            <li><ion-icon name="ellipse-outline"></ion-icon><span>Гибрид</span></li>
+            <li><ion-icon name="ellipse-outline"></ion-icon><span>Электро</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVICE -->
+  <div class="tab-panel" id="tab-service">
+    <div class="section-wrap" style="margin-top:28px;">
+      <div class="screen-grid">
+        <div class="screen-card screen-main">
+          <div class="screen-card-head">
+            <div class="screen-icon"><ion-icon name="construct-outline"></ion-icon></div>
+            <div>
+              <h3>Сервис</h3>
+              <div style="font-size:13px;color:var(--subtext)">Техническое обслуживание</div>
+            </div>
+          </div>
+          <p class="screen-desc">Полная история обслуживания автомобиля. Каждый вид работ контролируется по пробегу и дате с цветовой индикацией статуса.</p>
+          <ul class="feat-list">
+            <li><ion-icon name="list-outline"></ion-icon><span><strong>Список работ ТО</strong> — замена масла, фильтров, тормозных колодок, свечей, ремня ГРМ, шин и другие виды обслуживания.</span></li>
+            <li><ion-icon name="checkmark-done-outline"></ion-icon><span><strong>Статус каждой работы</strong> — зелёный (в норме), жёлтый (скоро нужно), красный (просрочено) на основе интервала по пробегу или дате.</span></li>
+            <li><ion-icon name="time-outline"></ion-icon><span><strong>Интервалы</strong> — настройка по километрам и/или месяцам для каждого вида работ.</span></li>
+            <li><ion-icon name="storefront-outline"></ion-icon><span><strong>Мастерская</strong> — фиксирует где выполнялась работа.</span></li>
+            <li><ion-icon name="cash-outline"></ion-icon><span><strong>Стоимость</strong> — сумма каждой работы для подсчёта расходов на обслуживание.</span></li>
+            <li><ion-icon name="add-circle-outline"></ion-icon><span><strong>Добавление записи</strong> — дата, вид работы, пробег, мастерская, стоимость, примечание.</span></li>
+          </ul>
+        </div>
+        <div class="screen-card">
+          <h3 style="margin-bottom:12px;font-size:15px;">Виды работ</h3>
+          <ul class="feat-list">
+            <li><ion-icon name="water-outline"></ion-icon><span>Замена масла и фильтров</span></li>
+            <li><ion-icon name="disc-outline"></ion-icon><span>Тормозные колодки и диски</span></li>
+            <li><ion-icon name="flash-outline"></ion-icon><span>Свечи зажигания</span></li>
+            <li><ion-icon name="settings-outline"></ion-icon><span>Ремень / цепь ГРМ</span></li>
+            <li><ion-icon name="ellipse-outline"></ion-icon><span>Шины (сезонная смена)</span></li>
+            <li><ion-icon name="battery-charging-outline"></ion-icon><span>Аккумулятор</span></li>
+            <li><ion-icon name="thermometer-outline"></ion-icon><span>Охлаждающая жидкость</span></li>
+            <li><ion-icon name="add-outline"></ion-icon><span>Любые другие работы</span></li>
+          </ul>
+        </div>
+        <div class="screen-card">
+          <h3 style="margin-bottom:10px;font-size:15px;">Индикация статуса</h3>
+          <div style="display:flex;flex-direction:column;gap:10px;margin-top:8px;">
+            <div class="status-badge status-ok" style="width:fit-content"><ion-icon name="checkmark-circle-outline"></ion-icon> В норме — обслуживание актуально</div>
+            <div class="status-badge status-warn" style="width:fit-content"><ion-icon name="time-outline"></ion-icon> Скоро — близко к интервалу</div>
+            <div class="status-badge status-err" style="width:fit-content"><ion-icon name="alert-circle-outline"></ion-icon> Просрочено — пора обслужить</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JOURNAL -->
+  <div class="tab-panel" id="tab-journal">
+    <div class="section-wrap" style="margin-top:28px;">
+      <div class="screen-grid">
+        <div class="screen-card screen-main">
+          <div class="screen-card-head">
+            <div class="screen-icon"><ion-icon name="book-outline"></ion-icon></div>
+            <div>
+              <h3>Журнал</h3>
+              <div style="font-size:13px;color:var(--subtext)">Все события и аналитика</div>
+            </div>
+          </div>
+          <p class="screen-desc">Сводный раздел с полной историей автомобиля. Три вкладки — Топливо, Сервис, Расходы — с месячной навигацией, сводной статистикой и экспортом отчётов.</p>
+          <ul class="feat-list">
+            <li><ion-icon name="pie-chart-outline"></ion-icon><span><strong>Сводная карточка</strong> — donut-диаграмма расходов за месяц: заправки / ТО / доп. расходы. Тап по секции переключает вкладку.</span></li>
+            <li><ion-icon name="calendar-outline"></ion-icon><span><strong>Навигация по месяцам</strong> — стрелки для переключения периода, данные пересчитываются мгновенно.</span></li>
+            <li><ion-icon name="filter-outline"></ion-icon><span><strong>Фильтр по категориям</strong> — во вкладке «Расходы» тап по категории фильтрует список.</span></li>
+            <li><ion-icon name="trending-up-outline"></ion-icon><span><strong>Тренды ▲▼</strong> — сравнение с предыдущим месяцем для каждой категории расходов.</span></li>
+            <li><ion-icon name="share-outline"></ion-icon><span><strong>Экспорт отчётов</strong> — PDF и CSV за любой период. Топливо, ТО, расходы или сводный отчёт.</span></li>
+          </ul>
+        </div>
+        <div class="screen-card">
+          <h3 style="margin-bottom:12px;font-size:15px;">Вкладки журнала</h3>
+          <ul class="feat-list">
+            <li><ion-icon name="flame-outline"></ion-icon><span><strong>Топливо</strong> — сумма ₸, литры, средний расход за месяц</span></li>
+            <li><ion-icon name="construct-outline"></ion-icon><span><strong>Сервис</strong> — сумма ТО, количество работ</span></li>
+            <li><ion-icon name="wallet-outline"></ion-icon><span><strong>Расходы</strong> — разбивка по категориям с горизонтальными барами и %</span></li>
+          </ul>
+        </div>
+        <div class="screen-card">
+          <h3 style="margin-bottom:12px;font-size:15px;">Форматы экспорта</h3>
+          <ul class="feat-list">
+            <li><ion-icon name="document-text-outline"></ion-icon><span><strong>PDF</strong> — красиво оформленный отчёт с шапкой авто и итогами</span></li>
+            <li><ion-icon name="grid-outline"></ion-icon><span><strong>CSV</strong> — табличные данные для Excel или Google Sheets</span></li>
+            <li><ion-icon name="car-outline"></ion-icon><span><strong>Сравнение авто</strong> — сводный отчёт по всем автомобилям</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROFILE -->
+  <div class="tab-panel" id="tab-profile">
+    <div class="section-wrap" style="margin-top:28px;">
+      <div class="screen-grid">
+        <div class="screen-card screen-main">
+          <div class="screen-card-head">
+            <div class="screen-icon"><ion-icon name="person-outline"></ion-icon></div>
+            <div>
+              <h3>Профиль</h3>
+              <div style="font-size:13px;color:var(--subtext)">Авто, аккаунт и настройки</div>
+            </div>
+          </div>
+          <p class="screen-desc">Управление автомобилями, аккаунтом Firebase и настройками приложения. Быстрое переключение между несколькими машинами.</p>
+          <ul class="feat-list">
+            <li><ion-icon name="car-outline"></ion-icon><span><strong>Мои автомобили</strong> — список всех добавленных авто с активным выделенным. Переключение одним тапом, редактирование и удаление.</span></li>
+            <li><ion-icon name="cloud-upload-outline"></ion-icon><span><strong>Аккаунт</strong> — вход через Google, ручная синхронизация данных с Firebase, выход из аккаунта.</span></li>
+            <li><ion-icon name="settings-outline"></ion-icon><span><strong>Настройки</strong> — тема (тёмная/светлая/системная), стиль (Classic/Glass/Glass Iris), язык, единицы измерения, уведомления.</span></li>
+            <li><ion-icon name="globe-outline"></ion-icon><span><strong>Сайт приложения</strong> — ссылка на эту страницу.</span></li>
+            <li><ion-icon name="mail-outline"></ion-icon><span><strong>Написать нам</strong> — связь с поддержкой по email.</span></li>
+            <li><ion-icon name="lock-closed-outline"></ion-icon><span><strong>Конфиденциальность и условия</strong> — правовые документы.</span></li>
+          </ul>
+        </div>
+        <div class="screen-card">
+          <h3 style="margin-bottom:12px;font-size:15px;">Добавление автомобиля</h3>
+          <ul class="feat-list">
+            <li><ion-icon name="car-outline"></ion-icon><span>Марка и модель из каталога</span></li>
+            <li><ion-icon name="calendar-outline"></ion-icon><span>Год выпуска</span></li>
+            <li><ion-icon name="key-outline"></ion-icon><span>Госномер и VIN</span></li>
+            <li><ion-icon name="speedometer-outline"></ion-icon><span>Начальный пробег</span></li>
+            <li><ion-icon name="flame-outline"></ion-icon><span>Тип топлива и объём бака</span></li>
+            <li><ion-icon name="settings-outline"></ion-icon><span>Коробка передач, объём двигателя</span></li>
+            <li><ion-icon name="image-outline"></ion-icon><span>Фотография автомобиля</span></li>
+          </ul>
+        </div>
+        <div class="screen-card">
+          <h3 style="margin-bottom:12px;font-size:15px;">Настройки уведомлений</h3>
+          <ul class="feat-list">
+            <li><ion-icon name="notifications-outline"></ion-icon><span>Включить / выключить уведомления</span></li>
+            <li><ion-icon name="time-outline"></ion-icon><span>Время отправки напоминания</span></li>
+            <li><ion-icon name="musical-note-outline"></ion-icon><span>Выбор звука: стандартный, chime, horn, retro, vroom</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FEATURES ── -->
+<section class="features-section" id="features">
+  <div class="section-wrap">
+    <div class="section-label">Ключевые функции</div>
+    <h2 class="section-title">Всё что нужно<br/>владельцу авто</h2>
+    <p class="section-sub">AutoSup заменяет разрозненные заметки, таблицы и приложения одним инструментом.</p>
+
+    <div class="feat-grid">
+      <div class="feat-card">
+        <div class="feat-card-icon"><ion-icon name="car-sport-outline"></ion-icon></div>
+        <h3>Несколько автомобилей</h3>
+        <p>Ведите учёт семейного автопарка в одном аккаунте. Переключение между машинами — один тап в профиле.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-card-icon"><ion-icon name="cloud-done-outline"></ion-icon></div>
+        <h3>Облачная синхронизация</h3>
+        <p>Все данные сохраняются локально в SQLite и в Firebase. Доступны на всех ваших устройствах после входа через Google.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-card-icon"><ion-icon name="notifications-outline"></ion-icon></div>
+        <h3>Умные уведомления</h3>
+        <p>Напомнит о плановом ТО по пробегу или дате, о скором истечении страховки, техосмотра, водительских прав — заранее.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-card-icon"><ion-icon name="share-outline"></ion-icon></div>
+        <h3>Экспорт PDF и CSV</h3>
+        <p>Выгружайте отчёты по заправкам, ТО, расходам или сводный отчёт. Гибкий выбор периода: месяц, 3 месяца, год или произвольный.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-card-icon"><ion-icon name="wallet-outline"></ion-icon></div>
+        <h3>Категории расходов</h3>
+        <p>Страховка, штрафы, мойка, парковка, запчасти — любые расходы по категориям. Переименование и объединение категорий.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-card-icon"><ion-icon name="stats-chart-outline"></ion-icon></div>
+        <h3>Аналитика и графики</h3>
+        <p>Интерактивные графики расхода топлива по дням и месяцам, динамика л/100км, donut-диаграмма расходов с трендами.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-card-icon"><ion-icon name="document-text-outline"></ion-icon></div>
+        <h3>Документы с контролем сроков</h3>
+        <p>Страховка, техосмотр, права и другие документы. Приложение предупреждает за 30 дней до истечения срока.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-card-icon"><ion-icon name="color-palette-outline"></ion-icon></div>
+        <h3>Три темы оформления</h3>
+        <p>Classic, Glass и Glass Iris — выбирайте стиль под своё настроение. Поддержка тёмной, светлой и системной темы.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-card-icon"><ion-icon name="language-outline"></ion-icon></div>
+        <h3>13 языков интерфейса</h3>
+        <p>Русский, английский, казахский, испанский, французский, немецкий, португальский, китайский, японский, арабский, хинди, турецкий, индонезийский.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CUSTOMIZATION ── -->
+<section class="custom-section" id="customize">
+  <div class="section-wrap">
+    <div class="section-label">Персонализация</div>
+    <h2 class="section-title">Настройте под себя</h2>
+    <p class="section-sub">Три стиля оформления, 13 языков и гибкие единицы измерения.</p>
+
+    <div style="margin-top:48px;">
+      <h3 style="font-size:16px;font-weight:700;margin-bottom:6px;color:var(--subtext);letter-spacing:0.05em;text-transform:uppercase;font-size:12px;">Стили оформления</h3>
+      <div class="theme-cards">
+        <div class="theme-card theme-classic">
+          <div class="theme-preview" style="background:#1a1a1a;display:flex;align-items:center;justify-content:center;">
+            <ion-icon name="square-outline" style="font-size:28px;color:#555;"></ion-icon>
+          </div>
+          <h4>Classic</h4>
+          <p>Чистый плоский дизайн. Минимализм без лишних эффектов.</p>
+        </div>
+        <div class="theme-card theme-glass">
+          <div class="theme-preview" style="background:rgba(79,125,255,0.15);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;border:1px solid rgba(79,125,255,0.2);">
+            <ion-icon name="square-outline" style="font-size:28px;color:rgba(79,125,255,0.6);"></ion-icon>
+          </div>
+          <h4>Glass</h4>
+          <p>Стеклянный эффект с размытием. Современный и лёгкий вид.</p>
+        </div>
+        <div class="theme-card theme-iris">
+          <div class="theme-preview" style="background:linear-gradient(135deg,rgba(79,125,255,0.2),rgba(139,92,246,0.2));display:flex;align-items:center;justify-content:center;border:1px solid rgba(139,92,246,0.25);">
+            <ion-icon name="square-outline" style="font-size:28px;color:rgba(139,92,246,0.7);"></ion-icon>
+          </div>
+          <h4>Glass Iris</h4>
+          <p>Стекло с радужным градиентом. Яркий и стильный вариант.</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:52px;">
+      <h3 style="font-size:12px;font-weight:700;margin-bottom:16px;color:var(--subtext);letter-spacing:0.05em;text-transform:uppercase;">Поддерживаемые языки</h3>
+      <div class="lang-grid">
+        <div class="lang-item"><span>🇷🇺</span> Русский</div>
+        <div class="lang-item"><span>🇬🇧</span> English</div>
+        <div class="lang-item"><span>🇰🇿</span> Қазақша</div>
+        <div class="lang-item"><span>🇪🇸</span> Español</div>
+        <div class="lang-item"><span>🇫🇷</span> Français</div>
+        <div class="lang-item"><span>🇩🇪</span> Deutsch</div>
+        <div class="lang-item"><span>🇧🇷</span> Português</div>
+        <div class="lang-item"><span>🇨🇳</span> 中文</div>
+        <div class="lang-item"><span>🇯🇵</span> 日本語</div>
+        <div class="lang-item"><span>🇸🇦</span> العربية</div>
+        <div class="lang-item"><span>🇮🇳</span> हिन्दी</div>
+        <div class="lang-item"><span>🇹🇷</span> Türkçe</div>
+        <div class="lang-item"><span>🇮🇩</span> Indonesia</div>
+      </div>
+    </div>
+
+    <div style="margin-top:52px;">
+      <h3 style="font-size:12px;font-weight:700;margin-bottom:16px;color:var(--subtext);letter-spacing:0.05em;text-transform:uppercase;">Единицы измерения</h3>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;">
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 20px;display:flex;align-items:center;gap:10px;">
+          <ion-icon name="speedometer-outline" style="color:var(--accent1);font-size:20px;"></ion-icon>
+          <div><div style="font-size:13px;font-weight:600;">Расстояние</div><div style="font-size:12px;color:var(--subtext);">км / мили</div></div>
+        </div>
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 20px;display:flex;align-items:center;gap:10px;">
+          <ion-icon name="water-outline" style="color:var(--accent1);font-size:20px;"></ion-icon>
+          <div><div style="font-size:13px;font-weight:600;">Объём</div><div style="font-size:12px;color:var(--subtext);">литры / галлоны</div></div>
+        </div>
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 20px;display:flex;align-items:center;gap:10px;">
+          <ion-icon name="cash-outline" style="color:var(--accent1);font-size:20px;"></ion-icon>
+          <div><div style="font-size:13px;font-weight:600;">Валюта</div><div style="font-size:12px;color:var(--subtext);">₸ / $ / € / ₽ и другие</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SCREENSHOTS ── -->
+<section class="shots-section" id="screenshots">
+  <div class="section-wrap">
+    <div class="section-label">Интерфейс</div>
+    <h2 class="section-title">Красиво и удобно</h2>
+    <p class="section-sub">Тёмная тема, стеклянный дизайн, плавные анимации.</p>
+  </div>
+  <div class="shots-scroll">
+    <div class="shot-frame"><img src="screenshots/IMG_5991.jpg" alt="Топливо" /></div>
+    <div class="shot-frame"><img src="screenshots/IMG_5992.jpg" alt="ТО" /></div>
+    <div class="shot-frame"><img src="screenshots/IMG_5993.jpg" alt="Главная" /></div>
+    <div class="shot-frame"><img src="screenshots/IMG_5994.jpg" alt="Журнал" /></div>
+    <div class="shot-frame"><img src="screenshots/IMG_5995.jpg" alt="Профиль" /></div>
+    <div class="shot-frame"><img src="screenshots/IMG_5996.jpg" alt="Топливо тёмная" /></div>
+    <div class="shot-frame"><img src="screenshots/IMG_5997.jpg" alt="ТО тёмная" /></div>
+    <div class="shot-frame"><img src="screenshots/IMG_5998.jpg" alt="Главная тёмная" /></div>
+    <div class="shot-frame"><img src="screenshots/IMG_5999.jpg" alt="Журнал тёмная" /></div>
+    <div class="shot-frame"><img src="screenshots/IMG_6001.jpg" alt="Профиль тёмная" /></div>
+    <div class="shot-frame"><img src="screenshots/IMG_6002.jpg" alt="Топливо" /></div>
+    <div class="shot-frame"><img src="screenshots/IMG_6003.jpg" alt="Журнал расходы" /></div>
+    <div class="shot-frame"><img src="screenshots/IMG_6004.jpg" alt="Главная glass" /></div>
+    <div class="shot-frame"><img src="screenshots/IMG_6005.jpg" alt="Журнал glass" /></div>
+    <div class="shot-frame"><img src="screenshots/IMG_6006.jpg" alt="Профиль glass" /></div>
+    <div class="shot-frame"><img src="screenshots/IMG_6007.jpg" alt="Топливо тёмная" /></div>
+    <div class="shot-frame"><img src="screenshots/IMG_6008.jpg" alt="Главная тёмная" /></div>
+    <div class="shot-frame"><img src="screenshots/IMG_6009.jpg" alt="Главная тёмная" /></div>
+    <div class="shot-frame"><img src="screenshots/IMG_6010.jpg" alt="Журнал тёмная" /></div>
+    <div class="shot-frame"><img src="screenshots/IMG_6011.jpg" alt="Профиль тёмная" /></div>
+    <div class="shot-frame"><img src="screenshots/IMG_6012.jpg" alt="ТО glass" /></div>
+    <div class="shot-frame"><img src="screenshots/IMG_6013.jpg" alt="Журнал iris" /></div>
+    <div class="shot-frame"><img src="screenshots/IMG_6014.jpg" alt="Главная iris" /></div>
+    <div class="shot-frame"><img src="screenshots/IMG_6015.jpg" alt="ТО iris" /></div>
+    <div class="shot-frame"><img src="screenshots/IMG_6016.jpg" alt="Профиль iris" /></div>
+    <div class="shot-frame"><img src="screenshots/IMG_6017.jpg" alt="Профиль авто" /></div>
+    <div class="shot-frame"><img src="screenshots/IMG_6018.jpg" alt="Топливо glass" /></div>
+    <div class="shot-frame"><img src="screenshots/IMG_6019.jpg" alt="ТО iris" /></div>
+    <div class="shot-frame"><img src="screenshots/IMG_6020.jpg" alt="Топливо iris" /></div>
+    <div class="shot-frame"><img src="screenshots/IMG_6021.jpg" alt="Профиль iris" /></div>
+    <div class="shot-frame"><img src="screenshots/IMG_6022.jpg" alt="Профиль авто iris" /></div>
+    <div class="shot-frame"><img src="screenshots/IMG_6023.jpg" alt="Топливо iris" /></div>
+    <div class="shot-frame"><img src="screenshots/IMG_6024.jpg" alt="Журнал iris" /></div>
+  </div>
+</section>
+
+<!-- ── DOWNLOAD ── -->
+<section class="download-section" id="download">
+  <div class="section-label" style="justify-content:center;display:flex;">Доступно бесплатно</div>
+  <h2>Скачайте AutoSup<br/><span class="gradient-text">прямо сейчас</span></h2>
+  <p>Начните вести учёт автомобиля бесплатно.<br/>iOS и Android.</p>
+  <div class="store-btns">
+    <a class="store-btn soon" href="#">
+      <ion-icon name="logo-apple"></ion-icon>
+      <div>
+        <div class="store-btn-sub">Скоро в</div>
+        <div class="store-btn-name">App Store</div>
+      </div>
+    </a>
+    <a class="store-btn soon" href="#">
+      <ion-icon name="logo-google-playstore"></ion-icon>
+      <div>
+        <div class="store-btn-sub">Скоро в</div>
+        <div class="store-btn-name">Google Play</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner">
+    <a class="footer-logo" href="#">
+      <img src="icon.png" alt="AutoSup" />
+      <span class="gradient-text">AutoSup</span>
+    </a>
+    <div class="footer-links">
+      <a href="/privacy">Политика конфиденциальности</a>
+      <a href="/terms">Условия использования</a>
+      <a href="/delete-account">Удаление аккаунта</a>
+      <a href="mailto:zhitman83@gmail.com">Поддержка</a>
+    </div>
+    <div class="footer-copy">© 2026 AutoSup. Все права защищены.</div>
+  </div>
+</footer>
+
+<script>
+  function showTab(id, el) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + id).classList.add('active');
+    el.classList.add('active');
+  }
+
+  // Премиум scroll-reveal: элементы плавно всплывают при прокрутке.
+  // JS сам навешивает .reveal — при отключённом JS всё остаётся видимым.
+  (function () {
+    var targets = document.querySelectorAll(
+      '.feat-card, .screen-card, .theme-card, .mini-card, .shot-frame, ' +
+      '.lang-item, .section-title, .section-label, .section-sub, .hero-stats > div'
+    );
+    targets.forEach(function (el) { el.classList.add('reveal'); });
+    if (!('IntersectionObserver' in window)) {
+      targets.forEach(function (el) { el.classList.add('revealed'); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('revealed'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    targets.forEach(function (el) { io.observe(el); });
+  })();
+</script>
+
 </body>
 </html>
