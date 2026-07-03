@@ -342,10 +342,10 @@
       html { scroll-behavior: auto; }
     }
 
-    /* Полный логотип в hero */
+    /* Полный логотип в hero — тёмный фон гасится через screen, свечение остаётся */
     .hero-logo {
-      width: min(340px, 80vw); height: auto; margin-bottom: 10px;
-      filter: drop-shadow(0 14px 44px rgba(79,125,255,0.30)); }
+      width: min(380px, 82vw); height: auto; margin-bottom: 10px;
+      mix-blend-mode: screen; }
 
     /* Иконки вкладок — настоящие PNG из приложения, окрашиваются как tintColor */
     .tab-ico {
