@@ -271,6 +271,33 @@
       display: block; width: 178px; height: auto; border-radius: 32px;
     }
 
+    /* ── КАК РАБОТАЕТ ── */
+    .how-section { padding: 90px 24px; }
+    .how-steps { display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; margin-top: 44px; }
+    .how-step { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 30px 26px;
+      transition: transform .35s cubic-bezier(.16,1,.3,1), border-color .35s, box-shadow .35s; }
+    .how-step:hover { transform: translateY(-6px); border-color: var(--border2); box-shadow: 0 18px 44px -14px rgba(79,125,255,0.28); }
+    .how-num { width: 46px; height: 46px; border-radius: 13px; display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 20px; color: #fff; background: linear-gradient(135deg, var(--accent1), var(--accent2));
+      margin-bottom: 18px; box-shadow: 0 8px 22px -6px rgba(79,125,255,0.6); }
+    .how-step h3 { font-size: 17px; margin-bottom: 9px; }
+    .how-step p { font-size: 14px; color: var(--subtext); line-height: 1.55; }
+    @media (max-width:700px) { .how-steps { grid-template-columns: 1fr; } }
+
+    /* ── FAQ ── */
+    .faq-section { padding: 90px 24px; }
+    .faq-list { margin-top: 40px; max-width: 760px; }
+    .faq-item { border: 1px solid var(--border); border-radius: 14px; margin-bottom: 12px; overflow: hidden;
+      background: var(--surface); transition: border-color .3s; }
+    .faq-item.open { border-color: var(--border2); }
+    .faq-q { width: 100%; text-align: left; background: none; border: none; color: var(--text);
+      font-size: 15px; font-weight: 600; padding: 18px 20px; cursor: pointer; display: flex;
+      justify-content: space-between; align-items: center; gap: 12px; font-family: inherit; }
+    .faq-ico { font-size: 24px; line-height: 1; color: var(--accent1); transition: transform .3s; flex-shrink: 0; }
+    .faq-item.open .faq-ico { transform: rotate(45deg); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
+    .faq-a p { padding: 0 20px 18px; font-size: 14px; color: var(--subtext); line-height: 1.6; }
+
     /* ── DOWNLOAD ── */
     .download-section { padding: 100px 24px; text-align: center; }
     .download-section h2 { font-size: clamp(28px, 4vw, 46px); font-weight: 800; margin-bottom: 14px; }
@@ -869,6 +896,66 @@
   </div>
 </section>
 
+<!-- ── КАК РАБОТАЕТ ── -->
+<section class="how-section" id="how">
+  <div class="section-wrap">
+    <div class="section-label">Как это работает</div>
+    <h2 class="section-title">Начните за 3 шага</h2>
+    <p class="section-sub">Ничего сложного — от установки до первого напоминания проходит пара минут.</p>
+    <div class="how-steps">
+      <div class="how-step">
+        <div class="how-num">1</div>
+        <h3>Добавьте автомобиль</h3>
+        <p>Марка, модель, год, госномер и фото. Каталог с сотнями марок и поколений — выбор в пару тапов.</p>
+      </div>
+      <div class="how-step">
+        <div class="how-num">2</div>
+        <h3>Ведите учёт</h3>
+        <p>Заправки, ТО, расходы и документы — вносятся за секунды. Графики и статистика считаются автоматически.</p>
+      </div>
+      <div class="how-step">
+        <div class="how-num">3</div>
+        <h3>Получайте напоминания</h3>
+        <p>Приложение само напомнит о плановом ТО, истечении страховки, техосмотра и водительских прав — заранее.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FAQ ── -->
+<section class="faq-section" id="faq">
+  <div class="section-wrap">
+    <div class="section-label">Вопросы</div>
+    <h2 class="section-title">Частые вопросы</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q">AutoSup бесплатный? <span class="faq-ico">+</span></button>
+        <div class="faq-a"><p>Да. Все основные функции — учёт топлива, ТО, расходов, документов, напоминания — доступны бесплатно.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Мои данные в безопасности? <span class="faq-ico">+</span></button>
+        <div class="faq-a"><p>Данные хранятся локально на устройстве и, при желании, в вашем личном Firebase-аккаунте. Синхронизация — только после входа через Google. Мы не продаём и не передаём ваши данные.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">На каких платформах работает? <span class="faq-ico">+</span></button>
+        <div class="faq-a"><p>AutoSup доступен на iOS и Android. Интерфейс переведён на 13 языков.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Подходит для электромобилей и гибридов? <span class="faq-ico">+</span></button>
+        <div class="faq-a"><p>Да. Есть учёт зарядок и расхода в кВт·ч для электро, а для гибридов — и топливо, и электроэнергия одновременно.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Можно вести несколько автомобилей? <span class="faq-ico">+</span></button>
+        <div class="faq-a"><p>Да. Ведите весь семейный автопарк в одном аккаунте, переключение между машинами — один тап. Есть и семейный доступ с ролями.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Нужен ли интернет? <span class="faq-ico">+</span></button>
+        <div class="faq-a"><p>Нет. Приложение полностью работает офлайн — облачная синхронизация опциональна и включается по желанию.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ── DOWNLOAD ── -->
 <section class="download-section" id="download">
   <div class="section-label" style="justify-content:center;display:flex;">Доступно бесплатно</div>
@@ -974,6 +1061,16 @@
       }, { threshold: 0.4 }).observe(box);
     } else { run(); }
   })();
+
+  // FAQ-аккордеон
+  document.querySelectorAll('.faq-q').forEach(function (q) {
+    q.addEventListener('click', function () {
+      var item = q.parentElement;
+      var a = item.querySelector('.faq-a');
+      var open = item.classList.toggle('open');
+      a.style.maxHeight = open ? a.scrollHeight + 'px' : '0';
+    });
+  });
 </script>
 
 </body>
