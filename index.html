@@ -355,6 +355,27 @@
       -webkit-mask-size: contain; mask-size: contain;
       -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
       -webkit-mask-position: center; mask-position: center; }
+
+    /* Плавающие blur-орбы — глубина фона в hero */
+    .orb { position: absolute; border-radius: 50%; filter: blur(70px); pointer-events: none; z-index: 0; }
+    .orb-1 { width: 460px; height: 460px; top: -90px; left: -130px;
+      background: radial-gradient(circle, rgba(79,125,255,0.38), transparent 68%); animation: drift1 24s ease-in-out infinite; }
+    .orb-2 { width: 540px; height: 540px; bottom: -160px; right: -150px;
+      background: radial-gradient(circle, rgba(139,92,246,0.34), transparent 68%); animation: drift2 28s ease-in-out infinite; }
+    .orb-3 { width: 360px; height: 360px; top: 42%; left: 56%;
+      background: radial-gradient(circle, rgba(52,211,153,0.14), transparent 70%); animation: drift3 32s ease-in-out infinite; }
+    @keyframes drift1 { 0%,100% { transform: translate(0,0); } 50% { transform: translate(60px,44px); } }
+    @keyframes drift2 { 0%,100% { transform: translate(0,0); } 50% { transform: translate(-54px,-40px); } }
+    @keyframes drift3 { 0%,100% { transform: translate(0,0); } 50% { transform: translate(34px,-52px); } }
+    .hero > *:not(.orb) { position: relative; z-index: 1; }
+
+    /* 3D-тилт карточек фич */
+    .feat-card { transform-style: preserve-3d; will-change: transform; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .orb { animation: none; }
+      .feat-card { transform: none !important; }
+    }
   </style>
 </head>
 <body>
@@ -375,6 +396,9 @@
 
 <!-- ── HERO ── -->
 <section class="hero">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
   <div class="hero-badge">
     <ion-icon name="phone-portrait-outline"></ion-icon>
     iOS &amp; Android
@@ -902,6 +926,44 @@
       });
     }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
     targets.forEach(function (el) { io.observe(el); });
+  })();
+
+  // 3D-тилт карточек фич за курсором
+  document.querySelectorAll('.feat-card').forEach(function (card) {
+    card.addEventListener('mousemove', function (e) {
+      var r = card.getBoundingClientRect();
+      var x = (e.clientX - r.left) / r.width - 0.5;
+      var y = (e.clientY - r.top) / r.height - 0.5;
+      card.style.transform = 'perspective(720px) rotateY(' + (x * 7) + 'deg) rotateX(' + (-y * 7) + 'deg) translateY(-6px)';
+    });
+    card.addEventListener('mouseleave', function () { card.style.transform = ''; });
+  });
+
+  // Анимированные счётчики (hero-stats считаются от 0)
+  (function () {
+    var stats = document.querySelectorAll('.hstat-val');
+    var done = false;
+    function run() {
+      if (done) return; done = true;
+      stats.forEach(function (el) {
+        var raw = el.textContent.trim();
+        var suffix = raw.replace(/[0-9]/g, '');
+        var target = parseInt(raw, 10);
+        if (isNaN(target)) return;
+        var dur = 1100, t0 = performance.now();
+        (function step(now) {
+          var p = Math.min((now - t0) / dur, 1);
+          el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3))) + suffix;
+          if (p < 1) requestAnimationFrame(step);
+        })(t0);
+      });
+    }
+    var box = document.querySelector('.hero-stats');
+    if (box && 'IntersectionObserver' in window) {
+      new IntersectionObserver(function (en) {
+        en.forEach(function (e) { if (e.isIntersecting) run(); });
+      }, { threshold: 0.4 }).observe(box);
+    } else { run(); }
   })();
 </script>
 
