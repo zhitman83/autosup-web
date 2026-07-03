@@ -250,16 +250,25 @@
       scrollbar-width: none;
     }
     .shots-scroll::-webkit-scrollbar { display: none; }
+    /* Мокап телефона: корпус + notch вокруг скриншота */
     .shot-frame {
       position: relative; flex-shrink: 0;
-      border-radius: 36px; overflow: hidden;
-      box-shadow: 0 24px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(99,120,255,0.15);
-      transition: transform 0.3s;
+      padding: 9px; border-radius: 40px;
+      background: linear-gradient(165deg, #20263f 0%, #0c0f1e 60%);
+      box-shadow: 0 26px 64px rgba(0,0,0,0.55),
+                  inset 0 0 0 1px rgba(255,255,255,0.06),
+                  0 0 0 1px rgba(99,120,255,0.14);
+      transition: transform 0.35s cubic-bezier(.16,1,.3,1);
       scroll-snap-align: start;
     }
-    .shot-frame:hover { transform: translateY(-6px) scale(1.02); }
+    .shot-frame::before {
+      content: ''; position: absolute; top: 17px; left: 50%; transform: translateX(-50%);
+      width: 52px; height: 6px; border-radius: 3px;
+      background: rgba(0,0,0,0.55); z-index: 2;
+    }
+    .shot-frame:hover { transform: translateY(-8px) scale(1.02); }
     .shot-frame img {
-      display: block; width: 180px; height: auto; border-radius: 36px;
+      display: block; width: 178px; height: auto; border-radius: 32px;
     }
 
     /* ── DOWNLOAD ── */
