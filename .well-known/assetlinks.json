@@ -1,0 +1,13 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.autosup.app",
+      "sha256_cert_fingerprints": [
+        "3F:AB:E8:DD:B4:94:F2:81:38:29:7C:AD:C1:C9:8D:3F:00:66:AB:B9:0A:50:04:C5:84:3F:FD:56:1B:7C:91:07",
+        "DD:C5:AF:F0:7A:5C:05:F3:EB:5C:3B:A4:62:74:29:B5:42:B0:7C:22:0B:C8:53:3B:EC:0F:C0:FD:35:D0:B3:CB"
+      ]
+    }
+  }
+]
