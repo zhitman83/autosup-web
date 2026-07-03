@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AutoSup — учёт автомобиля</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(160deg, #0b1220 0%, #12243b 100%);
+      color: #eaf2ff; min-height: 100vh;
+      display: flex; align-items: center; justify-content: center; padding: 24px;
+    }
+    .card { max-width: 420px; text-align: center; }
+    .logo { font-size: 34px; font-weight: 800; letter-spacing: -0.5px; color: #00e5b8; }
+    .tagline { margin-top: 8px; font-size: 16px; color: #9fb3cc; }
+    .desc { margin-top: 24px; font-size: 15px; line-height: 1.5; color: #cdd9ea; }
+    .stores { margin-top: 32px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      display: inline-block; padding: 12px 20px; border-radius: 12px;
+      background: #00e5b8; color: #06202b; font-weight: 700; text-decoration: none; font-size: 15px;
+    }
+    .btn.secondary { background: rgba(255,255,255,0.1); color: #eaf2ff; }
+    .footer { margin-top: 40px; font-size: 12px; color: #5f7591; }
+    .footer a { color: #9fb3cc; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="logo">AutoSup</div>
+    <div class="tagline">Учёт автомобиля: топливо, ТО, расходы</div>
+    <div class="desc">
+      Ведите историю обслуживания, расход топлива и зарядки, документы и напоминания —
+      для бензиновых, гибридных и электромобилей.
+    </div>
+    <div class="stores">
+      <a class="btn" href="#">App Store</a>
+      <a class="btn secondary" href="#">Google Play</a>
+    </div>
+    <div class="footer">
+      © AutoSup · <a href="/privacy">Конфиденциальность</a>
+    </div>
+  </div>
+</body>
+</html>

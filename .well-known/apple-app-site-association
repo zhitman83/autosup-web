@@ -1,0 +1,15 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["FQ5724CY67.com.autosuppro.app"],
+        "components": [
+          {
+            "/": "/invite/*",
+            "comment": "Family invite deep links"
+          }
+        ]
+      }
+    ]
+  }
+}
