@@ -3,8 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AutoSup — Умный учёт вашего автомобиля</title>
-  <meta name="description" content="AutoSup — мобильное приложение для владельцев автомобилей. Учёт топлива, ТО, расходов и документов. iOS и Android." />
+  <title>AutoSup — Твой авто-помощник</title>
+  <meta name="description" content="AutoSup — умный учёт автомобиля: топливо, ТО, расходы, документы. Для бензина, гибрида и электро. Автопомощник, напоминания, облако. iOS и Android." />
+  <link rel="icon" type="image/png" href="icon.png" />
+  <link rel="apple-touch-icon" href="icon.png" />
+  <meta name="theme-color" content="#080b18" />
+  <!-- Open Graph / соцсети -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://autosup.app/" />
+  <meta property="og:title" content="AutoSup — Твой авто-помощник" />
+  <meta property="og:description" content="Умный учёт автомобиля: топливо, ТО, расходы, документы. Бензин, гибрид, электро. iOS и Android." />
+  <meta property="og:image" content="https://autosup.app/logo.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="AutoSup — Твой авто-помощник" />
+  <meta name="twitter:description" content="Умный учёт автомобиля: топливо, ТО, расходы, документы. iOS и Android." />
+  <meta name="twitter:image" content="https://autosup.app/logo.png" />
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
   <style>
@@ -412,9 +425,22 @@
       .orb { animation: none; }
       .feat-card { transform: none !important; }
     }
+
+    /* Прогресс-бар скролла + кнопка «наверх» */
+    .scroll-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0; z-index: 200;
+      background: linear-gradient(90deg, var(--accent1), var(--accent2)); }
+    .to-top { position: fixed; bottom: 24px; right: 24px; width: 48px; height: 48px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent1), var(--accent2)); border: none; color: #fff;
+      cursor: pointer; opacity: 0; pointer-events: none; transform: translateY(10px);
+      transition: opacity .3s, transform .3s; z-index: 150; display: flex; align-items: center;
+      justify-content: center; font-size: 22px; box-shadow: 0 10px 30px -8px rgba(79,125,255,0.6); }
+    .to-top.show { opacity: 1; pointer-events: auto; transform: translateY(0); }
+    .to-top:hover { transform: translateY(-3px); }
   </style>
 </head>
 <body>
+<div class="scroll-progress" id="scrollBar"></div>
+<button class="to-top" id="toTop" aria-label="Наверх"><ion-icon name="arrow-up-outline"></ion-icon></button>
 
 <!-- ── NAV ── -->
 <nav>
@@ -426,6 +452,7 @@
     <a href="#screens">Экраны</a>
     <a href="#features">Функции</a>
     <a href="#customize">Настройки</a>
+    <a href="#faq">FAQ</a>
     <a href="#download" class="nav-cta">Скачать</a>
   </div>
 </nav>
@@ -1071,6 +1098,16 @@
       a.style.maxHeight = open ? a.scrollHeight + 'px' : '0';
     });
   });
+
+  // Прогресс-бар скролла + кнопка «наверх»
+  var _bar = document.getElementById('scrollBar');
+  var _top = document.getElementById('toTop');
+  window.addEventListener('scroll', function () {
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    _bar.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + '%';
+    _top.classList.toggle('show', window.scrollY > 500);
+  });
+  _top.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
 </script>
 
 </body>
