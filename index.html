@@ -341,6 +341,19 @@
       .hero::before { animation: none; }
       html { scroll-behavior: auto; }
     }
+
+    /* Полный логотип в hero */
+    .hero-logo {
+      width: min(340px, 80vw); height: auto; margin-bottom: 10px;
+      filter: drop-shadow(0 14px 44px rgba(79,125,255,0.30)); }
+
+    /* Иконки вкладок — настоящие PNG из приложения, окрашиваются как tintColor */
+    .tab-ico {
+      display: inline-block; width: 18px; height: 18px;
+      background: currentColor; vertical-align: -3px;
+      -webkit-mask-size: contain; mask-size: contain;
+      -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+      -webkit-mask-position: center; mask-position: center; }
   </style>
 </head>
 <body>
@@ -365,8 +378,8 @@
     <ion-icon name="phone-portrait-outline"></ion-icon>
     iOS &amp; Android
   </div>
-  <img class="hero-icon" src="icon.png" alt="AutoSup" />
-  <h1>Умный учёт<br/><span class="gradient-text">вашего автомобиля</span></h1>
+  <img class="hero-logo" src="logo.png" alt="AutoSup — Твой авто-помощник" />
+  <h1>Твой автомобиль —<br/><span class="gradient-text">под полным контролем</span></h1>
   <p class="hero-sub">Всё об автомобиле в одном месте — топливо, техническое обслуживание, расходы, документы. Красивый интерфейс, облачная синхронизация, 13 языков.</p>
   <div class="hero-btns">
     <a href="#download" class="btn-primary">
@@ -406,19 +419,19 @@
 
   <div class="tabs-nav" id="tabsNav">
     <button class="tab-btn active" onclick="showTab('home', this)">
-      <ion-icon name="home-outline"></ion-icon> Главная
+      <span class="tab-ico" style="-webkit-mask-image:url(icons/tab-home.png);mask-image:url(icons/tab-home.png)"></span> Главная
     </button>
     <button class="tab-btn" onclick="showTab('fuel', this)">
-      <ion-icon name="flame-outline"></ion-icon> Топливо
+      <span class="tab-ico" style="-webkit-mask-image:url(icons/tab-fuel.png);mask-image:url(icons/tab-fuel.png)"></span> Топливо
     </button>
     <button class="tab-btn" onclick="showTab('service', this)">
-      <ion-icon name="construct-outline"></ion-icon> Сервис
+      <span class="tab-ico" style="-webkit-mask-image:url(icons/tab-service.png);mask-image:url(icons/tab-service.png)"></span> Сервис
     </button>
     <button class="tab-btn" onclick="showTab('journal', this)">
-      <ion-icon name="book-outline"></ion-icon> Журнал
+      <span class="tab-ico" style="-webkit-mask-image:url(icons/tab-journal.png);mask-image:url(icons/tab-journal.png)"></span> Журнал
     </button>
     <button class="tab-btn" onclick="showTab('profile', this)">
-      <ion-icon name="person-outline"></ion-icon> Профиль
+      <span class="tab-ico" style="-webkit-mask-image:url(icons/tab-profile.png);mask-image:url(icons/tab-profile.png)"></span> Профиль
     </button>
   </div>
 
