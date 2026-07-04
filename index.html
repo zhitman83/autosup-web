@@ -478,9 +478,21 @@
     /* 3D-тилт карточек */
     .feat-card, .how-step, .theme-card { transform-style: preserve-3d; will-change: transform; }
 
+    /* Grid-паттерн в hero */
+    .hero-grid { position: absolute; inset: 0; z-index: 0; pointer-events: none;
+      background-image: linear-gradient(rgba(99,120,255,0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(99,120,255,0.07) 1px, transparent 1px);
+      background-size: 46px 46px;
+      -webkit-mask: radial-gradient(ellipse 78% 58% at 50% 42%, #000 32%, transparent 72%);
+      mask: radial-gradient(ellipse 78% 58% at 50% 42%, #000 32%, transparent 72%); }
+    #heroParticles { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+    .hero-spotlight { position: absolute; inset: 0; z-index: 0; pointer-events: none;
+      background: radial-gradient(340px circle at var(--mx,50%) var(--my,38%), rgba(79,125,255,0.16), transparent 68%); }
+
     @media (prefers-reduced-motion: reduce) {
       .orb { animation: none; }
       .feat-card { transform: none !important; }
+      #heroParticles, .hero-spotlight { display: none; }
     }
 
     /* Прогресс-бар скролла + кнопка «наверх» */
@@ -529,6 +541,9 @@
   <div class="orb orb-1"></div>
   <div class="orb orb-2"></div>
   <div class="orb orb-3"></div>
+  <div class="hero-grid"></div>
+  <canvas id="heroParticles"></canvas>
+  <div class="hero-spotlight" id="heroSpotlight"></div>
   <div class="hero-badge">
     <ion-icon name="phone-portrait-outline"></ion-icon>
     iOS &amp; Android
@@ -1328,6 +1343,41 @@
     var saved = 'ru';
     try { saved = localStorage.getItem('lang') || 'ru'; } catch (e) {}
     if (saved === 'en') setLang('en');
+  })();
+
+  // Particles-сеть в hero
+  (function () {
+    var c = document.getElementById('heroParticles'); if (!c) return;
+    var hero = c.parentElement, ctx = c.getContext('2d'), pts = [], DPR = Math.min(window.devicePixelRatio || 1, 2);
+    function resize() { c.width = hero.offsetWidth * DPR; c.height = hero.offsetHeight * DPR; c.style.width = hero.offsetWidth + 'px'; c.style.height = hero.offsetHeight + 'px'; }
+    resize(); window.addEventListener('resize', resize);
+    var N = Math.min(64, Math.floor(hero.offsetWidth / 24));
+    for (var i = 0; i < N; i++) pts.push({ x: Math.random() * c.width, y: Math.random() * c.height, vx: (Math.random() - .5) * .3 * DPR, vy: (Math.random() - .5) * .3 * DPR });
+    function draw() {
+      ctx.clearRect(0, 0, c.width, c.height);
+      for (var i = 0; i < pts.length; i++) {
+        var p = pts[i]; p.x += p.vx; p.y += p.vy;
+        if (p.x < 0 || p.x > c.width) p.vx *= -1;
+        if (p.y < 0 || p.y > c.height) p.vy *= -1;
+        ctx.beginPath(); ctx.arc(p.x, p.y, 1.4 * DPR, 0, 6.283); ctx.fillStyle = 'rgba(120,150,255,0.5)'; ctx.fill();
+        for (var j = i + 1; j < pts.length; j++) {
+          var q = pts[j], dx = p.x - q.x, dy = p.y - q.y, d = Math.sqrt(dx * dx + dy * dy), lim = 115 * DPR;
+          if (d < lim) { ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y); ctx.strokeStyle = 'rgba(120,150,255,' + (0.13 * (1 - d / lim)) + ')'; ctx.stroke(); }
+        }
+      }
+      requestAnimationFrame(draw);
+    }
+    draw();
+  })();
+
+  // Spotlight за курсором в hero
+  (function () {
+    var hero = document.querySelector('.hero'), sp = document.getElementById('heroSpotlight'); if (!hero || !sp) return;
+    hero.addEventListener('mousemove', function (e) {
+      var r = hero.getBoundingClientRect();
+      sp.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+      sp.style.setProperty('--my', (e.clientY - r.top) + 'px');
+    });
   })();
 </script>
 
