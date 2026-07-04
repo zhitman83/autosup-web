@@ -292,6 +292,24 @@
       display: block; width: 182px; height: auto; border-radius: 34px;
     }
 
+    /* ── ЖИВОЕ ДЕМО ── */
+    .demo-section { padding: 96px 24px; }
+    .demo-wrap { margin-top: var(--sp-5); display: flex; flex-direction: column; align-items: center; gap: var(--sp-4); }
+    .demo-phone { position: relative; padding: 6px; border-radius: 44px;
+      background: linear-gradient(145deg, #cfd7ef 0%, #7d88ad 18%, #333b5c 50%, #7d88ad 82%, #cfd7ef 100%);
+      box-shadow: var(--shadow-lift), inset 0 1px 2px rgba(255,255,255,0.4), 0 0 0 1px rgba(0,0,0,0.45); }
+    .demo-phone::before { content: ''; position: absolute; top: 14px; left: 50%; transform: translateX(-50%);
+      width: 54px; height: 6px; border-radius: 3px; background: rgba(0,0,0,0.6); z-index: 2; }
+    .demo-phone img { display: block; width: 264px; height: auto; border-radius: 38px; transition: opacity .25s ease; }
+    .demo-tabs { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+    .demo-tab { display: flex; align-items: center; gap: 7px; padding: 10px 16px; border-radius: var(--r-pill);
+      border: 1px solid var(--border); background: var(--surface); color: var(--subtext); cursor: pointer;
+      font-size: var(--fs-sm); font-family: inherit; transition: border-color .25s, background .25s, color .25s; }
+    .demo-tab:hover { color: var(--text); }
+    .demo-tab.active { border-color: var(--border2); color: var(--text);
+      background: linear-gradient(135deg, rgba(79,125,255,0.22), rgba(139,92,246,0.15)); }
+    .demo-tab .tab-ico { width: 16px; height: 16px; }
+
     /* ── КАЛЬКУЛЯТОР ── */
     .calc-section { padding: 96px 24px; }
     .calc-box { margin-top: var(--sp-5); display: grid; grid-template-columns: 1.1fr 0.9fr; gap: var(--sp-4);
@@ -532,6 +550,27 @@
     <div>
       <div class="hstat-val gradient-text">100%</div>
       <div class="hstat-lab">ваши данные</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ЖИВОЕ ДЕМО ── -->
+<section class="demo-section" id="demo">
+  <div class="section-wrap" style="text-align:center;">
+    <div class="section-label" style="display:flex;justify-content:center;">Живое демо</div>
+    <h2 class="section-title">Загляните внутрь</h2>
+    <p class="section-sub" style="margin:0 auto;">Переключайте разделы — посмотрите, как выглядит приложение.</p>
+    <div class="demo-wrap">
+      <div class="demo-phone">
+        <img id="demoImg" src="screenshots/IMG_5993.jpg" alt="AutoSup — экран" />
+      </div>
+      <div class="demo-tabs">
+        <button class="demo-tab active" data-img="IMG_5993.jpg"><span class="tab-ico" style="-webkit-mask-image:url(icons/tab-home.png);mask-image:url(icons/tab-home.png)"></span> Главная</button>
+        <button class="demo-tab" data-img="IMG_5991.jpg"><span class="tab-ico" style="-webkit-mask-image:url(icons/tab-fuel.png);mask-image:url(icons/tab-fuel.png)"></span> Топливо</button>
+        <button class="demo-tab" data-img="IMG_5992.jpg"><span class="tab-ico" style="-webkit-mask-image:url(icons/tab-service.png);mask-image:url(icons/tab-service.png)"></span> Сервис</button>
+        <button class="demo-tab" data-img="IMG_5994.jpg"><span class="tab-ico" style="-webkit-mask-image:url(icons/tab-journal.png);mask-image:url(icons/tab-journal.png)"></span> Журнал</button>
+        <button class="demo-tab" data-img="IMG_5995.jpg"><span class="tab-ico" style="-webkit-mask-image:url(icons/tab-profile.png);mask-image:url(icons/tab-profile.png)"></span> Профиль</button>
+      </div>
     </div>
   </div>
 </section>
@@ -1244,6 +1283,17 @@
     [km, cons, price].forEach(function (el) { el.addEventListener('input', calc); });
     calc();
   })();
+
+  // Живое демо — смена скриншота по вкладкам
+  document.querySelectorAll('.demo-tab').forEach(function (t) {
+    t.addEventListener('click', function () {
+      document.querySelectorAll('.demo-tab').forEach(function (x) { x.classList.remove('active'); });
+      t.classList.add('active');
+      var img = document.getElementById('demoImg');
+      img.style.opacity = '0';
+      setTimeout(function () { img.src = 'screenshots/' + t.dataset.img; img.style.opacity = '1'; }, 160);
+    });
+  });
 </script>
 
 </body>
