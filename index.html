@@ -495,10 +495,11 @@
     .to-top:hover { transform: translateY(-3px); }
 
     /* Языковой переключатель */
-    .lang-toggle { background: none; border: 1px solid var(--border2); color: var(--subtext);
-      border-radius: var(--r-pill); padding: 5px 13px; font-size: 13px; font-weight: 700; cursor: pointer;
-      font-family: inherit; transition: color .2s, border-color .2s; }
-    .lang-toggle:hover { color: var(--text); border-color: var(--accent1); }
+    .nav-right { display: flex; align-items: center; gap: 18px; }
+    .lang-toggle { background: rgba(79,125,255,0.14); border: 1px solid var(--accent1); color: var(--text);
+      border-radius: var(--r-pill); padding: 6px 14px; font-size: 13px; font-weight: 700; cursor: pointer;
+      font-family: inherit; transition: background .2s, color .2s; flex-shrink: 0; }
+    .lang-toggle:hover { background: var(--accent1); color: #fff; }
   </style>
 </head>
 <body>
@@ -511,11 +512,13 @@
     <img src="icon.png" alt="AutoSup" />
     <span class="gradient-text">AutoSup</span>
   </a>
-  <div class="nav-links">
-    <a href="#screens" data-en="Screens">Экраны</a>
-    <a href="#features" data-en="Features">Функции</a>
-    <a href="#customize" data-en="Settings">Настройки</a>
-    <a href="#faq" data-en="FAQ">FAQ</a>
+  <div class="nav-right">
+    <div class="nav-links">
+      <a href="#screens" data-en="Screens">Экраны</a>
+      <a href="#features" data-en="Features">Функции</a>
+      <a href="#customize" data-en="Settings">Настройки</a>
+      <a href="#faq" data-en="FAQ">FAQ</a>
+    </div>
     <button id="langToggle" class="lang-toggle" aria-label="Language">EN</button>
     <a href="#download" class="nav-cta" data-en="Download">Скачать</a>
   </div>
