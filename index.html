@@ -292,6 +292,22 @@
       display: block; width: 182px; height: auto; border-radius: 34px;
     }
 
+    /* ── КАЛЬКУЛЯТОР ── */
+    .calc-section { padding: 96px 24px; }
+    .calc-box { margin-top: var(--sp-5); display: grid; grid-template-columns: 1.1fr 0.9fr; gap: var(--sp-4);
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-xl); padding: var(--sp-4); }
+    .calc-inputs { display: flex; flex-direction: column; gap: var(--sp-3); justify-content: center; }
+    .calc-field-top { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: var(--fs-sm); color: var(--subtext); }
+    .calc-field-top b { color: var(--accent1); }
+    .calc-field input[type=range] { width: 100%; accent-color: var(--accent1); height: 6px; cursor: pointer; }
+    .calc-result { background: linear-gradient(160deg, rgba(79,125,255,0.16), rgba(139,92,246,0.10));
+      border: 1px solid var(--border2); border-radius: var(--r-lg); padding: var(--sp-4);
+      display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+    .calc-res-label { font-size: var(--fs-sm); color: var(--subtext); }
+    .calc-res-val { font-size: var(--fs-2xl); font-weight: 800; margin: 12px 0; }
+    .calc-res-note { font-size: var(--fs-xs); color: var(--subtext); line-height: 1.5; }
+    @media (max-width: 700px) { .calc-box { grid-template-columns: 1fr; } }
+
     /* ── КАК РАБОТАЕТ ── */
     .how-section { padding: 96px 24px; }
     .how-steps { display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; margin-top: 44px; }
@@ -932,6 +948,36 @@
   </div>
 </section>
 
+<!-- ── КАЛЬКУЛЯТОР ── -->
+<section class="calc-section" id="calc">
+  <div class="section-wrap">
+    <div class="section-label">Экономия</div>
+    <h2 class="section-title">Сколько уходит на топливо?</h2>
+    <p class="section-sub">Прикиньте годовые расходы — AutoSup помогает держать их под контролем и вовремя замечать перерасход.</p>
+    <div class="calc-box">
+      <div class="calc-inputs">
+        <div class="calc-field">
+          <div class="calc-field-top"><span>Пробег в месяц</span><span><b id="v-km">1 500</b> км</span></div>
+          <input type="range" id="c-km" min="300" max="5000" value="1500" step="100" />
+        </div>
+        <div class="calc-field">
+          <div class="calc-field-top"><span>Расход</span><span><b id="v-cons">9</b> л/100км</span></div>
+          <input type="range" id="c-cons" min="4" max="20" value="9" step="0.5" />
+        </div>
+        <div class="calc-field">
+          <div class="calc-field-top"><span>Цена топлива</span><span><b id="v-price">250</b> ₸/л</span></div>
+          <input type="range" id="c-price" min="150" max="600" value="250" step="10" />
+        </div>
+      </div>
+      <div class="calc-result">
+        <div class="calc-res-label">Расходы на топливо в год</div>
+        <div class="calc-res-val gradient-text" id="c-result">—</div>
+        <div class="calc-res-note">С AutoSup вы видите точную статистику расхода и не переплачиваете вслепую.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ── КАК РАБОТАЕТ ── -->
 <section class="how-section" id="how">
   <div class="section-wrap">
@@ -1117,6 +1163,22 @@
     _top.classList.toggle('show', window.scrollY > 500);
   });
   _top.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+
+  // Калькулятор расходов на топливо
+  (function () {
+    var km = document.getElementById('c-km'), cons = document.getElementById('c-cons'), price = document.getElementById('c-price');
+    if (!km) return;
+    function fmt(n) { return n.toLocaleString('ru-RU'); }
+    function calc() {
+      document.getElementById('v-km').textContent = fmt(+km.value);
+      document.getElementById('v-cons').textContent = cons.value;
+      document.getElementById('v-price').textContent = fmt(+price.value);
+      var year = (+km.value) * 12 * (+cons.value) / 100 * (+price.value);
+      document.getElementById('c-result').textContent = fmt(Math.round(year)) + ' ₸';
+    }
+    [km, cons, price].forEach(function (el) { el.addEventListener('input', calc); });
+    calc();
+  })();
 </script>
 
 </body>
