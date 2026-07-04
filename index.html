@@ -536,6 +536,13 @@
       opacity: 0; transition: opacity .35s; pointer-events: none; }
     .feat-card:hover::after { opacity: 1; }
 
+    /* Mesh-градиент — переливающийся фон hero */
+    .hero-mesh { position: absolute; inset: -25%; z-index: 0; pointer-events: none; opacity: 0.5;
+      background: conic-gradient(from 0deg at 50% 50%, rgba(79,125,255,0.13), rgba(139,92,246,0.13), rgba(52,211,153,0.07), rgba(139,92,246,0.11), rgba(79,125,255,0.13));
+      filter: blur(90px); animation: meshRotate 46s linear infinite; }
+    @keyframes meshRotate { to { transform: rotate(360deg); } }
+    @media (prefers-reduced-motion: reduce) { .hero-mesh { animation: none; } }
+
     @media (prefers-reduced-motion: reduce) {
       .orb { animation: none; }
       .feat-card { transform: none !important; }
@@ -591,6 +598,7 @@
   <div class="hero-grid"></div>
   <canvas id="heroParticles"></canvas>
   <div class="hero-spotlight" id="heroSpotlight"></div>
+  <div class="hero-mesh"></div>
   <div class="hero-badge">
     <ion-icon name="phone-portrait-outline"></ion-icon>
     iOS &amp; Android
