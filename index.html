@@ -493,6 +493,12 @@
       justify-content: center; font-size: 22px; box-shadow: 0 10px 30px -8px rgba(79,125,255,0.6); }
     .to-top.show { opacity: 1; pointer-events: auto; transform: translateY(0); }
     .to-top:hover { transform: translateY(-3px); }
+
+    /* Языковой переключатель */
+    .lang-toggle { background: none; border: 1px solid var(--border2); color: var(--subtext);
+      border-radius: var(--r-pill); padding: 5px 13px; font-size: 13px; font-weight: 700; cursor: pointer;
+      font-family: inherit; transition: color .2s, border-color .2s; }
+    .lang-toggle:hover { color: var(--text); border-color: var(--accent1); }
   </style>
 </head>
 <body>
@@ -506,11 +512,12 @@
     <span class="gradient-text">AutoSup</span>
   </a>
   <div class="nav-links">
-    <a href="#screens">Экраны</a>
-    <a href="#features">Функции</a>
-    <a href="#customize">Настройки</a>
-    <a href="#faq">FAQ</a>
-    <a href="#download" class="nav-cta">Скачать</a>
+    <a href="#screens" data-en="Screens">Экраны</a>
+    <a href="#features" data-en="Features">Функции</a>
+    <a href="#customize" data-en="Settings">Настройки</a>
+    <a href="#faq" data-en="FAQ">FAQ</a>
+    <button id="langToggle" class="lang-toggle" aria-label="Language">EN</button>
+    <a href="#download" class="nav-cta" data-en="Download">Скачать</a>
   </div>
 </nav>
 
@@ -524,32 +531,32 @@
     iOS &amp; Android
   </div>
   <img class="hero-logo" src="logo.png" alt="AutoSup — Твой авто-помощник" />
-  <h1>Всё по твоему авто —<br/><span class="gradient-text">в одном приложении</span></h1>
-  <p class="hero-sub">Всё об автомобиле в одном месте — топливо, техническое обслуживание, расходы, документы. Красивый интерфейс, облачная синхронизация, 13 языков.</p>
+  <h1 data-en="Everything for your car —<br><span class='gradient-text'>in one app</span>">Всё по твоему авто —<br/><span class="gradient-text">в одном приложении</span></h1>
+  <p class="hero-sub" data-en="Everything about your car in one place — fuel, maintenance, expenses, documents. Beautiful interface, cloud sync, 13 languages.">Всё об автомобиле в одном месте — топливо, техническое обслуживание, расходы, документы. Красивый интерфейс, облачная синхронизация, 13 языков.</p>
   <div class="hero-btns">
     <a href="#download" class="btn-primary">
-      <ion-icon name="download-outline"></ion-icon> Скачать приложение
+      <ion-icon name="download-outline"></ion-icon> <span data-en="Download the app">Скачать приложение</span>
     </a>
     <a href="#screens" class="btn-outline">
-      Узнать больше <ion-icon name="arrow-forward-outline"></ion-icon>
+      <span data-en="Learn more">Узнать больше</span> <ion-icon name="arrow-forward-outline"></ion-icon>
     </a>
   </div>
   <div class="hero-stats">
     <div>
       <div class="hstat-val gradient-text">5</div>
-      <div class="hstat-lab">разделов приложения</div>
+      <div class="hstat-lab" data-en="app sections">разделов приложения</div>
     </div>
     <div>
       <div class="hstat-val gradient-text">13</div>
-      <div class="hstat-lab">языков интерфейса</div>
+      <div class="hstat-lab" data-en="languages">языков интерфейса</div>
     </div>
     <div>
       <div class="hstat-val gradient-text">3</div>
-      <div class="hstat-lab">темы оформления</div>
+      <div class="hstat-lab" data-en="themes">темы оформления</div>
     </div>
     <div>
       <div class="hstat-val gradient-text">100%</div>
-      <div class="hstat-lab">ваши данные</div>
+      <div class="hstat-lab" data-en="your data">ваши данные</div>
     </div>
   </div>
 </section>
@@ -1294,6 +1301,26 @@
       setTimeout(function () { img.src = 'screenshots/' + t.dataset.img; img.style.opacity = '1'; }, 160);
     });
   });
+
+  // Языковой переключатель RU/EN (data-en атрибуты)
+  (function () {
+    var btn = document.getElementById('langToggle');
+    function setLang(lang) {
+      document.querySelectorAll('[data-en]').forEach(function (el) {
+        if (el.dataset.ru === undefined) el.dataset.ru = el.innerHTML;
+        el.innerHTML = (lang === 'en') ? el.dataset.en : el.dataset.ru;
+      });
+      document.documentElement.lang = lang;
+      if (btn) btn.textContent = (lang === 'en') ? 'RU' : 'EN';
+      try { localStorage.setItem('lang', lang); } catch (e) {}
+    }
+    if (btn) btn.addEventListener('click', function () {
+      setLang(document.documentElement.lang === 'en' ? 'ru' : 'en');
+    });
+    var saved = 'ru';
+    try { saved = localStorage.getItem('lang') || 'ru'; } catch (e) {}
+    if (saved === 'en') setLang('en');
+  })();
 </script>
 
 </body>
