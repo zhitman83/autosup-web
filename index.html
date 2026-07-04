@@ -504,6 +504,15 @@
     .hero-spotlight { position: absolute; inset: 0; z-index: 0; pointer-events: none;
       background: radial-gradient(340px circle at var(--mx,50%) var(--my,38%), rgba(79,125,255,0.16), transparent 68%); }
 
+    /* Анимированные градиентные бордеры карточек на hover */
+    .feat-card { position: relative; }
+    .feat-card::after { content: ''; position: absolute; inset: 0; border-radius: inherit; padding: 1px;
+      background: linear-gradient(135deg, var(--accent1), var(--accent2));
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor; mask-composite: exclude;
+      opacity: 0; transition: opacity .35s; pointer-events: none; }
+    .feat-card:hover::after { opacity: 1; }
+
     @media (prefers-reduced-motion: reduce) {
       .orb { animation: none; }
       .feat-card { transform: none !important; }
@@ -1404,6 +1413,21 @@
       sp.style.setProperty('--mx', (e.clientX - r.left) + 'px');
       sp.style.setProperty('--my', (e.clientY - r.top) + 'px');
     });
+  })();
+
+  // Параллакс логотипа и сетки в hero при скролле
+  (function () {
+    var logo = document.querySelector('.hero-logo'), grid = document.querySelector('.hero-grid');
+    if (!logo) return;
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) return;
+    window.addEventListener('scroll', function () {
+      var y = window.scrollY;
+      if (y < 900) {
+        logo.style.transform = 'translateY(' + (y * 0.12) + 'px)';
+        if (grid) grid.style.transform = 'translateY(' + (y * 0.06) + 'px)';
+      }
+    }, { passive: true });
   })();
 </script>
 
