@@ -292,6 +292,21 @@
       display: block; width: 182px; height: auto; border-radius: 34px;
     }
 
+    /* ── MARQUEE МАРОК ── */
+    .marquee-wrap { padding: 48px 0 44px; }
+    .marquee-label { text-align: center; font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--muted); margin-bottom: 26px; font-weight: 700; }
+    .marquee { overflow: hidden; position: relative; }
+    .marquee::before, .marquee::after { content: ''; position: absolute; top: 0; bottom: 0; width: 140px; z-index: 2; pointer-events: none; }
+    .marquee::before { left: 0; background: linear-gradient(90deg, var(--bg), transparent); }
+    .marquee::after { right: 0; background: linear-gradient(270deg, var(--bg), transparent); }
+    .marquee-track { display: flex; gap: 52px; width: max-content; animation: marquee 30s linear infinite; }
+    .marquee-item { font-size: 24px; font-weight: 800; color: var(--subtext); white-space: nowrap; opacity: 0.6;
+      transition: opacity .3s, color .3s; }
+    .marquee-item:hover { opacity: 1; color: var(--text); }
+    @keyframes marquee { to { transform: translateX(-50%); } }
+    @media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; } }
+
     /* ── ЖИВОЕ ДЕМО ── */
     .demo-section { padding: 96px 24px; }
     .demo-wrap { margin-top: var(--sp-5); display: flex; flex-direction: column; align-items: center; gap: var(--sp-4); }
@@ -578,6 +593,17 @@
     </div>
   </div>
 </section>
+
+<!-- ── MARQUEE МАРОК ── -->
+<div class="marquee-wrap">
+  <div class="marquee-label" data-en="Works with any car — hundreds of makes & generations">Работает с любой маркой — сотни марок и поколений</div>
+  <div class="marquee">
+    <div class="marquee-track">
+      <span class="marquee-item">Toyota</span><span class="marquee-item">Honda</span><span class="marquee-item">BMW</span><span class="marquee-item">Mercedes-Benz</span><span class="marquee-item">Hyundai</span><span class="marquee-item">Kia</span><span class="marquee-item">Nissan</span><span class="marquee-item">Volkswagen</span><span class="marquee-item">Lexus</span><span class="marquee-item">Zeekr</span><span class="marquee-item">BYD</span><span class="marquee-item">Lada</span>
+      <span class="marquee-item">Toyota</span><span class="marquee-item">Honda</span><span class="marquee-item">BMW</span><span class="marquee-item">Mercedes-Benz</span><span class="marquee-item">Hyundai</span><span class="marquee-item">Kia</span><span class="marquee-item">Nissan</span><span class="marquee-item">Volkswagen</span><span class="marquee-item">Lexus</span><span class="marquee-item">Zeekr</span><span class="marquee-item">BYD</span><span class="marquee-item">Lada</span>
+    </div>
+  </div>
+</div>
 
 <!-- ── ЖИВОЕ ДЕМО ── -->
 <section class="demo-section" id="demo">
