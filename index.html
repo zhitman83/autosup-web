@@ -411,20 +411,9 @@
     @media (max-width: 700px) { .stats-band-grid { grid-template-columns: repeat(2,1fr); gap: var(--sp-4); } }
 
     /* ── ОТЗЫВЫ ── */
-    .reviews-section { padding: 96px 24px; }
-    .reviews-grid { margin-top: var(--sp-5); display: grid; grid-template-columns: repeat(3,1fr); gap: var(--sp-3); }
-    .review-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-lg); padding: var(--sp-4);
-      transition: transform .35s cubic-bezier(.16,1,.3,1), border-color .35s, box-shadow .35s; }
-    .review-card:hover { transform: translateY(-6px); border-color: var(--border2); box-shadow: var(--shadow-card); }
-    .review-stars { color: var(--yellow); font-size: 15px; letter-spacing: 2px; margin-bottom: 12px; }
-    .review-text { font-size: var(--fs-sm); line-height: 1.6; color: var(--text); }
-    .review-author { margin-top: 16px; display: flex; align-items: center; gap: 10px; }
-    .review-avatar { width: 38px; height: 38px; border-radius: 50%; flex-shrink: 0;
-      background: linear-gradient(135deg, var(--accent1), var(--accent2));
-      display: flex; align-items: center; justify-content: center; font-weight: 800; color: #fff; font-size: 15px; }
-    .review-name { font-size: var(--fs-sm); font-weight: 700; }
-    .review-car { font-size: var(--fs-xs); color: var(--subtext); }
-    @media (max-width: 800px) { .reviews-grid { grid-template-columns: 1fr; } }
+    .reviews-section { padding: 96px 24px; text-align: center; }
+    .review-cta { margin-top: var(--sp-4); display: flex; flex-direction: column; align-items: center; gap: 16px; }
+    .review-soon { font-size: var(--fs-xs); color: var(--muted); }
 
     /* ── DOWNLOAD ── */
     .download-section { padding: 100px 24px; text-align: center; }
@@ -1463,24 +1452,14 @@
 <!-- ── ОТЗЫВЫ ── -->
 <section class="reviews-section" id="reviews">
   <div class="section-wrap">
-    <div class="section-label" data-en="Reviews" data-kz="Пікірлер">Отзывы</div>
-    <h2 class="section-title" data-en="What drivers say" data-kz="Жүргізушілер не дейді">Что говорят водители</h2>
-    <div class="reviews-grid">
-      <div class="review-card">
-        <div class="review-stars">★★★★★</div>
-        <div class="review-text" data-en="Finally I see my real fuel consumption instead of guessing. The charts are super clear." data-kz="Ақыры болжамай, нақты жанармай шығынын көріп отырмын. Графиктер өте көрнекі.">Наконец-то вижу реальный расход топлива, а не гадаю. Графики очень наглядные.</div>
-        <div class="review-author"><div class="review-avatar">А</div><div><div class="review-name">Азамат</div><div class="review-car">Toyota Camry</div></div></div>
-      </div>
-      <div class="review-card">
-        <div class="review-stars">★★★★★</div>
-        <div class="review-text" data-en="It reminded me about insurance in advance — saved me from a fine. Very handy." data-kz="Сақтандыру туралы алдын ала еске салды — айыппұлдан құтқарды. Өте ыңғайлы.">Напомнило про страховку заранее — спасло от штрафа. Очень удобно.</div>
-        <div class="review-author"><div class="review-avatar">Д</div><div><div class="review-name">Дмитрий</div><div class="review-car">BMW 5 Series</div></div></div>
-      </div>
-      <div class="review-card">
-        <div class="review-stars">★★★★★</div>
-        <div class="review-text" data-en="I keep all 3 family cars in one place. Switching between them is one tap." data-kz="Отбасының барлық 3 көлігін бір жерде жүргіземін. Ауыстыру — бір түрту.">Веду все 3 семейных авто в одном месте. Переключение — один тап.</div>
-        <div class="review-author"><div class="review-avatar">А</div><div><div class="review-name">Айгуль</div><div class="review-car">Honda CR-V</div></div></div>
-      </div>
+    <div class="section-label" style="justify-content:center;display:flex;" data-en="Reviews" data-kz="Пікірлер">Отзывы</div>
+    <h2 class="section-title" data-en="Enjoying the app?" data-kz="Қосымша ұнады ма?">Понравилось приложение?</h2>
+    <p class="section-sub" style="margin:0 auto;" data-en="Leave a rating on the App Store — it takes a minute and helps other drivers find AutoSup." data-kz="App Store-де баға қойыңыз — бір минут кетеді, басқа жүргізушілерге AutoSup-ты табуға көмектеседі.">Оставьте оценку в App Store — это займёт минуту и поможет другим водителям найти AutoSup.</p>
+    <div class="review-cta">
+      <a class="btn-primary" href="https://apps.apple.com/app/id6776712725?action=write-review" target="_blank" rel="noopener">
+        <ion-icon name="star-outline"></ion-icon> <span data-en="Rate on the App Store" data-kz="App Store-де баға қою">Оценить в App Store</span>
+      </a>
+      <span class="review-soon" data-en="Google Play reviews — coming soon" data-kz="Google Play пікірлері — жақында">Отзывы в Google Play — скоро</span>
     </div>
   </div>
 </section>
