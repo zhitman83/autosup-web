@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AutoSup — Твой авто-помощник</title>
-  <meta name="description" content="AutoSup — умный учёт автомобиля: топливо, ТО, расходы, документы. Для бензина, гибрида и электро. Автопомощник, напоминания, облако. iOS и Android." />
+  <meta name="description" content="AutoSup — умный учёт автомобиля: топливо, ТО, расходы, документы, вложения. Виджет на экран, Автопомощник, напоминания, облако. Для бензина, гибрида и электро. iOS и Android." />
   <link rel="icon" type="image/png" href="icon.png" />
   <link rel="apple-touch-icon" href="icon.png" />
   <meta name="theme-color" content="#080b18" />
@@ -856,7 +856,7 @@
               <div style="font-size:13px;color:var(--subtext)">Все события и аналитика</div>
             </div>
           </div>
-          <p class="screen-desc">Сводный раздел с полной историей автомобиля. Три вкладки — Топливо, Сервис, Расходы — с месячной навигацией, сводной статистикой и экспортом отчётов.</p>
+          <p class="screen-desc" data-en="A hub with the full car history. Three tabs — Fuel, Service, Expenses — with monthly navigation, summary stats and rich report export (PDF/CSV/XLSX), including fleet reports for multiple cars.">Сводный раздел с полной историей автомобиля. Три вкладки — Топливо, Сервис, Расходы — с месячной навигацией, сводной статистикой и экспортом богатых отчётов (PDF/CSV/XLSX), включая флит-отчёты по всему автопарку.</p>
           <ul class="feat-list">
             <li><ion-icon name="pie-chart-outline"></ion-icon><span><strong>Сводная карточка</strong> — donut-диаграмма расходов за месяц: заправки / ТО / доп. расходы. Тап по секции переключает вкладку.</span></li>
             <li><ion-icon name="calendar-outline"></ion-icon><span><strong>Навигация по месяцам</strong> — стрелки для переключения периода, данные пересчитываются мгновенно.</span></li>
@@ -874,11 +874,14 @@
           </ul>
         </div>
         <div class="screen-card">
-          <h3 style="margin-bottom:12px;font-size:15px;">Форматы экспорта</h3>
+          <h3 style="margin-bottom:12px;font-size:15px;" data-en="Export formats">Форматы экспорта</h3>
           <ul class="feat-list">
-            <li><ion-icon name="document-text-outline"></ion-icon><span><strong>PDF</strong> — красиво оформленный отчёт с шапкой авто и итогами</span></li>
-            <li><ion-icon name="grid-outline"></ion-icon><span><strong>CSV</strong> — табличные данные для Excel или Google Sheets</span></li>
-            <li><ion-icon name="car-outline"></ion-icon><span><strong>Сравнение авто</strong> — сводный отчёт по всем автомобилям</span></li>
+            <li><ion-icon name="document-text-outline"></ion-icon><span><strong>PDF</strong> <span data-en="— a rich report with KPIs, breakdown and history">— богатый отчёт с ключевыми показателями, разбивкой и историей</span></span></li>
+            <li><ion-icon name="grid-outline"></ion-icon><span><strong>CSV</strong> <span data-en="— flat tables for Excel or Google Sheets">— табличные данные для Excel или Google Sheets</span></span></li>
+            <li><ion-icon name="grid-outline"></ion-icon><span><strong>XLSX</strong> <span data-en="— multi-sheet Excel file, used for fleet reports">— многолистовой файл Excel, для флит-отчётов</span></span></li>
+            <li><ion-icon name="car-outline"></ion-icon><span><strong data-en="Compare cars">Сравнение авто</strong> <span data-en="— a summary report across all your cars">— сводный отчёт по всем автомобилям</span></span></li>
+            <li><ion-icon name="people-circle-outline"></ion-icon><span><strong data-en="By driver">По водителям</strong> <span data-en="— who spent what, for shared or fleet cars">— кто сколько потратил, для общих и парковых авто</span></span></li>
+            <li><ion-icon name="shield-checkmark-outline"></ion-icon><span><strong data-en="Compliance">Комплаенс</strong> <span data-en="— document & service deadlines across the whole fleet">— сроки документов и ТО по всему автопарку</span></span></li>
           </ul>
         </div>
       </div>
@@ -902,15 +905,16 @@
             <li><ion-icon name="car-outline"></ion-icon><span><strong>Мои автомобили</strong> — список всех добавленных авто с активным выделенным. Переключение одним тапом, редактирование и удаление.</span></li>
             <li><ion-icon name="cloud-upload-outline"></ion-icon><span><strong>Аккаунт</strong> — вход через Google, ручная синхронизация данных с Firebase, выход из аккаунта.</span></li>
             <li><ion-icon name="settings-outline"></ion-icon><span><strong>Настройки</strong> — тема (тёмная/светлая/системная), стиль (Classic/Glass/Glass Iris), язык, единицы измерения, уведомления.</span></li>
+            <li><ion-icon name="help-circle-outline"></ion-icon><span><strong data-en="Hint mode">Режим подсказок</strong> <span data-en="— a (?) button on every screen explains what each part does.">— кнопка (?) на каждом экране объясняет, что означает каждый элемент.</span></span></li>
             <li><ion-icon name="globe-outline"></ion-icon><span><strong>Сайт приложения</strong> — ссылка на эту страницу.</span></li>
             <li><ion-icon name="mail-outline"></ion-icon><span><strong>Написать нам</strong> — связь с поддержкой по email.</span></li>
             <li><ion-icon name="lock-closed-outline"></ion-icon><span><strong>Конфиденциальность и условия</strong> — правовые документы.</span></li>
           </ul>
         </div>
         <div class="screen-card">
-          <h3 style="margin-bottom:12px;font-size:15px;">Добавление автомобиля</h3>
+          <h3 style="margin-bottom:12px;font-size:15px;" data-en="Adding a car">Добавление автомобиля</h3>
           <ul class="feat-list">
-            <li><ion-icon name="car-outline"></ion-icon><span>Марка и модель из каталога</span></li>
+            <li><ion-icon name="car-outline"></ion-icon><span data-en="Make and model from the catalog — or add your own manually if it's missing">Марка и модель из каталога — или введите вручную, если её там нет</span></li>
             <li><ion-icon name="calendar-outline"></ion-icon><span>Год выпуска</span></li>
             <li><ion-icon name="key-outline"></ion-icon><span>Госномер и VIN</span></li>
             <li><ion-icon name="speedometer-outline"></ion-icon><span>Начальный пробег</span></li>
@@ -957,8 +961,8 @@
       </div>
       <div class="feat-card">
         <div class="feat-card-icon"><ion-icon name="share-outline"></ion-icon></div>
-        <h3>Экспорт PDF и CSV</h3>
-        <p>Выгружайте отчёты по заправкам, ТО, расходам или сводный отчёт. Гибкий выбор периода: месяц, 3 месяца, год или произвольный.</p>
+        <h3 data-en="PDF, CSV & Excel export">Экспорт PDF, CSV и Excel</h3>
+        <p data-en="Rich reports with KPIs and breakdowns by station, category or maintenance item — plus flat CSV/XLSX tables. Any period: month, 3 months, year or custom.">Богатые отчёты с ключевыми показателями и разбивкой по АЗС, категориям или видам работ — плюс табличные CSV/XLSX. Любой период: месяц, 3 месяца, год или произвольный.</p>
       </div>
       <div class="feat-card">
         <div class="feat-card-icon"><ion-icon name="wallet-outline"></ion-icon></div>
@@ -984,6 +988,26 @@
         <div class="feat-card-icon"><ion-icon name="language-outline"></ion-icon></div>
         <h3>13 языков интерфейса</h3>
         <p>Русский, английский, казахский, испанский, французский, немецкий, португальский, китайский, японский, арабский, хинди, турецкий, индонезийский.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-card-icon"><ion-icon name="camera-outline"></ion-icon></div>
+        <h3 data-en="Attachments to records">Вложения к записям</h3>
+        <p data-en="Attach a photo of the receipt or a PDF document to any fill-up, service or expense. Full-screen gallery with swipe and sharing.">Прикрепляйте фото чека или PDF-документ к любой заправке, ТО или расходу. Полноэкранная галерея с листанием и шарингом.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-card-icon"><ion-icon name="people-circle-outline"></ion-icon></div>
+        <h3 data-en="Fleet reports">Флит-отчёты</h3>
+        <p data-en="For a family or company fleet — a report by driver (who spent what) and a compliance report (document & service deadlines across all cars). Multi-sheet XLSX included.">Для семейного или корпоративного автопарка — отчёт по водителям (кто сколько потратил) и отчёт по комплаенсу (сроки документов и ТО по всем машинам). Есть многолистовой XLSX.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-card-icon"><ion-icon name="help-circle-outline"></ion-icon></div>
+        <h3 data-en="Built-in hints">Режим подсказок</h3>
+        <p data-en="A (?) button on every screen highlights zones and explains what each one does — no need to figure the app out on your own.">Кнопка (?) на каждом экране подсвечивает зоны и объясняет, что они делают — не нужно разбираться в приложении самостоятельно.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-card-icon"><ion-icon name="paper-plane-outline"></ion-icon></div>
+        <h3 data-en="Push notifications">Push-уведомления</h3>
+        <p data-en="Instant alerts for family invites and important app announcements — on top of local reminders for maintenance and documents.">Мгновенные оповещения о приглашениях в семью и важных анонсах приложения — в дополнение к локальным напоминаниям о ТО и документах.</p>
       </div>
     </div>
   </div>
@@ -1047,6 +1071,32 @@
     <div class="assist-shots">
       <div class="shot-frame"><img src="screenshots/family.jpg" alt="Семейный доступ" /></div>
       <div class="shot-frame"><img src="screenshots/passport.jpg" alt="Паспорт авто" /></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ВИДЖЕТ ── -->
+<section class="assist-section" id="widget">
+  <div class="section-wrap">
+    <div class="section-label" data-en="Home screen widget">Виджет на экран</div>
+    <h2 class="section-title" data-en="Your car, without opening the app">Ваше авто без захода в приложение</h2>
+    <p class="section-sub" data-en="A home screen widget for iOS and Android — mileage, consumption and maintenance status at a glance.">Виджет на домашний экран для iOS и Android — пробег, расход и статус ТО одним взглядом.</p>
+    <div class="assist-feats">
+      <div class="assist-feat">
+        <div class="assist-feat-ico"><ion-icon name="color-palette-outline"></ion-icon></div>
+        <h3 data-en="Follows your app style">Следует стилю приложения</h3>
+        <p data-en="Classic, Depth or Crystal — whichever style and theme you picked in the app, the widget matches it automatically and redraws instantly on change.">Classic, Глубина или Кристалл — какой стиль и тему выбрали в приложении, такими будут и виджет. Перерисовывается мгновенно при смене.</p>
+      </div>
+      <div class="assist-feat">
+        <div class="assist-feat-ico"><ion-icon name="ellipse-outline"></ion-icon></div>
+        <h3 data-en="Status at a glance">Статус на виду</h3>
+        <p data-en="The widget border is colored by your car's status — green, yellow or red — so you see if something needs attention without unlocking the phone.">Рамка виджета окрашена по статусу автомобиля — зелёная, жёлтая или красная, — сразу видно, нужно ли что-то сделать, даже не разблокируя телефон.</p>
+      </div>
+      <div class="assist-feat">
+        <div class="assist-feat-ico"><ion-icon name="flash-outline"></ion-icon></div>
+        <h3 data-en="Quick fuel entry">Быстрая заправка</h3>
+        <p data-en="The medium-size iOS widget has a fuel button right on it — jump straight into adding a fill-up.">Средний виджет на iOS несёт кнопку заправки прямо на себе — переход к добавлению заправки в один тап.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -1129,7 +1179,7 @@
         </div>
         <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 20px;display:flex;align-items:center;gap:10px;">
           <ion-icon name="cash-outline" style="color:var(--accent1);font-size:20px;"></ion-icon>
-          <div><div style="font-size:13px;font-weight:600;">Валюта</div><div style="font-size:12px;color:var(--subtext);">₸ / $ / € / ₽ и другие</div></div>
+          <div><div style="font-size:13px;font-weight:600;" data-en="Currency">Валюта</div><div style="font-size:12px;color:var(--subtext);" data-en="160 currencies (ISO 4217) — ₸, $, €, ₽ and more">160 валют (ISO 4217) — ₸, $, €, ₽ и другие</div></div>
         </div>
       </div>
     </div>
@@ -1225,7 +1275,7 @@
       <div class="how-step">
         <div class="how-num">1</div>
         <h3 data-en="Add your car">Добавьте автомобиль</h3>
-        <p>Марка, модель, год, госномер и фото. Каталог с сотнями марок и поколений — выбор в пару тапов.</p>
+        <p data-en="Make, model, year, plate and photo. A catalog with hundreds of makes and generations — pick in a couple of taps. Don't see your car? Add it manually.">Марка, модель, год, госномер и фото. Каталог с сотнями марок и поколений — выбор в пару тапов. Не нашли свою марку? Добавьте вручную.</p>
       </div>
       <div class="how-step">
         <div class="how-num">2</div>
@@ -1321,6 +1371,14 @@
       <div class="faq-item">
         <button class="faq-q">Нужен ли интернет? <span class="faq-ico">+</span></button>
         <div class="faq-a"><p>Нет. Приложение полностью работает офлайн — облачная синхронизация опциональна и включается по желанию.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Есть виджет на домашний экран? <span class="faq-ico">+</span></button>
+        <div class="faq-a"><p>Да, для iOS и Android. Показывает пробег, расход и статус ТО, следует стилю и теме приложения, рамка окрашивается по статусу авто.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Можно прикрепить фото чека к записи? <span class="faq-ico">+</span></button>
+        <div class="faq-a"><p>Да. К любой заправке, записи ТО или расходу можно добавить фото или PDF-документ — с полноэкранным просмотром и шарингом.</p></div>
       </div>
     </div>
   </div>
