@@ -87,13 +87,13 @@
     .nav-logo { display: flex; align-items: center; gap: 9px; text-decoration: none; }
     .nav-logo img { width: 30px; height: 30px; border-radius: 8px; }
     .nav-logo span { font-size: 17px; font-weight: 700; }
-    .nav-links { display: flex; align-items: center; gap: 24px; }
-    .nav-links a { color: var(--subtext); text-decoration: none; font-size: 14px; transition: color 0.2s; }
+    .nav-links { display: flex; align-items: center; gap: 15px; }
+    .nav-links a { color: var(--subtext); text-decoration: none; font-size: 13px; white-space: nowrap; flex-shrink: 0; transition: color 0.2s; }
     .nav-links a:hover { color: var(--text); }
     .nav-cta {
       background: linear-gradient(135deg, var(--accent1), var(--accent2));
       color: #fff !important; padding: 7px 16px; border-radius: 16px;
-      font-weight: 600; font-size: 13px !important;
+      font-weight: 600; font-size: 13px !important; white-space: nowrap; flex-shrink: 0;
     }
 
     /* ── HERO ── */
@@ -455,8 +455,9 @@
     .footer-copy { color: var(--muted); font-size: 12px; width: 100%; margin-top: 14px; text-align: center; }
 
     /* ── RESPONSIVE ── */
+    /* Ссылки в шапке не помещаются с длинными казахскими словами уже с ~1150px */
+    @media (max-width: 1150px) { .nav-links { display: none; } }
     @media (max-width: 700px) {
-      .nav-links { display: none; }
       .screen-grid, .mini-cards { grid-template-columns: 1fr; }
       .screen-main { grid-column: 1; }
       .theme-cards { grid-template-columns: 1fr; }
@@ -581,12 +582,14 @@
     .to-top.show { opacity: 1; pointer-events: auto; transform: translateY(0); }
     .to-top:hover { transform: translateY(-3px); }
 
-    /* Языковой переключатель */
+    /* Языковой переключатель (RU / EN / KZ) */
     .nav-right { display: flex; align-items: center; gap: 18px; }
-    .lang-toggle { background: rgba(79,125,255,0.14); border: 1px solid var(--accent1); color: var(--text);
-      border-radius: var(--r-pill); padding: 6px 14px; font-size: 13px; font-weight: 700; cursor: pointer;
-      font-family: inherit; transition: background .2s, color .2s; flex-shrink: 0; }
-    .lang-toggle:hover { background: var(--accent1); color: #fff; }
+    .lang-switch { display: flex; align-items: center; gap: 2px; flex-shrink: 0;
+      background: rgba(79,125,255,0.1); border: 1px solid var(--accent1); border-radius: var(--r-pill); padding: 3px; }
+    .lang-opt { background: none; border: none; color: var(--subtext); font-size: 12px; font-weight: 700;
+      font-family: inherit; padding: 5px 10px; border-radius: var(--r-pill); cursor: pointer; transition: background .2s, color .2s; }
+    .lang-opt:hover { color: var(--text); }
+    .lang-opt.active { background: var(--accent1); color: #fff; }
   </style>
 </head>
 <body>
@@ -601,17 +604,21 @@
   </a>
   <div class="nav-right">
     <div class="nav-links">
-      <a href="#screens" data-en="Screens">Экраны</a>
-      <a href="#features" data-en="Features">Функции</a>
-      <a href="#assist" data-en="Car Assistant">Автопомощник</a>
-      <a href="#passport" data-en="Car passport">Паспорт авто</a>
-      <a href="#plates" data-en="License plates">Госномера</a>
-      <a href="#widget" data-en="Widget">Виджет</a>
-      <a href="#customize" data-en="Settings">Настройки</a>
-      <a href="#faq" data-en="FAQ">FAQ</a>
+      <a href="#screens" data-en="Screens" data-kz="Экрандар">Экраны</a>
+      <a href="#features" data-en="Features" data-kz="Функциялар">Функции</a>
+      <a href="#assist" data-en="Car Assistant" data-kz="Автокөмекші">Автопомощник</a>
+      <a href="#passport" data-en="Car passport" data-kz="Көлік паспорты">Паспорт авто</a>
+      <a href="#plates" data-en="License plates" data-kz="Мемнөмірлер">Госномера</a>
+      <a href="#widget" data-en="Widget" data-kz="Виджет">Виджет</a>
+      <a href="#customize" data-en="Settings" data-kz="Параметрлер">Настройки</a>
+      <a href="#faq" data-en="FAQ" data-kz="Сұрақ-жауап">FAQ</a>
     </div>
-    <button id="langToggle" class="lang-toggle" aria-label="Language">EN</button>
-    <a href="#download" class="nav-cta" data-en="Download">Скачать</a>
+    <div class="lang-switch" role="group" aria-label="Language">
+      <button class="lang-opt" data-lang="ru">RU</button>
+      <button class="lang-opt" data-lang="en">EN</button>
+      <button class="lang-opt" data-lang="kz">KZ</button>
+    </div>
+    <a href="#download" class="nav-cta" data-en="Download" data-kz="Жүктеп алу">Скачать</a>
   </div>
 </nav>
 
@@ -629,39 +636,39 @@
     iOS &amp; Android
   </div>
   <img class="hero-logo" src="logo.png" alt="AutoSup — Твой авто-помощник" />
-  <h1 data-en="Everything for your car —<br><span class='gradient-text'>in one app</span>">Всё по твоему авто —<br/><span class="gradient-text">в одном приложении</span></h1>
-  <p class="hero-sub" data-en="Everything about your car in one place — fuel, maintenance, expenses, documents. Beautiful interface, cloud sync, 13 languages.">Всё об автомобиле в одном месте — топливо, техническое обслуживание, расходы, документы. Красивый интерфейс, облачная синхронизация, 13 языков.</p>
+  <h1 data-en="Everything for your car —<br><span class='gradient-text'>in one app</span>" data-kz="Көлігің туралы бәрі —<br><span class='gradient-text'>бір қосымшада</span>">Всё по твоему авто —<br/><span class="gradient-text">в одном приложении</span></h1>
+  <p class="hero-sub" data-en="Everything about your car in one place — fuel, maintenance, expenses, documents. Beautiful interface, cloud sync, 13 languages." data-kz="Автомобиліңіз туралы бәрі бір жерде — жанармай, техникалық қызмет, шығындар, құжаттар. Әдемі интерфейс, бұлттық синхрондау, 13 тіл.">Всё об автомобиле в одном месте — топливо, техническое обслуживание, расходы, документы. Красивый интерфейс, облачная синхронизация, 13 языков.</p>
   <div class="hero-btns">
     <a href="#download" class="btn-primary">
-      <ion-icon name="download-outline"></ion-icon> <span data-en="Download the app">Скачать приложение</span>
+      <ion-icon name="download-outline"></ion-icon> <span data-en="Download the app" data-kz="Қосымшаны жүктеу">Скачать приложение</span>
     </a>
     <a href="#screens" class="btn-outline">
-      <span data-en="Learn more">Узнать больше</span> <ion-icon name="arrow-forward-outline"></ion-icon>
+      <span data-en="Learn more" data-kz="Толығырақ білу">Узнать больше</span> <ion-icon name="arrow-forward-outline"></ion-icon>
     </a>
   </div>
   <div class="hero-stats">
     <div>
       <div class="hstat-val gradient-text">5</div>
-      <div class="hstat-lab" data-en="app sections">разделов приложения</div>
+      <div class="hstat-lab" data-en="app sections" data-kz="қосымша бөлімі">разделов приложения</div>
     </div>
     <div>
       <div class="hstat-val gradient-text">13</div>
-      <div class="hstat-lab" data-en="languages">языков интерфейса</div>
+      <div class="hstat-lab" data-en="languages" data-kz="интерфейс тілі">языков интерфейса</div>
     </div>
     <div>
       <div class="hstat-val gradient-text">3</div>
-      <div class="hstat-lab" data-en="themes">темы оформления</div>
+      <div class="hstat-lab" data-en="themes" data-kz="безендіру темасы">темы оформления</div>
     </div>
     <div>
       <div class="hstat-val gradient-text">100%</div>
-      <div class="hstat-lab" data-en="your data">ваши данные</div>
+      <div class="hstat-lab" data-en="your data" data-kz="деректеріңіз">ваши данные</div>
     </div>
   </div>
 </section>
 
 <!-- ── MARQUEE МАРОК ── -->
 <div class="marquee-wrap">
-  <div class="marquee-label" data-en="Works with any car — hundreds of makes & generations">Работает с любой маркой — сотни марок и поколений</div>
+  <div class="marquee-label" data-en="Works with any car — hundreds of makes & generations" data-kz="Кез келген маркамен жұмыс істейді — жүздеген марка мен буын">Работает с любой маркой — сотни марок и поколений</div>
   <div class="marquee">
     <div class="marquee-track">
       <span class="marquee-item">Toyota</span><span class="marquee-item">Honda</span><span class="marquee-item">BMW</span><span class="marquee-item">Mercedes-Benz</span><span class="marquee-item">Hyundai</span><span class="marquee-item">Kia</span><span class="marquee-item">Nissan</span><span class="marquee-item">Volkswagen</span><span class="marquee-item">Lexus</span><span class="marquee-item">Zeekr</span><span class="marquee-item">BYD</span><span class="marquee-item">Lada</span>
@@ -673,9 +680,9 @@
 <!-- ── ЖИВОЕ ДЕМО ── -->
 <section class="demo-section" id="demo">
   <div class="section-wrap" style="text-align:center;">
-    <div class="section-label" style="display:flex;justify-content:center;" data-en="Live demo">Живое демо</div>
-    <h2 class="section-title" data-en="Take a look inside">Загляните внутрь</h2>
-    <p class="section-sub" style="margin:0 auto;" data-en="Switch sections — see how the app looks.">Переключайте разделы — посмотрите, как выглядит приложение.</p>
+    <div class="section-label" style="display:flex;justify-content:center;" data-en="Live demo" data-kz="Тікелей демо">Живое демо</div>
+    <h2 class="section-title" data-en="Take a look inside" data-kz="Ішіне көз жүгіртіңіз">Загляните внутрь</h2>
+    <p class="section-sub" style="margin:0 auto;" data-en="Switch sections — see how the app looks." data-kz="Бөлімдерді ауыстырыңыз — қосымша қалай көрінетінін көріңіз.">Переключайте разделы — посмотрите, как выглядит приложение.</p>
     <div class="demo-wrap">
       <div class="demo-phone">
         <img id="demoImg" src="screenshots/app-home.jpg" alt="AutoSup — экран" />
@@ -694,9 +701,9 @@
 <!-- ── SCREENS ── -->
 <section class="screens-section" id="screens">
   <div class="tabs-header section-wrap">
-    <div class="section-label" data-en="App sections">Разделы приложения</div>
+    <div class="section-label" data-en="App sections" data-kz="Қосымша бөлімдері">Разделы приложения</div>
     <h2 class="section-title">Пять экранов —<br/>полный контроль</h2>
-    <p class="section-sub" data-en="Tab navigation at the bottom. Each section has its own job.">Навигация по вкладкам в нижней панели. Каждый раздел решает свою задачу.</p>
+    <p class="section-sub" data-en="Tab navigation at the bottom. Each section has its own job." data-kz="Төменгі панельдегі қойындылар арқылы шарлау. Әр бөлім өз міндетін атқарады.">Навигация по вкладкам в нижней панели. Каждый раздел решает свою задачу.</p>
   </div>
 
   <div class="tabs-nav" id="tabsNav">
@@ -757,7 +764,7 @@
             <div class="screen-icon"><span class="tab-ico" style="width:26px;height:26px;-webkit-mask-image:url(icons/tab-fuel.png);mask-image:url(icons/tab-fuel.png)"></span></div>
             <div>
               <h3>Топливо</h3>
-              <div style="font-size:13px;color:var(--subtext)" data-en="Fill-ups, consumption & analytics">Заправки, расход и аналитика</div>
+              <div style="font-size:13px;color:var(--subtext)" data-en="Fill-ups, consumption & analytics" data-kz="Жанармай құю, шығын және аналитика">Заправки, расход и аналитика</div>
             </div>
           </div>
           <p class="screen-desc">Раздел для детального учёта заправок. Интерактивные графики по дням и месяцам, статистика расхода топлива, топ АЗС по частоте посещений.</p>
@@ -785,7 +792,7 @@
             </div>
             <div class="mini-card">
               <div class="mini-card-icon"><ion-icon name="speedometer-outline" style="font-size:20px;color:var(--accent1)"></ion-icon></div>
-              <h4 data-en="Consumption">Расход</h4>
+              <h4 data-en="Consumption" data-kz="Шығын">Расход</h4>
               <p>Средний расход л/100км</p>
             </div>
             <div class="mini-card">
@@ -867,7 +874,7 @@
               <div style="font-size:13px;color:var(--subtext)">Все события и аналитика</div>
             </div>
           </div>
-          <p class="screen-desc" data-en="A hub with the full car history. Three tabs — Fuel, Service, Expenses — with monthly navigation, summary stats and rich report export (PDF/CSV/XLSX), including fleet reports for multiple cars.">Сводный раздел с полной историей автомобиля. Три вкладки — Топливо, Сервис, Расходы — с месячной навигацией, сводной статистикой и экспортом богатых отчётов (PDF/CSV/XLSX), включая флит-отчёты по всему автопарку.</p>
+          <p class="screen-desc" data-en="A hub with the full car history. Three tabs — Fuel, Service, Expenses — with monthly navigation, summary stats and rich report export (PDF/CSV/XLSX), including fleet reports for multiple cars." data-kz="Автомобильдің толық тарихы бар жиынтық бөлім. Үш қойынды — Жанармай, Қызмет, Шығындар — айлық навигация, жиынтық статистика және толыққанды есептерді экспорттау (PDF/CSV/XLSX), оның ішінде бүкіл автопарк бойынша флит-есептер де бар.">Сводный раздел с полной историей автомобиля. Три вкладки — Топливо, Сервис, Расходы — с месячной навигацией, сводной статистикой и экспортом богатых отчётов (PDF/CSV/XLSX), включая флит-отчёты по всему автопарку.</p>
           <ul class="feat-list">
             <li><ion-icon name="pie-chart-outline"></ion-icon><span><strong>Сводная карточка</strong> — donut-диаграмма расходов за месяц: заправки / ТО / доп. расходы. Тап по секции переключает вкладку.</span></li>
             <li><ion-icon name="calendar-outline"></ion-icon><span><strong>Навигация по месяцам</strong> — стрелки для переключения периода, данные пересчитываются мгновенно.</span></li>
@@ -885,14 +892,14 @@
           </ul>
         </div>
         <div class="screen-card">
-          <h3 style="margin-bottom:12px;font-size:15px;" data-en="Export formats">Форматы экспорта</h3>
+          <h3 style="margin-bottom:12px;font-size:15px;" data-en="Export formats" data-kz="Экспорт форматтары">Форматы экспорта</h3>
           <ul class="feat-list">
-            <li><ion-icon name="document-text-outline"></ion-icon><span><strong>PDF</strong> <span data-en="— a rich report with KPIs, breakdown and history">— богатый отчёт с ключевыми показателями, разбивкой и историей</span></span></li>
-            <li><ion-icon name="grid-outline"></ion-icon><span><strong>CSV</strong> <span data-en="— flat tables for Excel or Google Sheets">— табличные данные для Excel или Google Sheets</span></span></li>
-            <li><ion-icon name="grid-outline"></ion-icon><span><strong>XLSX</strong> <span data-en="— multi-sheet Excel file, used for fleet reports">— многолистовой файл Excel, для флит-отчётов</span></span></li>
-            <li><ion-icon name="car-outline"></ion-icon><span><strong data-en="Compare cars">Сравнение авто</strong> <span data-en="— a summary report across all your cars">— сводный отчёт по всем автомобилям</span></span></li>
-            <li><ion-icon name="people-circle-outline"></ion-icon><span><strong data-en="By driver">По водителям</strong> <span data-en="— who spent what, for shared or fleet cars">— кто сколько потратил, для общих и парковых авто</span></span></li>
-            <li><ion-icon name="shield-checkmark-outline"></ion-icon><span><strong data-en="Compliance">Комплаенс</strong> <span data-en="— document & service deadlines across the whole fleet">— сроки документов и ТО по всему автопарку</span></span></li>
+            <li><ion-icon name="document-text-outline"></ion-icon><span><strong>PDF</strong> <span data-en="— a rich report with KPIs, breakdown and history" data-kz="— негізгі көрсеткіштері, бөлшектеуі және тарихы бар толыққанды есеп">— богатый отчёт с ключевыми показателями, разбивкой и историей</span></span></li>
+            <li><ion-icon name="grid-outline"></ion-icon><span><strong>CSV</strong> <span data-en="— flat tables for Excel or Google Sheets" data-kz="— Excel немесе Google Sheets үшін кестелік деректер">— табличные данные для Excel или Google Sheets</span></span></li>
+            <li><ion-icon name="grid-outline"></ion-icon><span><strong>XLSX</strong> <span data-en="— multi-sheet Excel file, used for fleet reports" data-kz="— флит-есептер үшін көп парақты Excel файлы">— многолистовой файл Excel, для флит-отчётов</span></span></li>
+            <li><ion-icon name="car-outline"></ion-icon><span><strong data-en="Compare cars" data-kz="Көліктерді салыстыру">Сравнение авто</strong> <span data-en="— a summary report across all your cars" data-kz="— барлық көліктер бойынша жиынтық есеп">— сводный отчёт по всем автомобилям</span></span></li>
+            <li><ion-icon name="people-circle-outline"></ion-icon><span><strong data-en="By driver" data-kz="Жүргізушілер бойынша">По водителям</strong> <span data-en="— who spent what, for shared or fleet cars" data-kz="— кім қанша жұмсағаны, ортақ және парк көліктері үшін">— кто сколько потратил, для общих и парковых авто</span></span></li>
+            <li><ion-icon name="shield-checkmark-outline"></ion-icon><span><strong data-en="Compliance" data-kz="Комплаенс">Комплаенс</strong> <span data-en="— document & service deadlines across the whole fleet" data-kz="— бүкіл автопарк бойынша құжаттар мен ТО мерзімдері">— сроки документов и ТО по всему автопарку</span></span></li>
           </ul>
         </div>
       </div>
@@ -916,16 +923,16 @@
             <li><ion-icon name="car-outline"></ion-icon><span><strong>Мои автомобили</strong> — список всех добавленных авто с активным выделенным. Переключение одним тапом, редактирование и удаление.</span></li>
             <li><ion-icon name="cloud-upload-outline"></ion-icon><span><strong>Аккаунт</strong> — вход через Google, ручная синхронизация данных с Firebase, выход из аккаунта.</span></li>
             <li><ion-icon name="settings-outline"></ion-icon><span><strong>Настройки</strong> — тема (тёмная/светлая/системная), стиль (Classic/Glass/Glass Iris), язык, единицы измерения, уведомления.</span></li>
-            <li><ion-icon name="help-circle-outline"></ion-icon><span><strong data-en="Hint mode">Режим подсказок</strong> <span data-en="— a (?) button on every screen explains what each part does.">— кнопка (?) на каждом экране объясняет, что означает каждый элемент.</span></span></li>
+            <li><ion-icon name="help-circle-outline"></ion-icon><span><strong data-en="Hint mode" data-kz="Кеңес режимі">Режим подсказок</strong> <span data-en="— a (?) button on every screen explains what each part does." data-kz="— әр экрандағы (?) түймесі әр элементтің нені білдіретінін түсіндіреді.">— кнопка (?) на каждом экране объясняет, что означает каждый элемент.</span></span></li>
             <li><ion-icon name="globe-outline"></ion-icon><span><strong>Сайт приложения</strong> — ссылка на эту страницу.</span></li>
             <li><ion-icon name="mail-outline"></ion-icon><span><strong>Написать нам</strong> — связь с поддержкой по email.</span></li>
             <li><ion-icon name="lock-closed-outline"></ion-icon><span><strong>Конфиденциальность и условия</strong> — правовые документы.</span></li>
           </ul>
         </div>
         <div class="screen-card">
-          <h3 style="margin-bottom:12px;font-size:15px;" data-en="Adding a car">Добавление автомобиля</h3>
+          <h3 style="margin-bottom:12px;font-size:15px;" data-en="Adding a car" data-kz="Автомобиль қосу">Добавление автомобиля</h3>
           <ul class="feat-list">
-            <li><ion-icon name="car-outline"></ion-icon><span data-en="Make and model from the catalog — or add your own manually if it's missing">Марка и модель из каталога — или введите вручную, если её там нет</span></li>
+            <li><ion-icon name="car-outline"></ion-icon><span data-en="Make and model from the catalog — or add your own manually if it's missing" data-kz="Каталогтан марка мен модель — немесе жоқ болса, қолмен енгізіңіз">Марка и модель из каталога — или введите вручную, если её там нет</span></li>
             <li><ion-icon name="calendar-outline"></ion-icon><span>Год выпуска</span></li>
             <li><ion-icon name="key-outline"></ion-icon><span>Госномер и VIN</span></li>
             <li><ion-icon name="speedometer-outline"></ion-icon><span>Начальный пробег</span></li>
@@ -950,9 +957,9 @@
 <!-- ── FEATURES ── -->
 <section class="features-section" id="features">
   <div class="section-wrap">
-    <div class="section-label" data-en="Key features">Ключевые функции</div>
+    <div class="section-label" data-en="Key features" data-kz="Негізгі функциялар">Ключевые функции</div>
     <h2 class="section-title">Всё что нужно<br/>владельцу авто</h2>
-    <p class="section-sub" data-en="AutoSup replaces scattered notes, spreadsheets and apps with a single tool.">AutoSup заменяет разрозненные заметки, таблицы и приложения одним инструментом.</p>
+    <p class="section-sub" data-en="AutoSup replaces scattered notes, spreadsheets and apps with a single tool." data-kz="AutoSup шашыраңқы жазбаларды, кестелерді және қосымшаларды бір құралмен алмастырады.">AutoSup заменяет разрозненные заметки, таблицы и приложения одним инструментом.</p>
 
     <div class="feat-grid">
       <div class="feat-card">
@@ -962,7 +969,7 @@
       </div>
       <div class="feat-card">
         <div class="feat-card-icon"><ion-icon name="cloud-done-outline"></ion-icon></div>
-        <h3 data-en="Cloud sync">Облачная синхронизация</h3>
+        <h3 data-en="Cloud sync" data-kz="Бұлттық синхрондау">Облачная синхронизация</h3>
         <p>Все данные сохраняются локально в SQLite и в Firebase. Доступны на всех ваших устройствах после входа через Google.</p>
       </div>
       <div class="feat-card">
@@ -972,8 +979,8 @@
       </div>
       <div class="feat-card">
         <div class="feat-card-icon"><ion-icon name="share-outline"></ion-icon></div>
-        <h3 data-en="PDF, CSV & Excel export">Экспорт PDF, CSV и Excel</h3>
-        <p data-en="Rich reports with KPIs and breakdowns by station, category or maintenance item — plus flat CSV/XLSX tables. Any period: month, 3 months, year or custom.">Богатые отчёты с ключевыми показателями и разбивкой по АЗС, категориям или видам работ — плюс табличные CSV/XLSX. Любой период: месяц, 3 месяца, год или произвольный.</p>
+        <h3 data-en="PDF, CSV & Excel export" data-kz="PDF, CSV және Excel экспорты">Экспорт PDF, CSV и Excel</h3>
+        <p data-en="Rich reports with KPIs and breakdowns by station, category or maintenance item — plus flat CSV/XLSX tables. Any period: month, 3 months, year or custom." data-kz="АЖС, санаттар немесе жұмыс түрлері бойынша бөлшектелген, негізгі көрсеткіштері бар толыққанды есептер — плюс кестелік CSV/XLSX. Кез келген кезең: ай, 3 ай, жыл немесе өзіңіз таңдаған.">Богатые отчёты с ключевыми показателями и разбивкой по АЗС, категориям или видам работ — плюс табличные CSV/XLSX. Любой период: месяц, 3 месяца, год или произвольный.</p>
       </div>
       <div class="feat-card">
         <div class="feat-card-icon"><ion-icon name="wallet-outline"></ion-icon></div>
@@ -1002,23 +1009,23 @@
       </div>
       <div class="feat-card">
         <div class="feat-card-icon"><ion-icon name="camera-outline"></ion-icon></div>
-        <h3 data-en="Attachments to records">Вложения к записям</h3>
-        <p data-en="Attach a photo of the receipt or a PDF document to any fill-up, service or expense. Full-screen gallery with swipe and sharing.">Прикрепляйте фото чека или PDF-документ к любой заправке, ТО или расходу. Полноэкранная галерея с листанием и шарингом.</p>
+        <h3 data-en="Attachments to records" data-kz="Жазбаларға тіркемелер">Вложения к записям</h3>
+        <p data-en="Attach a photo of the receipt or a PDF document to any fill-up, service or expense. Full-screen gallery with swipe and sharing." data-kz="Кез келген жанармай құюға, ТО-ға немесе шығынға чек фотосын немесе PDF-құжатты тіркеңіз. Парақтауға және бөлісуге болатын толық экранды галерея.">Прикрепляйте фото чека или PDF-документ к любой заправке, ТО или расходу. Полноэкранная галерея с листанием и шарингом.</p>
       </div>
       <div class="feat-card">
         <div class="feat-card-icon"><ion-icon name="people-circle-outline"></ion-icon></div>
-        <h3 data-en="Fleet reports">Флит-отчёты</h3>
-        <p data-en="For a family or company fleet — a report by driver (who spent what) and a compliance report (document & service deadlines across all cars). Multi-sheet XLSX included.">Для семейного или корпоративного автопарка — отчёт по водителям (кто сколько потратил) и отчёт по комплаенсу (сроки документов и ТО по всем машинам). Есть многолистовой XLSX.</p>
+        <h3 data-en="Fleet reports" data-kz="Флит-есептер">Флит-отчёты</h3>
+        <p data-en="For a family or company fleet — a report by driver (who spent what) and a compliance report (document & service deadlines across all cars). Multi-sheet XLSX included." data-kz="Отбасылық немесе корпоративтік автопарк үшін — жүргізушілер бойынша есеп (кім қанша жұмсаған) және комплаенс есебі (барлық көліктер бойынша құжаттар мен ТО мерзімдері). Көп парақты XLSX бар.">Для семейного или корпоративного автопарка — отчёт по водителям (кто сколько потратил) и отчёт по комплаенсу (сроки документов и ТО по всем машинам). Есть многолистовой XLSX.</p>
       </div>
       <div class="feat-card">
         <div class="feat-card-icon"><ion-icon name="help-circle-outline"></ion-icon></div>
-        <h3 data-en="Built-in hints">Режим подсказок</h3>
-        <p data-en="A (?) button on every screen highlights zones and explains what each one does — no need to figure the app out on your own.">Кнопка (?) на каждом экране подсвечивает зоны и объясняет, что они делают — не нужно разбираться в приложении самостоятельно.</p>
+        <h3 data-en="Built-in hints" data-kz="Кеңес режимі">Режим подсказок</h3>
+        <p data-en="A (?) button on every screen highlights zones and explains what each one does — no need to figure the app out on your own." data-kz="Әр экрандағы (?) түймесі аймақтарды бөлектеп, олардың не істейтінін түсіндіреді — қосымшаны өз бетіңізше үйренудің қажеті жоқ.">Кнопка (?) на каждом экране подсвечивает зоны и объясняет, что они делают — не нужно разбираться в приложении самостоятельно.</p>
       </div>
       <div class="feat-card">
         <div class="feat-card-icon"><ion-icon name="paper-plane-outline"></ion-icon></div>
-        <h3 data-en="Push notifications">Push-уведомления</h3>
-        <p data-en="Instant alerts for family invites and important app announcements — on top of local reminders for maintenance and documents.">Мгновенные оповещения о приглашениях в семью и важных анонсах приложения — в дополнение к локальным напоминаниям о ТО и документах.</p>
+        <h3 data-en="Push notifications" data-kz="Push-хабарландырулар">Push-уведомления</h3>
+        <p data-en="Instant alerts for family invites and important app announcements — on top of local reminders for maintenance and documents." data-kz="Отбасыға шақырулар және қосымшаның маңызды жаңалықтары туралы лезде хабарландырулар — ТО мен құжаттар туралы жергілікті ескертпелерге қосымша.">Мгновенные оповещения о приглашениях в семью и важных анонсах приложения — в дополнение к локальным напоминаниям о ТО и документах.</p>
       </div>
     </div>
   </div>
@@ -1027,24 +1034,24 @@
 <!-- ── АВТОПОМОЩНИК ── -->
 <section class="assist-section" id="assist">
   <div class="section-wrap">
-    <div class="section-label" data-en="Car Assistant">Автопомощник</div>
-    <h2 class="section-title" data-en="More than tracking">Больше, чем учёт</h2>
-    <p class="section-sub" data-en="Dashboard warning lights decoded, step-by-step DIY guides and nearby services — right inside the app.">Расшифровка значков приборки, пошаговые автогайды и поиск сервисов рядом — прямо в приложении.</p>
+    <div class="section-label" data-en="Car Assistant" data-kz="Автокөмекші">Автопомощник</div>
+    <h2 class="section-title" data-en="More than tracking" data-kz="Есептен де көбі">Больше, чем учёт</h2>
+    <p class="section-sub" data-en="Dashboard warning lights decoded, step-by-step DIY guides and nearby services — right inside the app." data-kz="Панель белгілерін тану, қадамдық автогайдтар және маңайдағы сервистерді іздеу — тікелей қосымшада.">Расшифровка значков приборки, пошаговые автогайды и поиск сервисов рядом — прямо в приложении.</p>
     <div class="assist-feats">
       <div class="assist-feat">
         <div class="assist-feat-ico"><ion-icon name="warning-outline"></ion-icon></div>
-        <h3 data-en="Dashboard icons">Значки панели</h3>
-        <p data-en="62 warning lights decoded — what it means and what to do, with color and urgency.">62 индикатора приборки с расшифровкой — что значит и что делать, с цветом и срочностью.</p>
+        <h3 data-en="Dashboard icons" data-kz="Панель белгілері">Значки панели</h3>
+        <p data-en="62 warning lights decoded — what it means and what to do, with color and urgency." data-kz="Түсіндірмесі бар 62 панель индикаторы — нені білдіреді және не істеу керек, түсі мен шұғылдығымен.">62 индикатора приборки с расшифровкой — что значит и что делать, с цветом и срочностью.</p>
       </div>
       <div class="assist-feat">
         <div class="assist-feat-ico"><ion-icon name="construct-outline"></ion-icon></div>
-        <h3 data-en="DIY guides">Автогайды</h3>
-        <p data-en="20 step-by-step guides — check oil, top up washer fluid, inflate tyres, jump-start and more.">20 пошаговых инструкций — проверить масло, долить омыватель, подкачать шины, прикурить и другое.</p>
+        <h3 data-en="DIY guides" data-kz="Автогайдтар">Автогайды</h3>
+        <p data-en="20 step-by-step guides — check oil, top up washer fluid, inflate tyres, jump-start and more." data-kz="20 қадамдық нұсқаулық — майды тексеру, шаятын сұйықтықты құю, шиналарды қотару, аккумуляторды «тұтандыру» және басқа да.">20 пошаговых инструкций — проверить масло, долить омыватель, подкачать шины, прикурить и другое.</p>
       </div>
       <div class="assist-feat">
         <div class="assist-feat-ico"><ion-icon name="map-outline"></ion-icon></div>
-        <h3 data-en="Find on map">Найти на карте</h3>
-        <p data-en="8 categories — fuel, EV charging, service, tyre shops, car wash, tow truck and more nearby.">8 категорий — заправки, EV-зарядки, автосервисы, шиномонтажи, автомойки, эвакуатор рядом.</p>
+        <h3 data-en="Find on map" data-kz="Картадан табу">Найти на карте</h3>
+        <p data-en="8 categories — fuel, EV charging, service, tyre shops, car wash, tow truck and more nearby." data-kz="8 санат — жанармай құю, EV-зарядка, автосервис, шиномонтаж, автомойка, маңайдағы эвакуатор.">8 категорий — заправки, EV-зарядки, автосервисы, шиномонтажи, автомойки, эвакуатор рядом.</p>
       </div>
     </div>
     <div class="assist-shots">
@@ -1059,19 +1066,19 @@
 <!-- ── ЕЩЁ ВОЗМОЖНОСТИ ── -->
 <section class="assist-section" id="more">
   <div class="section-wrap">
-    <div class="section-label" data-en="And more">Ещё больше</div>
-    <h2 class="section-title" data-en="Features for everyone">Возможности для каждого</h2>
-    <p class="section-sub" data-en="Family sharing and full support for EVs and hybrids.">Семейный доступ и полная поддержка электро и гибридов.</p>
+    <div class="section-label" data-en="And more" data-kz="Тағы да көп">Ещё больше</div>
+    <h2 class="section-title" data-en="Features for everyone" data-kz="Әркімге арналған мүмкіндіктер">Возможности для каждого</h2>
+    <p class="section-sub" data-en="Family sharing and full support for EVs and hybrids." data-kz="Отбасылық қолжетімділік және электро мен гибридтерге толық қолдау.">Семейный доступ и полная поддержка электро и гибридов.</p>
     <div class="assist-feats">
       <div class="assist-feat">
         <div class="assist-feat-ico"><ion-icon name="people-outline"></ion-icon></div>
-        <h3 data-en="Family sharing">Семейный доступ</h3>
-        <p data-en="Share a car with your family — invite by link, roles Editor and Viewer.">Общий доступ к авто для семьи — приглашение по ссылке, роли Редактор и Наблюдатель.</p>
+        <h3 data-en="Family sharing" data-kz="Отбасылық қолжетімділік">Семейный доступ</h3>
+        <p data-en="Share a car with your family — invite by link, roles Editor and Viewer." data-kz="Отбасы үшін көлікке ортақ қолжетімділік — сілтеме арқылы шақыру, Редактор және Байқаушы рөлдері.">Общий доступ к авто для семьи — приглашение по ссылке, роли Редактор и Наблюдатель.</p>
       </div>
       <div class="assist-feat">
         <div class="assist-feat-ico"><ion-icon name="flash-outline"></ion-icon></div>
-        <h3 data-en="EV & hybrids">Электро и гибриды</h3>
-        <p data-en="Track charging in kWh for EVs, and both fuel and electricity for hybrids.">Учёт зарядок в кВт·ч для электро и одновременно топлива и электроэнергии для гибридов.</p>
+        <h3 data-en="EV & hybrids" data-kz="Электро және гибридтер">Электро и гибриды</h3>
+        <p data-en="Track charging in kWh for EVs, and both fuel and electricity for hybrids." data-kz="Электрокөліктер үшін кВт·сағ-пен зарядтауды есепке алу, ал гибридтер үшін — жанармай мен электрэнергияны бір мезгілде.">Учёт зарядок в кВт·ч для электро и одновременно топлива и электроэнергии для гибридов.</p>
       </div>
     </div>
     <div class="assist-shots">
@@ -1083,24 +1090,24 @@
 <!-- ── ПАСПОРТ АВТО ── -->
 <section class="assist-section" id="passport">
   <div class="section-wrap">
-    <div class="section-label" data-en="Car passport">Паспорт авто</div>
-    <h2 class="section-title" data-en="Sell your car faster">Продайте авто быстрее</h2>
-    <p class="section-sub" data-en="One document instead of a pile of screenshots and receipts — you decide what the buyer sees and what stays private.">Один документ вместо кучи скриншотов и чеков — сами решаете, что показать покупателю, а что оставить при себе.</p>
+    <div class="section-label" data-en="Car passport" data-kz="Көлік паспорты">Паспорт авто</div>
+    <h2 class="section-title" data-en="Sell your car faster" data-kz="Көлікті жылдам сатыңыз">Продайте авто быстрее</h2>
+    <p class="section-sub" data-en="One document instead of a pile of screenshots and receipts — you decide what the buyer sees and what stays private." data-kz="Скриншоттар мен чектер үйіндісінің орнына бір құжат — сатып алушыға нені көрсету, нені өзіңізде қалдыруды өзіңіз шешесіз.">Один документ вместо кучи скриншотов и чеков — сами решаете, что показать покупателю, а что оставить при себе.</p>
     <div class="assist-feats">
       <div class="assist-feat">
         <div class="assist-feat-ico"><ion-icon name="checkmark-done-outline"></ion-icon></div>
-        <h3 data-en="Always included">Входит всегда</h3>
-        <p data-en="Service history, car specs, mileage and documents (insurance, inspection, tech passport, tax) — the base that proves the car was looked after.">История ТО, характеристики автомобиля, пробег и документы (страховка, техосмотр, техпаспорт, налог) — база документа, которая доказывает, что за авто следили.</p>
+        <h3 data-en="Always included" data-kz="Әрқашан кіреді">Входит всегда</h3>
+        <p data-en="Service history, car specs, mileage and documents (insurance, inspection, tech passport, tax) — the base that proves the car was looked after." data-kz="ТО тарихы, автомобиль сипаттамалары, жүріс және құжаттар (сақтандыру, техкөру, техпаспорт, салық) — көлікке қарау жасалғанын дәлелдейтін құжат негізі.">История ТО, характеристики автомобиля, пробег и документы (страховка, техосмотр, техпаспорт, налог) — база документа, которая доказывает, что за авто следили.</p>
       </div>
       <div class="assist-feat">
         <div class="assist-feat-ico"><ion-icon name="eye-off-outline"></ion-icon></div>
-        <h3 data-en="Hide what you don't want to share">Скрывайте лишнее</h3>
-        <p data-en="Car photo, VIN, license plate and maintenance costs are separate toggles. Selling to a stranger — turn off VIN and plate, but keep the full service history visible.">Фото автомобиля, VIN-номер, госномер и суммы трат на ТО — отдельные переключатели. Продаёте незнакомцу — уберите VIN и номер, но оставьте полную историю обслуживания.</p>
+        <h3 data-en="Hide what you don't want to share" data-kz="Артығын жасырыңыз">Скрывайте лишнее</h3>
+        <p data-en="Car photo, VIN, license plate and maintenance costs are separate toggles. Selling to a stranger — turn off VIN and plate, but keep the full service history visible." data-kz="Автомобиль фотосы, VIN-нөмірі, мемнөмір және ТО-ға жұмсалған соманы жеке қосқыштар басқарады. Бейтаныс адамға сатсаңыз — VIN мен нөмірді жасырыңыз, бірақ қызмет көрсету тарихын толық қалдырыңыз.">Фото автомобиля, VIN-номер, госномер и суммы трат на ТО — отдельные переключатели. Продаёте незнакомцу — уберите VIN и номер, но оставьте полную историю обслуживания.</p>
       </div>
       <div class="assist-feat">
         <div class="assist-feat-ico"><ion-icon name="document-attach-outline"></ion-icon></div>
-        <h3 data-en="PDF or Excel">PDF или Excel</h3>
-        <p data-en="Send a ready-made PDF straight in a chat with the buyer. Or export a multi-sheet Excel (Car / Specs / Service / Documents) for your own records.">Готовый PDF отправьте прямо в переписке с покупателем. Или выгрузите многолистовой Excel (Авто / Характеристики / ТО / Документы) — для своего архива.</p>
+        <h3 data-en="PDF or Excel" data-kz="PDF немесе Excel">PDF или Excel</h3>
+        <p data-en="Send a ready-made PDF straight in a chat with the buyer. Or export a multi-sheet Excel (Car / Specs / Service / Documents) for your own records." data-kz="Дайын PDF-ті сатып алушымен хат алмасуда тікелей жіберіңіз. Немесе өз архивіңіз үшін көп парақты Excel (Авто / Сипаттамалар / ТО / Құжаттар) жүктеп алыңыз.">Готовый PDF отправьте прямо в переписке с покупателем. Или выгрузите многолистовой Excel (Авто / Характеристики / ТО / Документы) — для своего архива.</p>
       </div>
     </div>
     <div class="assist-shots">
@@ -1112,24 +1119,24 @@
 <!-- ── ГОСНОМЕРА ── -->
 <section class="assist-section" id="plates">
   <div class="section-wrap">
-    <div class="section-label" data-en="License plates">Госномера</div>
-    <h2 class="section-title" data-en="A real plate, right on your card">Настоящий номер на вашей карточке</h2>
-    <p class="section-sub" data-en="Type the number — see it exactly as it looks on the bumper. 17 countries, authentic fonts and formats.">Введите номер — увидите его таким же, каким он выглядит на бампере. 17 стран, точные шрифты и форматы.</p>
+    <div class="section-label" data-en="License plates" data-kz="Мемнөмірлер">Госномера</div>
+    <h2 class="section-title" data-en="A real plate, right on your card" data-kz="Карточкаңыздағы нағыз нөмір">Настоящий номер на вашей карточке</h2>
+    <p class="section-sub" data-en="Type the number — see it exactly as it looks on the bumper. 17 countries, authentic fonts and formats." data-kz="Нөмірді енгізіңіз — оны бампердегідей дәл көресіз. 17 ел, дәл қаріптер мен форматтар.">Введите номер — увидите его таким же, каким он выглядит на бампере. 17 стран, точные шрифты и форматы.</p>
     <div class="assist-feats">
       <div class="assist-feat">
         <div class="assist-feat-ico"><ion-icon name="create-outline"></ion-icon></div>
-        <h3 data-en="Live preview">Живой предпросмотр</h3>
-        <p data-en="Pick a country — Kazakhstan, Russia, Kyrgyzstan and 14 more — and start typing the plate. The app spaces and hyphenates it automatically and renders it exactly like the real thing as you type.">Выберите страну — Казахстан, Россия, Кыргызстан и ещё 14 — и начинайте печатать номер. Приложение само расставляет пробелы и дефисы и сразу рисует номер точь-в-точь как настоящий, пока вы вводите.</p>
+        <h3 data-en="Live preview" data-kz="Тікелей алдын ала қарау">Живой предпросмотр</h3>
+        <p data-en="Pick a country — Kazakhstan, Russia, Kyrgyzstan and 14 more — and start typing the plate. The app spaces and hyphenates it automatically and renders it exactly like the real thing as you type." data-kz="Елді таңдаңыз — Қазақстан, Ресей, Қырғызстан және тағы 14 — және нөмірді теруді бастаңыз. Қосымша бос орындар мен дефистерді өзі қояды және сіз енгізіп жатқан кезде нөмірді дәл нағызындай сызып шығады.">Выберите страну — Казахстан, Россия, Кыргызстан и ещё 14 — и начинайте печатать номер. Приложение само расставляет пробелы и дефисы и сразу рисует номер точь-в-точь как настоящий, пока вы вводите.</p>
       </div>
       <div class="assist-feat">
         <div class="assist-feat-ico"><ion-icon name="shapes-outline"></ion-icon></div>
-        <h3 data-en="Authentic fonts & formats">Настоящие шрифты и форматы</h3>
-        <p data-en="Every country has its own font, proportions and flag/region placement — just like the real plate. Not just text — an accurate replica of the license plate.">Каждая страна — свой шрифт, свои пропорции и расположение флага и кода региона, как на реальной пластине. Не просто текст — точная копия номерного знака.</p>
+        <h3 data-en="Authentic fonts & formats" data-kz="Нағыз қаріптер мен форматтар">Настоящие шрифты и форматы</h3>
+        <p data-en="Every country has its own font, proportions and flag/region placement — just like the real plate. Not just text — an accurate replica of the license plate." data-kz="Әр елдің өз қаріпі, өз пропорциялары, нағыз пластинадағыдай ту мен өңір кодының орналасуы бар. Бұл жай мәтін емес — нөмір белгісінің дәл көшірмесі.">Каждая страна — свой шрифт, свои пропорции и расположение флага и кода региона, как на реальной пластине. Не просто текст — точная копия номерного знака.</p>
       </div>
       <div class="assist-feat">
         <div class="assist-feat-ico"><ion-icon name="apps-outline"></ion-icon></div>
-        <h3 data-en="On your car card">На карточке авто</h3>
-        <p data-en="Flip one switch and the plate shows up on your car card on the Home tab, next to the photo, mileage and consumption. Hidden by default — privacy is your call.">Включите один переключатель — и номер появится на карточке авто на главном экране рядом с фото, пробегом и расходом. По умолчанию скрыт — приватность на ваш выбор.</p>
+        <h3 data-en="On your car card" data-kz="Автомобиль карточкасында">На карточке авто</h3>
+        <p data-en="Flip one switch and the plate shows up on your car card on the Home tab, next to the photo, mileage and consumption. Hidden by default — privacy is your call." data-kz="Бір қосқышты қосыңыз — нөмір басты экрандағы автомобиль карточкасында фото, жүріс және шығынның жанында пайда болады. Әдепкі бойынша жасырын — құпиялылық сіздің таңдауыңыз.">Включите один переключатель — и номер появится на карточке авто на главном экране рядом с фото, пробегом и расходом. По умолчанию скрыт — приватность на ваш выбор.</p>
       </div>
     </div>
     <div class="plate-shots">
@@ -1143,24 +1150,24 @@
 <!-- ── ВИДЖЕТ ── -->
 <section class="assist-section" id="widget">
   <div class="section-wrap">
-    <div class="section-label" data-en="Home screen widget">Виджет на экран</div>
-    <h2 class="section-title" data-en="Your car, without opening the app">Ваше авто без захода в приложение</h2>
-    <p class="section-sub" data-en="A home screen widget for iOS and Android — mileage, consumption and maintenance status at a glance.">Виджет на домашний экран для iOS и Android — пробег, расход и статус ТО одним взглядом.</p>
+    <div class="section-label" data-en="Home screen widget" data-kz="Экрандағы виджет">Виджет на экран</div>
+    <h2 class="section-title" data-en="Your car, without opening the app" data-kz="Қосымшаға кірмей-ақ көлігіңіз">Ваше авто без захода в приложение</h2>
+    <p class="section-sub" data-en="A home screen widget for iOS and Android — mileage, consumption and maintenance status at a glance." data-kz="iOS және Android үшін басты экран виджеті — жүріс, шығын және ТО мәртебесі бір қарағанда.">Виджет на домашний экран для iOS и Android — пробег, расход и статус ТО одним взглядом.</p>
     <div class="assist-feats">
       <div class="assist-feat">
         <div class="assist-feat-ico"><ion-icon name="color-palette-outline"></ion-icon></div>
-        <h3 data-en="Follows your app style">Следует стилю приложения</h3>
-        <p data-en="Classic, Depth or Crystal — whichever style and theme you picked in the app, the widget matches it automatically and redraws instantly on change.">Classic, Глубина или Кристалл — какой стиль и тему выбрали в приложении, такими будут и виджет. Перерисовывается мгновенно при смене.</p>
+        <h3 data-en="Follows your app style" data-kz="Қосымша стиліне сай келеді">Следует стилю приложения</h3>
+        <p data-en="Classic, Depth or Crystal — whichever style and theme you picked in the app, the widget matches it automatically and redraws instantly on change." data-kz="Classic, Тереңдік немесе Кристалл — қосымшада қандай стиль мен тема таңдасаңыз, виджет те сондай болады. Ауыстырған кезде бірден қайта сызылады.">Classic, Глубина или Кристалл — какой стиль и тему выбрали в приложении, такими будут и виджет. Перерисовывается мгновенно при смене.</p>
       </div>
       <div class="assist-feat">
         <div class="assist-feat-ico"><ion-icon name="ellipse-outline"></ion-icon></div>
-        <h3 data-en="Status at a glance">Статус на виду</h3>
-        <p data-en="The widget border is colored by your car's status — green, yellow or red — so you see if something needs attention without unlocking the phone.">Рамка виджета окрашена по статусу автомобиля — зелёная, жёлтая или красная, — сразу видно, нужно ли что-то сделать, даже не разблокируя телефон.</p>
+        <h3 data-en="Status at a glance" data-kz="Мәртебе көз алдында">Статус на виду</h3>
+        <p data-en="The widget border is colored by your car's status — green, yellow or red — so you see if something needs attention without unlocking the phone." data-kz="Виджет жақтауы автомобиль мәртебесі бойынша боялған — жасыл, сары немесе қызыл — телефонды құлыптан ашпай-ақ бірдеңе істеу керек пе, бірден көрінеді.">Рамка виджета окрашена по статусу автомобиля — зелёная, жёлтая или красная, — сразу видно, нужно ли что-то сделать, даже не разблокируя телефон.</p>
       </div>
       <div class="assist-feat">
         <div class="assist-feat-ico"><ion-icon name="flash-outline"></ion-icon></div>
-        <h3 data-en="Quick fuel entry">Быстрая заправка</h3>
-        <p data-en="The medium-size iOS widget has a fuel button right on it — jump straight into adding a fill-up.">Средний виджет на iOS несёт кнопку заправки прямо на себе — переход к добавлению заправки в один тап.</p>
+        <h3 data-en="Quick fuel entry" data-kz="Жылдам жанармай құю">Быстрая заправка</h3>
+        <p data-en="The medium-size iOS widget has a fuel button right on it — jump straight into adding a fill-up." data-kz="iOS-тағы орта виджеттің өзінде жанармай құю түймесі бар — бір түртумен жанармай құюды қосуға өтесіз.">Средний виджет на iOS несёт кнопку заправки прямо на себе — переход к добавлению заправки в один тап.</p>
       </div>
     </div>
   </div>
@@ -1170,10 +1177,10 @@
 <section class="stats-band">
   <div class="section-wrap">
     <div class="stats-band-grid">
-      <div><div class="sb-val gradient-text">100+</div><div class="sb-lab" data-en="makes & models">марок и моделей</div></div>
-      <div><div class="sb-val gradient-text">62</div><div class="sb-lab" data-en="dashboard icons">значка приборки</div></div>
-      <div><div class="sb-val gradient-text">20</div><div class="sb-lab" data-en="DIY guides">автогайдов</div></div>
-      <div><div class="sb-val gradient-text">13</div><div class="sb-lab" data-en="languages">языков</div></div>
+      <div><div class="sb-val gradient-text">100+</div><div class="sb-lab" data-en="makes & models" data-kz="марка мен модель">марок и моделей</div></div>
+      <div><div class="sb-val gradient-text">62</div><div class="sb-lab" data-en="dashboard icons" data-kz="панель белгісі">значка приборки</div></div>
+      <div><div class="sb-val gradient-text">20</div><div class="sb-lab" data-en="DIY guides" data-kz="Автогайдтар">автогайдов</div></div>
+      <div><div class="sb-val gradient-text">13</div><div class="sb-lab" data-en="languages" data-kz="интерфейс тілі">языков</div></div>
     </div>
   </div>
 </section>
@@ -1181,9 +1188,9 @@
 <!-- ── CUSTOMIZATION ── -->
 <section class="custom-section" id="customize">
   <div class="section-wrap">
-    <div class="section-label" data-en="Personalization">Персонализация</div>
-    <h2 class="section-title" data-en="Make it yours">Настройте под себя</h2>
-    <p class="section-sub" data-en="Three visual styles, 13 languages and flexible units.">Три стиля оформления, 13 языков и гибкие единицы измерения.</p>
+    <div class="section-label" data-en="Personalization" data-kz="Дербестендіру">Персонализация</div>
+    <h2 class="section-title" data-en="Make it yours" data-kz="Өзіңізге лайықтаңыз">Настройте под себя</h2>
+    <p class="section-sub" data-en="Three visual styles, 13 languages and flexible units." data-kz="Үш безендіру стилі, 13 тіл және икемді өлшем бірліктері.">Три стиля оформления, 13 языков и гибкие единицы измерения.</p>
 
     <div style="margin-top:48px;">
       <h3 style="font-size:16px;font-weight:700;margin-bottom:6px;color:var(--subtext);letter-spacing:0.05em;text-transform:uppercase;font-size:12px;">Стили оформления</h3>
@@ -1244,7 +1251,7 @@
         </div>
         <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 20px;display:flex;align-items:center;gap:10px;">
           <ion-icon name="cash-outline" style="color:var(--accent1);font-size:20px;"></ion-icon>
-          <div><div style="font-size:13px;font-weight:600;" data-en="Currency">Валюта</div><div style="font-size:12px;color:var(--subtext);" data-en="160 currencies (ISO 4217) — ₸, $, €, ₽ and more">160 валют (ISO 4217) — ₸, $, €, ₽ и другие</div></div>
+          <div><div style="font-size:13px;font-weight:600;" data-en="Currency" data-kz="Валюта">Валюта</div><div style="font-size:12px;color:var(--subtext);" data-en="160 currencies (ISO 4217) — ₸, $, €, ₽ and more" data-kz="160 валюта (ISO 4217) — ₸, $, €, ₽ және басқалары">160 валют (ISO 4217) — ₸, $, €, ₽ и другие</div></div>
         </div>
       </div>
     </div>
@@ -1254,9 +1261,9 @@
 <!-- ── SCREENSHOTS ── -->
 <section class="shots-section" id="screenshots">
   <div class="section-wrap">
-    <div class="section-label" data-en="Interface">Интерфейс</div>
-    <h2 class="section-title" data-en="Beautiful & handy">Красиво и удобно</h2>
-    <p class="section-sub" data-en="Dark theme, glass design, smooth animations.">Тёмная тема, стеклянный дизайн, плавные анимации.</p>
+    <div class="section-label" data-en="Interface" data-kz="Интерфейс">Интерфейс</div>
+    <h2 class="section-title" data-en="Beautiful & handy" data-kz="Әдемі әрі ыңғайлы">Красиво и удобно</h2>
+    <p class="section-sub" data-en="Dark theme, glass design, smooth animations." data-kz="Күңгірт тема, шыны дизайн, жұмсақ анимациялар.">Тёмная тема, стеклянный дизайн, плавные анимации.</p>
   </div>
   <div class="shots-scroll">
     <div class="shot-frame"><img src="screenshots/app-home.jpg" alt="Главная" /></div>
@@ -1303,28 +1310,28 @@
 <!-- ── КАЛЬКУЛЯТОР ── -->
 <section class="calc-section" id="calc">
   <div class="section-wrap">
-    <div class="section-label" data-en="Savings">Экономия</div>
-    <h2 class="section-title" data-en="How much do you spend on fuel?">Сколько уходит на топливо?</h2>
-    <p class="section-sub" data-en="Estimate yearly costs — AutoSup helps keep them in check and spot overspending in time.">Прикиньте годовые расходы — AutoSup помогает держать их под контролем и вовремя замечать перерасход.</p>
+    <div class="section-label" data-en="Savings" data-kz="Үнемдеу">Экономия</div>
+    <h2 class="section-title" data-en="How much do you spend on fuel?" data-kz="Жанармайға қанша кетеді?">Сколько уходит на топливо?</h2>
+    <p class="section-sub" data-en="Estimate yearly costs — AutoSup helps keep them in check and spot overspending in time." data-kz="Жылдық шығынды болжаңыз — AutoSup оларды бақылауда ұстауға және артық жұмсауды уақытында байқауға көмектеседі.">Прикиньте годовые расходы — AutoSup помогает держать их под контролем и вовремя замечать перерасход.</p>
     <div class="calc-box">
       <div class="calc-inputs">
         <div class="calc-field">
-          <div class="calc-field-top"><span data-en="Monthly mileage">Пробег в месяц</span><span><b id="v-km">1 500</b> км</span></div>
+          <div class="calc-field-top"><span data-en="Monthly mileage" data-kz="Айлық жүріс">Пробег в месяц</span><span><b id="v-km">1 500</b> км</span></div>
           <input type="range" id="c-km" min="300" max="5000" value="1500" step="100" />
         </div>
         <div class="calc-field">
-          <div class="calc-field-top"><span data-en="Consumption">Расход</span><span><b id="v-cons">9</b> л/100км</span></div>
+          <div class="calc-field-top"><span data-en="Consumption" data-kz="Шығын">Расход</span><span><b id="v-cons">9</b> л/100км</span></div>
           <input type="range" id="c-cons" min="4" max="20" value="9" step="0.5" />
         </div>
         <div class="calc-field">
-          <div class="calc-field-top"><span data-en="Fuel price">Цена топлива</span><span><b id="v-price">250</b> ₸/л</span></div>
+          <div class="calc-field-top"><span data-en="Fuel price" data-kz="Жанармай бағасы">Цена топлива</span><span><b id="v-price">250</b> ₸/л</span></div>
           <input type="range" id="c-price" min="150" max="600" value="250" step="10" />
         </div>
       </div>
       <div class="calc-result">
-        <div class="calc-res-label" data-en="Yearly fuel cost">Расходы на топливо в год</div>
+        <div class="calc-res-label" data-en="Yearly fuel cost" data-kz="Жылдық жанармай шығыны">Расходы на топливо в год</div>
         <div class="calc-res-val gradient-text" id="c-result">—</div>
-        <div class="calc-res-note" data-en="With AutoSup you see exact consumption stats and never overpay blindly.">С AutoSup вы видите точную статистику расхода и не переплачиваете вслепую.</div>
+        <div class="calc-res-note" data-en="With AutoSup you see exact consumption stats and never overpay blindly." data-kz="AutoSup-пен сіз шығынның нақты статистикасын көресіз және көзсіз артық төлемейсіз.">С AutoSup вы видите точную статистику расхода и не переплачиваете вслепую.</div>
       </div>
     </div>
   </div>
@@ -1333,23 +1340,23 @@
 <!-- ── КАК РАБОТАЕТ ── -->
 <section class="how-section" id="how">
   <div class="section-wrap">
-    <div class="section-label" data-en="How it works">Как это работает</div>
-    <h2 class="section-title" data-en="Get started in 3 steps">Начните за 3 шага</h2>
-    <p class="section-sub" data-en="Nothing complex — from install to the first reminder takes a couple of minutes.">Ничего сложного — от установки до первого напоминания проходит пара минут.</p>
+    <div class="section-label" data-en="How it works" data-kz="Бұл қалай жұмыс істейді">Как это работает</div>
+    <h2 class="section-title" data-en="Get started in 3 steps" data-kz="3 қадаммен бастаңыз">Начните за 3 шага</h2>
+    <p class="section-sub" data-en="Nothing complex — from install to the first reminder takes a couple of minutes." data-kz="Ешқандай қиындық жоқ — орнатудан бірінші ескертпеге дейін бірнеше минут қана өтеді.">Ничего сложного — от установки до первого напоминания проходит пара минут.</p>
     <div class="how-steps">
       <div class="how-step">
         <div class="how-num">1</div>
-        <h3 data-en="Add your car">Добавьте автомобиль</h3>
-        <p data-en="Make, model, year, plate and photo. A catalog with hundreds of makes and generations — pick in a couple of taps. Don't see your car? Add it manually.">Марка, модель, год, госномер и фото. Каталог с сотнями марок и поколений — выбор в пару тапов. Не нашли свою марку? Добавьте вручную.</p>
+        <h3 data-en="Add your car" data-kz="Автомобиль қосыңыз">Добавьте автомобиль</h3>
+        <p data-en="Make, model, year, plate and photo. A catalog with hundreds of makes and generations — pick in a couple of taps. Don't see your car? Add it manually." data-kz="Марка, модель, жыл, мемнөмір және фото. Жүздеген марка мен буыны бар каталог — бірнеше түртумен таңдау. Маркаңызды таппадыңыз ба? Қолмен қосыңыз.">Марка, модель, год, госномер и фото. Каталог с сотнями марок и поколений — выбор в пару тапов. Не нашли свою марку? Добавьте вручную.</p>
       </div>
       <div class="how-step">
         <div class="how-num">2</div>
-        <h3 data-en="Track everything">Ведите учёт</h3>
+        <h3 data-en="Track everything" data-kz="Есеп жүргізіңіз">Ведите учёт</h3>
         <p>Заправки, ТО, расходы и документы — вносятся за секунды. Графики и статистика считаются автоматически.</p>
       </div>
       <div class="how-step">
         <div class="how-num">3</div>
-        <h3 data-en="Get reminders">Получайте напоминания</h3>
+        <h3 data-en="Get reminders" data-kz="Ескертпелер алыңыз">Получайте напоминания</h3>
         <p>Приложение само напомнит о плановом ТО, истечении страховки, техосмотра и водительских прав — заранее.</p>
       </div>
     </div>
@@ -1359,47 +1366,47 @@
 <!-- ── СРАВНЕНИЕ ── -->
 <section class="compare-section" id="compare">
   <div class="section-wrap">
-    <div class="section-label" data-en="Why AutoSup">Почему AutoSup</div>
-    <h2 class="section-title" data-en="AutoSup vs notes & Excel">AutoSup vs заметки и Excel</h2>
-    <p class="section-sub" data-en="What takes hours in spreadsheets and notes, AutoSup does automatically.">То, что в таблицах и заметках занимает часы, AutoSup делает автоматически.</p>
+    <div class="section-label" data-en="Why AutoSup" data-kz="Неге AutoSup">Почему AutoSup</div>
+    <h2 class="section-title" data-en="AutoSup vs notes & Excel" data-kz="AutoSup vs жазбалар мен Excel">AutoSup vs заметки и Excel</h2>
+    <p class="section-sub" data-en="What takes hours in spreadsheets and notes, AutoSup does automatically." data-kz="Кестелер мен жазбаларда сағаттар кететін нәрсені AutoSup автоматты түрде жасайды.">То, что в таблицах и заметках занимает часы, AutoSup делает автоматически.</p>
     <div class="compare-table">
       <div class="compare-row compare-head">
-        <div class="compare-cell" data-en="Feature">Возможность</div>
+        <div class="compare-cell" data-en="Feature" data-kz="Мүмкіндік">Возможность</div>
         <div class="compare-cell center compare-brand">AutoSup</div>
         <div class="compare-cell center">Заметки / Excel</div>
       </div>
       <div class="compare-row">
-        <div class="compare-cell" data-en="Automatic consumption charts">Автоматические графики расхода</div>
+        <div class="compare-cell" data-en="Automatic consumption charts" data-kz="Шығынның автоматты графиктері">Автоматические графики расхода</div>
         <div class="compare-cell center"><span class="c-yes">✓</span></div>
         <div class="compare-cell center"><span class="c-no">✕</span></div>
       </div>
       <div class="compare-row">
-        <div class="compare-cell" data-en="Service & document reminders">Напоминания о ТО и документах</div>
+        <div class="compare-cell" data-en="Service & document reminders" data-kz="ТО мен құжаттар туралы ескертпелер">Напоминания о ТО и документах</div>
         <div class="compare-cell center"><span class="c-yes">✓</span></div>
         <div class="compare-cell center"><span class="c-no">✕</span></div>
       </div>
       <div class="compare-row">
-        <div class="compare-cell" data-en="Automatic L/100km calculation">Автоматический расчёт л/100км</div>
+        <div class="compare-cell" data-en="Automatic L/100km calculation" data-kz="Л/100км автоматты есептеуі">Автоматический расчёт л/100км</div>
         <div class="compare-cell center"><span class="c-yes">✓</span></div>
         <div class="compare-cell center"><span class="c-no">✕</span></div>
       </div>
       <div class="compare-row">
-        <div class="compare-cell" data-en="PDF report export">Экспорт PDF-отчётов</div>
+        <div class="compare-cell" data-en="PDF report export" data-kz="PDF-есептерін экспорттау">Экспорт PDF-отчётов</div>
         <div class="compare-cell center"><span class="c-yes">✓</span></div>
         <div class="compare-cell center"><span class="c-no">✕</span></div>
       </div>
       <div class="compare-row">
-        <div class="compare-cell" data-en="Multiple cars in one place">Несколько авто в одном месте</div>
+        <div class="compare-cell" data-en="Multiple cars in one place" data-kz="Бірнеше көлік бір жерде">Несколько авто в одном месте</div>
         <div class="compare-cell center"><span class="c-yes">✓</span></div>
-        <div class="compare-cell center"><span class="c-no" data-en="manual">вручную</span></div>
+        <div class="compare-cell center"><span class="c-no" data-en="manual" data-kz="қолмен">вручную</span></div>
       </div>
       <div class="compare-row">
-        <div class="compare-cell" data-en="Cloud sync">Облачная синхронизация</div>
+        <div class="compare-cell" data-en="Cloud sync" data-kz="Бұлттық синхрондау">Облачная синхронизация</div>
         <div class="compare-cell center"><span class="c-yes">✓</span></div>
         <div class="compare-cell center"><span class="c-no">✕</span></div>
       </div>
       <div class="compare-row">
-        <div class="compare-cell" data-en="Always in your pocket">Всегда в кармане</div>
+        <div class="compare-cell" data-en="Always in your pocket" data-kz="Әрқашан қалтада">Всегда в кармане</div>
         <div class="compare-cell center"><span class="c-yes">✓</span></div>
         <div class="compare-cell center"><span class="c-no">≈</span></div>
       </div>
@@ -1410,8 +1417,8 @@
 <!-- ── FAQ ── -->
 <section class="faq-section" id="faq">
   <div class="section-wrap">
-    <div class="section-label" data-en="FAQ">Вопросы</div>
-    <h2 class="section-title" data-en="Frequently asked questions">Частые вопросы</h2>
+    <div class="section-label" data-en="FAQ" data-kz="Сұрақ-жауап">Вопросы</div>
+    <h2 class="section-title" data-en="Frequently asked questions" data-kz="Жиі қойылатын сұрақтар">Частые вопросы</h2>
     <div class="faq-list">
       <div class="faq-item">
         <button class="faq-q">AutoSup бесплатный? <span class="faq-ico">+</span></button>
@@ -1452,22 +1459,22 @@
 <!-- ── ОТЗЫВЫ ── -->
 <section class="reviews-section" id="reviews">
   <div class="section-wrap">
-    <div class="section-label" data-en="Reviews">Отзывы</div>
-    <h2 class="section-title" data-en="What drivers say">Что говорят водители</h2>
+    <div class="section-label" data-en="Reviews" data-kz="Пікірлер">Отзывы</div>
+    <h2 class="section-title" data-en="What drivers say" data-kz="Жүргізушілер не дейді">Что говорят водители</h2>
     <div class="reviews-grid">
       <div class="review-card">
         <div class="review-stars">★★★★★</div>
-        <div class="review-text" data-en="Finally I see my real fuel consumption instead of guessing. The charts are super clear.">Наконец-то вижу реальный расход топлива, а не гадаю. Графики очень наглядные.</div>
+        <div class="review-text" data-en="Finally I see my real fuel consumption instead of guessing. The charts are super clear." data-kz="Ақыры болжамай, нақты жанармай шығынын көріп отырмын. Графиктер өте көрнекі.">Наконец-то вижу реальный расход топлива, а не гадаю. Графики очень наглядные.</div>
         <div class="review-author"><div class="review-avatar">А</div><div><div class="review-name">Азамат</div><div class="review-car">Toyota Camry</div></div></div>
       </div>
       <div class="review-card">
         <div class="review-stars">★★★★★</div>
-        <div class="review-text" data-en="It reminded me about insurance in advance — saved me from a fine. Very handy.">Напомнило про страховку заранее — спасло от штрафа. Очень удобно.</div>
+        <div class="review-text" data-en="It reminded me about insurance in advance — saved me from a fine. Very handy." data-kz="Сақтандыру туралы алдын ала еске салды — айыппұлдан құтқарды. Өте ыңғайлы.">Напомнило про страховку заранее — спасло от штрафа. Очень удобно.</div>
         <div class="review-author"><div class="review-avatar">Д</div><div><div class="review-name">Дмитрий</div><div class="review-car">BMW 5 Series</div></div></div>
       </div>
       <div class="review-card">
         <div class="review-stars">★★★★★</div>
-        <div class="review-text" data-en="I keep all 3 family cars in one place. Switching between them is one tap.">Веду все 3 семейных авто в одном месте. Переключение — один тап.</div>
+        <div class="review-text" data-en="I keep all 3 family cars in one place. Switching between them is one tap." data-kz="Отбасының барлық 3 көлігін бір жерде жүргіземін. Ауыстыру — бір түрту.">Веду все 3 семейных авто в одном месте. Переключение — один тап.</div>
         <div class="review-author"><div class="review-avatar">А</div><div><div class="review-name">Айгуль</div><div class="review-car">Honda CR-V</div></div></div>
       </div>
     </div>
@@ -1476,14 +1483,14 @@
 
 <!-- ── DOWNLOAD ── -->
 <section class="download-section" id="download">
-  <div class="section-label" style="justify-content:center;display:flex;" data-en="Free to use">Доступно бесплатно</div>
+  <div class="section-label" style="justify-content:center;display:flex;" data-en="Free to use" data-kz="Тегін қолжетімді">Доступно бесплатно</div>
   <h2>Скачайте AutoSup<br/><span class="gradient-text">прямо сейчас</span></h2>
-  <p data-en="Start tracking your car for free.">Начните вести учёт автомобиля бесплатно.<br/>iOS и Android.</p>
+  <p data-en="Start tracking your car for free." data-kz="Автомобиль есебін тегін жүргізе бастаңыз.">Начните вести учёт автомобиля бесплатно.<br/>iOS и Android.</p>
   <div class="store-btns">
     <a class="store-btn" href="https://apps.apple.com/app/id6776712725" target="_blank" rel="noopener">
       <ion-icon name="logo-apple"></ion-icon>
       <div>
-        <div class="store-btn-sub" data-en="Download on the">Доступно в</div>
+        <div class="store-btn-sub" data-en="Download on the" data-kz="Қолжетімді">Доступно в</div>
         <div class="store-btn-name">App Store</div>
       </div>
     </a>
@@ -1505,10 +1512,10 @@
       <span class="gradient-text">AutoSup</span>
     </a>
     <div class="footer-links">
-      <a href="/privacy" data-en="Privacy Policy">Политика конфиденциальности</a>
-      <a href="/terms" data-en="Terms of Use">Условия использования</a>
-      <a href="/delete-account" data-en="Delete Account">Удаление аккаунта</a>
-      <a href="mailto:autosup.app@gmail.com" data-en="Support">Поддержка</a>
+      <a href="/privacy" data-en="Privacy Policy" data-kz="Құпиялылық саясаты">Политика конфиденциальности</a>
+      <a href="/terms" data-en="Terms of Use" data-kz="Пайдалану шарттары">Условия использования</a>
+      <a href="/delete-account" data-en="Delete Account" data-kz="Аккаунтты жою">Удаление аккаунта</a>
+      <a href="mailto:autosup.app@gmail.com" data-en="Support" data-kz="Қолдау">Поддержка</a>
     </div>
     <div class="footer-copy">© 2026 AutoSup. Все права защищены.</div>
   </div>
@@ -1627,24 +1634,26 @@
     });
   });
 
-  // Языковой переключатель RU/EN (data-en атрибуты)
+  // Языковой переключатель RU/EN/KZ (data-en / data-kz атрибуты)
   (function () {
-    var btn = document.getElementById('langToggle');
+    var opts = document.querySelectorAll('.lang-opt');
     function setLang(lang) {
       document.querySelectorAll('[data-en]').forEach(function (el) {
         if (el.dataset.ru === undefined) el.dataset.ru = el.innerHTML;
-        el.innerHTML = (lang === 'en') ? el.dataset.en : el.dataset.ru;
+        if (lang === 'en') el.innerHTML = el.dataset.en;
+        else if (lang === 'kz') el.innerHTML = el.dataset.kz || el.dataset.en;
+        else el.innerHTML = el.dataset.ru;
       });
       document.documentElement.lang = lang;
-      if (btn) btn.textContent = (lang === 'en') ? 'RU' : 'EN';
+      opts.forEach(function (b) { b.classList.toggle('active', b.dataset.lang === lang); });
       try { localStorage.setItem('lang', lang); } catch (e) {}
     }
-    if (btn) btn.addEventListener('click', function () {
-      setLang(document.documentElement.lang === 'en' ? 'ru' : 'en');
+    opts.forEach(function (b) {
+      b.addEventListener('click', function () { setLang(b.dataset.lang); });
     });
     var saved = 'ru';
     try { saved = localStorage.getItem('lang') || 'ru'; } catch (e) {}
-    if (saved === 'en') setLang('en');
+    setLang(saved);
   })();
 
   // Particles-сеть в hero
