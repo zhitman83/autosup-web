@@ -442,10 +442,10 @@
     .store-btn ion-icon { font-size: 30px; color: var(--subtext); }
     .store-btn-sub { font-size: 10px; color: var(--subtext); text-transform: uppercase; letter-spacing: 0.06em; }
     .store-btn-name { font-size: 17px; font-weight: 700; }
-    .download-row { display: flex; align-items: center; justify-content: center; gap: 32px; flex-wrap: wrap; }
-    .qr-block { display: flex; flex-direction: column; align-items: center; gap: 8px; }
-    .qr-block img { width: 108px; height: 108px; border-radius: 12px; display: block; }
-    .qr-block span { font-size: 12px; color: var(--subtext); max-width: 130px; line-height: 1.4; }
+    .download-row { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 24px; }
+    .qr-block { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+    .qr-block img { width: 180px; height: 180px; border-radius: 16px; display: block; box-shadow: var(--shadow-card); }
+    .qr-block span { font-size: 13px; color: var(--subtext); }
 
     /* ── FOOTER ── */
     footer { padding: 40px 24px; border-top: 1px solid var(--border); }
@@ -1491,6 +1491,10 @@
   <h2>Скачайте AutoSup<br/><span class="gradient-text">прямо сейчас</span></h2>
   <p data-en="Start tracking your car for free." data-kz="Автомобиль есебін тегін жүргізе бастаңыз.">Начните вести учёт автомобиля бесплатно.<br/>iOS и Android.</p>
   <div class="download-row">
+    <div class="qr-block">
+      <img src="icons/qr-appstore.png" alt="QR-код для скачивания AutoSup в App Store" />
+      <span data-en="Scan to install" data-kz="Орнату үшін сканерлеңіз">Наведите камеру, чтобы установить</span>
+    </div>
     <div class="store-btns">
       <a class="store-btn" href="https://apps.apple.com/app/id6776712725" target="_blank" rel="noopener">
         <ion-icon name="logo-apple"></ion-icon>
@@ -1506,10 +1510,6 @@
           <div class="store-btn-name">Google Play</div>
         </div>
       </a>
-    </div>
-    <div class="qr-block">
-      <img src="icons/qr-appstore.png" alt="QR-код для скачивания AutoSup в App Store" />
-      <span data-en="Scan to install" data-kz="Орнату үшін сканерлеңіз">Наведите камеру, чтобы установить</span>
     </div>
   </div>
 </section>
