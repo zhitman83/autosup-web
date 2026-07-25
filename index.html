@@ -396,6 +396,13 @@
     .assist-shots::-webkit-scrollbar { display: none; }
     @media (max-width: 800px) { .assist-feats { grid-template-columns: 1fr; } }
 
+    /* Скрины-карточки без телефонной рамки (ландшафтные, напр. госномера) */
+    .plate-shots { display: flex; gap: 18px; margin-top: var(--sp-5); flex-wrap: wrap; justify-content: center; }
+    .plate-shot { border-radius: var(--r-lg); overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow-card);
+      flex-shrink: 0; transition: transform .35s cubic-bezier(.16,1,.3,1), border-color .35s ease; }
+    .plate-shot:hover { transform: translateY(-6px); border-color: var(--border2); }
+    .plate-shot img { display: block; width: 320px; max-width: 82vw; height: auto; }
+
     /* ── ПОЛОСА ЦИФР ── */
     .stats-band { padding: 70px 24px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
     .stats-band-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: var(--sp-3); text-align: center; }
@@ -1009,11 +1016,6 @@
         <h3 data-en="Push notifications">Push-уведомления</h3>
         <p data-en="Instant alerts for family invites and important app announcements — on top of local reminders for maintenance and documents.">Мгновенные оповещения о приглашениях в семью и важных анонсах приложения — в дополнение к локальным напоминаниям о ТО и документах.</p>
       </div>
-      <div class="feat-card">
-        <div class="feat-card-icon"><ion-icon name="card-outline"></ion-icon></div>
-        <h3 data-en="Realistic license plates">Реалистичные госномера</h3>
-        <p data-en="A live-rendered plate right on the car card — 17 countries (Kazakhstan, Russia, EU and more) with authentic fonts and layout, auto-formatted as you type. Shown on the card only if you choose to.">Живой рендер номера прямо на карточке авто — 17 стран (Казахстан, Россия, ЕС и другие) с точными шрифтами и раскладкой, автоформат при вводе. Показ на карточке — по желанию.</p>
-      </div>
     </div>
   </div>
 </section>
@@ -1055,17 +1057,12 @@
   <div class="section-wrap">
     <div class="section-label" data-en="And more">Ещё больше</div>
     <h2 class="section-title" data-en="Features for everyone">Возможности для каждого</h2>
-    <p class="section-sub" data-en="Family sharing, a sell-ready car passport, and full support for EVs and hybrids.">Семейный доступ, продающий паспорт авто и полная поддержка электро и гибридов.</p>
+    <p class="section-sub" data-en="Family sharing and full support for EVs and hybrids.">Семейный доступ и полная поддержка электро и гибридов.</p>
     <div class="assist-feats">
       <div class="assist-feat">
         <div class="assist-feat-ico"><ion-icon name="people-outline"></ion-icon></div>
         <h3 data-en="Family sharing">Семейный доступ</h3>
         <p data-en="Share a car with your family — invite by link, roles Editor and Viewer.">Общий доступ к авто для семьи — приглашение по ссылке, роли Редактор и Наблюдатель.</p>
-      </div>
-      <div class="assist-feat">
-        <div class="assist-feat-ico"><ion-icon name="document-text-outline"></ion-icon></div>
-        <h3 data-en="Car passport">Паспорт авто</h3>
-        <p data-en="A sell-ready document — photo, specs, full service history, average consumption and documents. Toggle each section on or off, export as PDF or Excel.">Продающий документ: фото, характеристики, полная история ТО, средний расход и документы. Каждый раздел включается переключателем, выгрузка в PDF или Excel.</p>
       </div>
       <div class="assist-feat">
         <div class="assist-feat-ico"><ion-icon name="flash-outline"></ion-icon></div>
@@ -1075,7 +1072,66 @@
     </div>
     <div class="assist-shots">
       <div class="shot-frame"><img src="screenshots/family.jpg" alt="Семейный доступ" /></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ПАСПОРТ АВТО ── -->
+<section class="assist-section" id="passport">
+  <div class="section-wrap">
+    <div class="section-label" data-en="Car passport">Паспорт авто</div>
+    <h2 class="section-title" data-en="Sell your car faster">Продайте авто быстрее</h2>
+    <p class="section-sub" data-en="One document instead of a pile of screenshots and receipts — you decide what the buyer sees and what stays private.">Один документ вместо кучи скриншотов и чеков — сами решаете, что показать покупателю, а что оставить при себе.</p>
+    <div class="assist-feats">
+      <div class="assist-feat">
+        <div class="assist-feat-ico"><ion-icon name="checkmark-done-outline"></ion-icon></div>
+        <h3 data-en="Always included">Входит всегда</h3>
+        <p data-en="Service history, car specs, mileage and documents (insurance, inspection, tech passport, tax) — the base that proves the car was looked after.">История ТО, характеристики автомобиля, пробег и документы (страховка, техосмотр, техпаспорт, налог) — база документа, которая доказывает, что за авто следили.</p>
+      </div>
+      <div class="assist-feat">
+        <div class="assist-feat-ico"><ion-icon name="eye-off-outline"></ion-icon></div>
+        <h3 data-en="Hide what you don't want to share">Скрывайте лишнее</h3>
+        <p data-en="Car photo, VIN, license plate and maintenance costs are separate toggles. Selling to a stranger — turn off VIN and plate, but keep the full service history visible.">Фото автомобиля, VIN-номер, госномер и суммы трат на ТО — отдельные переключатели. Продаёте незнакомцу — уберите VIN и номер, но оставьте полную историю обслуживания.</p>
+      </div>
+      <div class="assist-feat">
+        <div class="assist-feat-ico"><ion-icon name="document-attach-outline"></ion-icon></div>
+        <h3 data-en="PDF or Excel">PDF или Excel</h3>
+        <p data-en="Send a ready-made PDF straight in a chat with the buyer. Or export a multi-sheet Excel (Car / Specs / Service / Documents) for your own records.">Готовый PDF отправьте прямо в переписке с покупателем. Или выгрузите многолистовой Excel (Авто / Характеристики / ТО / Документы) — для своего архива.</p>
+      </div>
+    </div>
+    <div class="assist-shots">
       <div class="shot-frame"><img src="screenshots/passport.jpg" alt="Паспорт авто" /></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ГОСНОМЕРА ── -->
+<section class="assist-section" id="plates">
+  <div class="section-wrap">
+    <div class="section-label" data-en="License plates">Госномера</div>
+    <h2 class="section-title" data-en="A real plate, right on your card">Настоящий номер на вашей карточке</h2>
+    <p class="section-sub" data-en="Type the number — see it exactly as it looks on the bumper. 17 countries, authentic fonts and formats.">Введите номер — увидите его таким же, каким он выглядит на бампере. 17 стран, точные шрифты и форматы.</p>
+    <div class="assist-feats">
+      <div class="assist-feat">
+        <div class="assist-feat-ico"><ion-icon name="create-outline"></ion-icon></div>
+        <h3 data-en="Live preview">Живой предпросмотр</h3>
+        <p data-en="Pick a country — Kazakhstan, Russia, Kyrgyzstan and 14 more — and start typing the plate. The app spaces and hyphenates it automatically and renders it exactly like the real thing as you type.">Выберите страну — Казахстан, Россия, Кыргызстан и ещё 14 — и начинайте печатать номер. Приложение само расставляет пробелы и дефисы и сразу рисует номер точь-в-точь как настоящий, пока вы вводите.</p>
+      </div>
+      <div class="assist-feat">
+        <div class="assist-feat-ico"><ion-icon name="shapes-outline"></ion-icon></div>
+        <h3 data-en="Authentic fonts & formats">Настоящие шрифты и форматы</h3>
+        <p data-en="Every country has its own font, proportions and flag/region placement — just like the real plate. Not just text — an accurate replica of the license plate.">Каждая страна — свой шрифт, свои пропорции и расположение флага и кода региона, как на реальной пластине. Не просто текст — точная копия номерного знака.</p>
+      </div>
+      <div class="assist-feat">
+        <div class="assist-feat-ico"><ion-icon name="apps-outline"></ion-icon></div>
+        <h3 data-en="On your car card">На карточке авто</h3>
+        <p data-en="Flip one switch and the plate shows up on your car card on the Home tab, next to the photo, mileage and consumption. Hidden by default — privacy is your call.">Включите один переключатель — и номер появится на карточке авто на главном экране рядом с фото, пробегом и расходом. По умолчанию скрыт — приватность на ваш выбор.</p>
+      </div>
+    </div>
+    <div class="plate-shots">
+      <div class="plate-shot"><img src="screenshots/plate-rus.jpg" alt="Госномер Россия на карточке авто" /></div>
+      <div class="plate-shot"><img src="screenshots/plate-kg.jpg" alt="Госномер Кыргызстан на карточке авто" /></div>
+      <div class="plate-shot"><img src="screenshots/plate-kz.jpg" alt="Госномер Казахстан на карточке авто" /></div>
     </div>
   </div>
 </section>
@@ -1466,7 +1522,7 @@
   // JS сам навешивает .reveal — при отключённом JS всё остаётся видимым.
   (function () {
     var targets = document.querySelectorAll(
-      '.feat-card, .screen-card, .theme-card, .mini-card, .shot-frame, ' +
+      '.feat-card, .screen-card, .theme-card, .mini-card, .shot-frame, .plate-shot, ' +
       '.lang-item, .section-title, .section-label, .section-sub, .hero-stats > div'
     );
     targets.forEach(function (el) { el.classList.add('reveal'); });
