@@ -453,6 +453,7 @@
     .store-btn-sub { font-size: 10px; color: var(--subtext); text-transform: uppercase; letter-spacing: 0.06em; }
     .store-btn-name { font-size: 17px; font-weight: 700; }
     .download-row { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 24px; }
+    .qr-row { display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; }
     .qr-block { display: flex; flex-direction: column; align-items: center; gap: 10px; }
     .qr-block img { width: 180px; height: 180px; border-radius: 16px; display: block; box-shadow: var(--shadow-card); }
     .qr-block span { font-size: 13px; color: var(--subtext); }
@@ -1516,9 +1517,15 @@
   <h2>Скачайте AutoSup<br/><span class="gradient-text">прямо сейчас</span></h2>
   <p data-en="Start tracking your car for free." data-kz="Автомобиль есебін тегін жүргізе бастаңыз.">Начните вести учёт автомобиля бесплатно.<br/>iOS и Android.</p>
   <div class="download-row">
-    <div class="qr-block">
-      <img src="icons/qr-appstore.png" alt="QR-код для скачивания AutoSup в App Store" loading="lazy" />
-      <span data-en="Scan to install" data-kz="Орнату үшін сканерлеңіз">Наведите камеру, чтобы установить</span>
+    <div class="qr-row">
+      <div class="qr-block">
+        <img src="icons/qr-appstore.png" alt="QR-код для скачивания AutoSup в App Store" loading="lazy" />
+        <span data-en="Scan for iOS" data-kz="iOS үшін сканерлеңіз">Для iOS</span>
+      </div>
+      <div class="qr-block">
+        <img src="icons/qr-googleplay.png" alt="QR-код для скачивания AutoSup в Google Play" loading="lazy" />
+        <span data-en="Scan for Android" data-kz="Android үшін сканерлеңіз">Для Android</span>
+      </div>
     </div>
     <div class="store-btns">
       <a class="store-btn" href="https://apps.apple.com/app/id6776712725" target="_blank" rel="noopener">
@@ -1528,10 +1535,10 @@
           <div class="store-btn-name">App Store</div>
         </div>
       </a>
-      <a class="store-btn soon" href="#">
+      <a class="store-btn" href="https://play.google.com/store/apps/details?id=com.autosup.app" target="_blank" rel="noopener">
         <ion-icon name="logo-google-playstore"></ion-icon>
         <div>
-          <div class="store-btn-sub">Скоро в</div>
+          <div class="store-btn-sub" data-en="Download on the" data-kz="Қолжетімді">Доступно в</div>
           <div class="store-btn-name">Google Play</div>
         </div>
       </a>
