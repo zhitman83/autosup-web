@@ -467,6 +467,10 @@
     .footer-links { display: flex; gap: 22px; flex-wrap: wrap; }
     .footer-links a { color: var(--subtext); text-decoration: none; font-size: 13px; transition: color 0.2s; }
     .footer-links a:hover { color: var(--text); }
+    .footer-social { display: flex; align-items: center; gap: 14px; }
+    .footer-social a { color: var(--subtext); display: flex; transition: color 0.2s; }
+    .footer-social a:hover { color: var(--text); }
+    .footer-social svg { width: 20px; height: 20px; }
     .footer-copy { color: var(--muted); font-size: 12px; width: 100%; margin-top: 14px; text-align: center; }
 
     /* ── RESPONSIVE ── */
@@ -1558,6 +1562,14 @@
       <a href="/terms" data-en="Terms of Use" data-kz="Пайдалану шарттары">Условия использования</a>
       <a href="/delete-account" data-en="Delete Account" data-kz="Аккаунтты жою">Удаление аккаунта</a>
       <a href="mailto:autosup.app@gmail.com" data-en="Support" data-kz="Қолдау">Поддержка</a>
+    </div>
+    <div class="footer-social">
+      <a href="https://www.instagram.com/autosup.app/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      </a>
+      <a href="https://www.facebook.com/profile.php?id=61592287097539" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4h-2.5A3.5 3.5 0 0 0 9 7.5V10H6.5v3H9v7h3v-7h2.5l1-3H12V7.5c0-.55.45-1 1-1H15V4z"/></svg>
+      </a>
     </div>
     <div class="footer-copy">© 2026 AutoSup. Все права защищены.</div>
   </div>
