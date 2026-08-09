@@ -435,6 +435,28 @@
     .reviews-section { padding: 96px 24px; text-align: center; }
     .review-cta { margin-top: var(--sp-4); display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; }
     @media (max-width: 560px) { .review-cta { flex-direction: column; } }
+    .review-stars { display: flex; justify-content: center; gap: 6px; margin-bottom: var(--sp-2); }
+    .review-stars ion-icon { font-size: 22px; color: var(--accent1); }
+
+    /* ── ЯЗЫЧОК «ОСТАВИТЬ ОТЗЫВ» ── */
+    .review-tab {
+      position: fixed; right: 0; top: 50%; transform: translateY(-50%);
+      z-index: 90; display: flex; flex-direction: column; align-items: center;
+      gap: 8px; padding: 14px 8px; text-decoration: none; cursor: pointer;
+      background: rgba(15,20,40,0.75); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border2); border-right: none;
+      border-top-left-radius: 12px; border-bottom-left-radius: 12px;
+      box-shadow: var(--shadow-lift);
+      transition: padding-right .2s;
+    }
+    .review-tab:hover { padding-right: 14px; }
+    .review-tab img { width: 26px; height: 26px; border-radius: 6px; }
+    .review-tab ion-icon { font-size: 18px; color: var(--accent1); }
+    .review-tab span {
+      writing-mode: vertical-rl; transform: rotate(180deg);
+      font-size: 13px; font-weight: 700; color: var(--text); white-space: nowrap;
+    }
+    @media (max-width: 640px) { .review-tab span { font-size: 12px; } }
 
     /* ── DOWNLOAD ── */
     .download-section { padding: 100px 24px; text-align: center; }
@@ -653,6 +675,7 @@
       <a href="#widget" data-en="Widget" data-kz="Виджет">Виджет</a>
       <a href="#customize" data-en="Settings" data-kz="Параметрлер">Настройки</a>
       <a href="#faq" data-en="FAQ" data-kz="Сұрақ-жауап">FAQ</a>
+      <a href="#reviews" data-en="Reviews" data-kz="Пікірлер">Отзывы</a>
     </div>
     <div class="lang-switch" role="group" aria-label="Language">
       <button class="lang-opt" data-lang="ru">RU</button>
@@ -662,6 +685,12 @@
     <a href="#download" class="nav-cta" data-en="Download" data-kz="Жүктеп алу">Скачать</a>
   </div>
 </nav>
+
+<a href="#reviews" class="review-tab" id="reviewTab" aria-label="Оставить отзыв">
+  <ion-icon name="star"></ion-icon>
+  <span data-en="Leave a review" data-kz="Пікір қалдыру">Оставить отзыв</span>
+  <img src="icon.png" alt="" aria-hidden="true" />
+</a>
 
 <!-- ── HERO ── -->
 <section class="hero">
@@ -1504,6 +1533,13 @@
 <section class="reviews-section" id="reviews">
   <div class="section-wrap">
     <div class="section-label" style="justify-content:center;display:flex;" data-en="Reviews" data-kz="Пікірлер">Отзывы</div>
+    <div class="review-stars" aria-hidden="true">
+      <ion-icon name="star"></ion-icon>
+      <ion-icon name="star"></ion-icon>
+      <ion-icon name="star"></ion-icon>
+      <ion-icon name="star"></ion-icon>
+      <ion-icon name="star"></ion-icon>
+    </div>
     <h2 class="section-title" data-en="Enjoying the app?" data-kz="Қосымша ұнады ма?">Понравилось приложение?</h2>
     <p class="section-sub" style="margin:0 auto;" data-en="Leave a rating on the App Store or Google Play — it takes a minute and helps other drivers find AutoSup." data-kz="App Store немесе Google Play-де баға қойыңыз — бір минут кетеді, басқа жүргізушілерге AutoSup-ты табуға көмектеседі.">Оставьте оценку в App Store или Google Play — это займёт минуту и поможет другим водителям найти AutoSup.</p>
     <div class="review-cta">
@@ -1799,6 +1835,26 @@
       try { localStorage.setItem('cookieConsent', 'declined'); } catch (e) {}
       banner.classList.remove('show');
     });
+  })();
+
+  // Язычок «Оставить отзыв»: на телефоне — сразу в стор своей платформы,
+  // на десктопе остаётся обычной якорной ссылкой на секцию #reviews.
+  (function () {
+    var tab = document.getElementById('reviewTab');
+    if (!tab) return;
+    var ua = navigator.userAgent || '';
+    var isIOS = /iPhone|iPad|iPod/.test(ua);
+    var isAndroid = /Android/.test(ua);
+    var storeUrl = isIOS
+      ? 'https://apps.apple.com/app/id6776712725?action=write-review'
+      : isAndroid
+        ? 'https://play.google.com/store/apps/details?id=com.autosup.app'
+        : null;
+    if (storeUrl) {
+      tab.setAttribute('href', storeUrl);
+      tab.setAttribute('target', '_blank');
+      tab.setAttribute('rel', 'noopener');
+    }
   })();
 </script>
 
