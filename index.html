@@ -433,8 +433,8 @@
 
     /* ── ОТЗЫВЫ ── */
     .reviews-section { padding: 96px 24px; text-align: center; }
-    .review-cta { margin-top: var(--sp-4); display: flex; flex-direction: column; align-items: center; gap: 16px; }
-    .review-soon { font-size: var(--fs-xs); color: var(--muted); }
+    .review-cta { margin-top: var(--sp-4); display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; }
+    @media (max-width: 560px) { .review-cta { flex-direction: column; } }
 
     /* ── DOWNLOAD ── */
     .download-section { padding: 100px 24px; text-align: center; }
@@ -1505,12 +1505,14 @@
   <div class="section-wrap">
     <div class="section-label" style="justify-content:center;display:flex;" data-en="Reviews" data-kz="Пікірлер">Отзывы</div>
     <h2 class="section-title" data-en="Enjoying the app?" data-kz="Қосымша ұнады ма?">Понравилось приложение?</h2>
-    <p class="section-sub" style="margin:0 auto;" data-en="Leave a rating on the App Store — it takes a minute and helps other drivers find AutoSup." data-kz="App Store-де баға қойыңыз — бір минут кетеді, басқа жүргізушілерге AutoSup-ты табуға көмектеседі.">Оставьте оценку в App Store — это займёт минуту и поможет другим водителям найти AutoSup.</p>
+    <p class="section-sub" style="margin:0 auto;" data-en="Leave a rating on the App Store or Google Play — it takes a minute and helps other drivers find AutoSup." data-kz="App Store немесе Google Play-де баға қойыңыз — бір минут кетеді, басқа жүргізушілерге AutoSup-ты табуға көмектеседі.">Оставьте оценку в App Store или Google Play — это займёт минуту и поможет другим водителям найти AutoSup.</p>
     <div class="review-cta">
       <a class="btn-primary" href="https://apps.apple.com/app/id6776712725?action=write-review" target="_blank" rel="noopener">
         <ion-icon name="star-outline"></ion-icon> <span data-en="Rate on the App Store" data-kz="App Store-де баға қою">Оценить в App Store</span>
       </a>
-      <span class="review-soon" data-en="Google Play reviews — coming soon" data-kz="Google Play пікірлері — жақында">Отзывы в Google Play — скоро</span>
+      <a class="btn-outline" href="https://play.google.com/store/apps/details?id=com.autosup.app" target="_blank" rel="noopener">
+        <ion-icon name="logo-google-playstore"></ion-icon> <span data-en="Rate on Google Play" data-kz="Google Play-де баға қою">Оценить в Google Play</span>
+      </a>
     </div>
   </div>
 </section>
