@@ -416,6 +416,12 @@
     .assist-shots { display: flex; gap: 18px; margin-top: var(--sp-5); overflow-x: auto; padding: 18px 4px 24px; scrollbar-width: none; }
     .assist-shots::-webkit-scrollbar { display: none; }
     @media (max-width: 800px) { .assist-feats { grid-template-columns: 1fr; } }
+    /* Секции с ЧЕТЫРЬМЯ карточками (голос, госномера) — сетка 2×2, а не ряд из
+       четырёх: ширина контента ограничена, и в один ряд карточка выходит 245 px
+       против принятых на сайте 334. Правила идут ПОСЛЕ медиазапроса выше — вес
+       селекторов одинаковый, побеждает последний. */
+    .assist-feats-4 { grid-template-columns: repeat(2,1fr); }
+    @media (max-width: 800px) { .assist-feats-4 { grid-template-columns: 1fr; } }
 
     /* Скрины-карточки без телефонной рамки (ландшафтные, напр. госномера) */
     .plate-shots { display: flex; gap: 18px; margin-top: var(--sp-5); flex-wrap: wrap; justify-content: center; }
@@ -423,6 +429,34 @@
       flex-shrink: 0; transition: transform .35s cubic-bezier(.16,1,.3,1), border-color .35s ease; }
     .plate-shot:hover { transform: translateY(-6px); border-color: var(--border2); }
     .plate-shot img { display: block; width: 320px; max-width: 82vw; height: auto; }
+
+    /* ── ВЫБОР ШАБЛОНА ГОСНОМЕРА ── */
+    .plate-picker { margin-top: var(--sp-5); }
+    .plate-chips { display: flex; gap: 8px; overflow-x: auto; padding: 4px 4px 14px; scrollbar-width: none;
+      justify-content: flex-start; }
+    .plate-chips::-webkit-scrollbar { display: none; }
+    @media (min-width: 900px) { .plate-chips { flex-wrap: wrap; justify-content: center; overflow-x: visible; } }
+    .plate-chip { flex-shrink: 0; display: inline-flex; align-items: center; gap: 7px; cursor: pointer;
+      background: var(--surface); border: 1px solid var(--border); border-radius: 999px; color: var(--subtext);
+      font-size: var(--fs-sm); font-family: inherit; padding: 9px 15px; white-space: nowrap;
+      transition: border-color .25s ease, color .25s ease, background .25s ease; }
+    .plate-chip:hover { border-color: var(--border2); color: var(--text); }
+    .plate-chip[aria-pressed="true"] { border-color: var(--green); color: var(--text); background: rgba(52,211,153,0.10); }
+    .plate-chip-flag { font-size: 17px; line-height: 1; }
+    .plate-stage { display: flex; justify-content: center; padding: 10px 0 4px; }
+    .plate-stage img { display: block; width: 560px; max-width: 88vw; height: auto;
+      filter: drop-shadow(0 12px 28px rgba(0,0,0,0.45)); }
+    .plate-formats { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap;
+      margin-top: 18px; }
+    .plate-formats[hidden] { display: none; }
+    .plate-formats-lab { font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--subtext); }
+    .plate-format-group { display: flex; gap: 8px; }
+    .plate-format-group[hidden] { display: none; }
+    .plate-format { cursor: pointer; background: transparent; border: 1px solid var(--border); border-radius: 999px;
+      color: var(--subtext); font-size: var(--fs-sm); font-family: inherit; padding: 7px 14px;
+      transition: border-color .25s ease, color .25s ease, background .25s ease; }
+    .plate-format:hover { border-color: var(--border2); color: var(--text); }
+    .plate-format[aria-pressed="true"] { border-color: var(--green); color: var(--text); background: rgba(52,211,153,0.10); }
 
     /* ── ПОЛОСА ЦИФР ── */
     .stats-band { padding: 70px 24px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
@@ -668,6 +702,7 @@
   <div class="nav-right">
     <div class="nav-links">
       <a href="#screens" data-en="Screens" data-kz="Экрандар">Экраны</a>
+      <a href="#voice" data-en="Voice" data-kz="Дауыс">Голос</a>
       <a href="#features" data-en="Features" data-kz="Функциялар">Функции</a>
       <a href="#assist" data-en="Car Assistant" data-kz="Автокөмекші">Автопомощник</a>
       <a href="#passport" data-en="Car passport" data-kz="Көлік паспорты">Паспорт авто</a>
@@ -707,7 +742,7 @@
   </div>
   <img class="hero-logo" src="logo.png" alt="AutoSup — Твой авто-помощник" />
   <h1 data-en="Everything for your car —<br><span class='gradient-text'>in one app</span>" data-kz="Көлігің туралы бәрі —<br><span class='gradient-text'>бір қосымшада</span>">Всё по твоему авто —<br/><span class="gradient-text">в одном приложении</span></h1>
-  <p class="hero-sub" data-en="Everything about your car in one place — fuel, maintenance, expenses, documents. Beautiful interface, cloud sync, 13 languages." data-kz="Автомобиліңіз туралы бәрі бір жерде — жанармай, техникалық қызмет, шығындар, құжаттар. Әдемі интерфейс, бұлттық синхрондау, 13 тіл.">Всё об автомобиле в одном месте — топливо, техническое обслуживание, расходы, документы. Красивый интерфейс, облачная синхронизация, 13 языков.</p>
+  <p class="hero-sub" data-en="Everything about your car in one place — fuel, maintenance, expenses, documents. Beautiful interface, cloud sync, 32 languages." data-kz="Автомобиліңіз туралы бәрі бір жерде — жанармай, техникалық қызмет, шығындар, құжаттар. Әдемі интерфейс, бұлттық синхрондау, 32 тіл.">Всё об автомобиле в одном месте — топливо, техническое обслуживание, расходы, документы. Красивый интерфейс, облачная синхронизация, 32 языка.</p>
   <div class="hero-btns">
     <a href="#download" class="btn-primary">
       <ion-icon name="download-outline"></ion-icon> <span data-en="Download the app" data-kz="Қосымшаны жүктеу">Скачать приложение</span>
@@ -722,7 +757,7 @@
       <div class="hstat-lab" data-en="app sections" data-kz="қосымша бөлімі">разделов приложения</div>
     </div>
     <div>
-      <div class="hstat-val gradient-text">13</div>
+      <div class="hstat-val gradient-text">32</div>
       <div class="hstat-lab" data-en="languages" data-kz="интерфейс тілі">языков интерфейса</div>
     </div>
     <div>
@@ -992,7 +1027,7 @@
           <ul class="feat-list">
             <li><ion-icon name="car-outline"></ion-icon><span><strong>Мои автомобили</strong> — список всех добавленных авто с активным выделенным. Переключение одним тапом, редактирование и удаление.</span></li>
             <li><ion-icon name="cloud-upload-outline"></ion-icon><span><strong>Аккаунт</strong> — вход через Google, ручная синхронизация данных с Firebase, выход из аккаунта.</span></li>
-            <li><ion-icon name="settings-outline"></ion-icon><span><strong>Настройки</strong> — тема (тёмная/светлая/системная), стиль (Classic/Glass/Glass Iris), язык, единицы измерения, уведомления.</span></li>
+            <li><ion-icon name="settings-outline"></ion-icon><span><strong>Настройки</strong> — тема (тёмная/светлая/системная), стиль (Классика/Глубина/Кристалл), язык, единицы измерения, уведомления.</span></li>
             <li><ion-icon name="help-circle-outline"></ion-icon><span><strong data-en="Hint mode" data-kz="Кеңес режимі">Режим подсказок</strong> <span data-en="— a (?) button on every screen explains what each part does." data-kz="— әр экрандағы (?) түймесі әр элементтің нені білдіретінін түсіндіреді.">— кнопка (?) на каждом экране объясняет, что означает каждый элемент.</span></span></li>
             <li><ion-icon name="globe-outline"></ion-icon><span><strong>Сайт приложения</strong> — ссылка на эту страницу.</span></li>
             <li><ion-icon name="mail-outline"></ion-icon><span><strong>Написать нам</strong> — связь с поддержкой по email.</span></li>
@@ -1019,6 +1054,37 @@
             <li><ion-icon name="musical-note-outline"></ion-icon><span>Выбор звука: стандартный, chime, horn, retro, vroom</span></li>
           </ul>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ГОЛОСОВОЙ ВВОД ── -->
+<section class="assist-section" id="voice">
+  <div class="section-wrap">
+    <div class="section-label" data-en="Voice input" data-kz="Дауыспен енгізу">Голосовой ввод</div>
+    <h2 class="section-title" data-en="Say it — and it's logged" data-kz="Айтыңыз — жазылады">Скажите — и запишется</h2>
+    <p class="section-sub" data-en="Fill-ups, service, expenses and mileage go in by voice: say the phrase and the form opens already filled in." data-kz="Жанармай құю, ТО, шығын және жүріс дауыспен енгізіледі: сөйлемді айтыңыз — форма толтырылған күйде ашылады.">Заправка, ТО, расход и пробег заносятся голосом: скажите фразу — форма откроется заполненной.</p>
+    <div class="assist-feats assist-feats-4">
+      <div class="assist-feat">
+        <div class="assist-feat-ico"><ion-icon name="mic-outline"></ion-icon></div>
+        <h3 data-en="In a single phrase" data-kz="Бір сөйлеммен">Одной фразой</h3>
+        <p data-en="Say “filled 30 litres for 10,000, mileage 102,300” — the form opens already filled in, you just check it and save. Works for fill-ups, expenses, mileage and service records. The phrase can be typed instead of spoken." data-kz="«30 литр 10 000-ға құйдым, жүріс 102 300» деп айтыңыз — форма толтырылған күйде ашылады, тексеріп сақтау ғана қалады. Жанармай құю, шығын, жүріс және ТО жазбалары үшін жұмыс істейді. Сөйлемді теріп те жазуға болады.">Скажите «залил 30 литров на 10 000, пробег 102 300» — форма откроется заполненной, останется проверить и сохранить. Работает для заправок, расходов, пробега и записей ТО. Фразу можно и набрать текстом.</p>
+      </div>
+      <div class="assist-feat">
+        <div class="assist-feat-ico"><ion-icon name="lock-closed-outline"></ion-icon></div>
+        <h3 data-en="It never leaves your phone" data-kz="Бәрі телефонда қалады">Всё остаётся на телефоне</h3>
+        <p data-en="Speech is recognised right on the device. The phrase is sent nowhere, no internet is needed, no account is required, and the number of entries is not limited." data-kz="Тану тікелей құрылғыда жүреді. Сөйлем ешқайда жіберілмейді, интернет қажет емес, аккаунт та керек емес, жазба саны шектелмеген.">Распознавание идёт прямо на устройстве. Фраза никуда не отправляется, интернет не нужен, аккаунт не нужен, а число записей не ограничено.</p>
+      </div>
+      <div class="assist-feat">
+        <div class="assist-feat-ico"><ion-icon name="chatbubble-ellipses-outline"></ion-icon></div>
+        <h3 data-en="Finish it by voice" data-kz="Формада айтып толтыру">Договаривание в форме</h3>
+        <p data-en="Missed a field? Tap the mic and say “for 25,000”, “mileage 50,100”, “at Avtomir” — as many times as you like. It understands dates in words, puts everything after “note” into the note, and saves on command: “save the fill-up”." data-kz="Өрісті ұмыттыңыз ба? Микрофонды басып, «25 000-ға», «жүріс 50 100», «Автомирде» деңіз — қалағаныңызша рет. Күнді сөзбен түсінеді, «ескертпе» сөзінен кейінгінің бәрін ескертпеге салады және дауыспен сақтайды: «жанармай құюды сақта».">Забыли поле — нажмите микрофон и скажите «за 25 000», «пробег 50 100», «в Автомире». Сколько угодно раз. Понимает дату словами, всё после слова «заметка» кладёт в примечание и сохраняет по команде: «сохрани заправку».</p>
+      </div>
+      <div class="assist-feat">
+        <div class="assist-feat-ico"><ion-icon name="language-outline"></ion-icon></div>
+        <h3 data-en="Russian and Kazakh" data-kz="Орысша және қазақша">Русский и казахский</h3>
+        <p data-en="The dictation language is chosen separately from the app language. Voice picks up your own stations, workshops and categories from your history and recognises the type of work in any grammatical case. Kazakh works on Android: iPhone has no system Kazakh recognition yet." data-kz="Диктовка тілі қосымша тілінен бөлек таңдалады. Дауыс сіздің тарихыңыздан жанармай құю бекеттерін, шеберханалар мен санаттарды таниды, ал жұмыс түрін кез келген септікте түсінеді. Қазақ тілі — Android-та: iPhone-да қазақ тілін жүйелік тану әзірге жоқ.">Язык диктовки выбирается отдельно от языка интерфейса. Голос узнаёт ваши АЗС, мастерские и категории из истории, а вид работ понимает в любом падеже. Казахский — на Android: системного распознавания казахского на iPhone пока нет.</p>
       </div>
     </div>
   </div>
@@ -1070,12 +1136,12 @@
       <div class="feat-card">
         <div class="feat-card-icon"><ion-icon name="color-palette-outline"></ion-icon></div>
         <h3>Три темы оформления</h3>
-        <p>Classic, Glass и Glass Iris — выбирайте стиль под своё настроение. Поддержка тёмной, светлой и системной темы.</p>
+        <p>Классика, Глубина и Кристалл — выбирайте стиль под своё настроение. Поддержка тёмной, светлой и системной темы.</p>
       </div>
       <div class="feat-card">
         <div class="feat-card-icon"><ion-icon name="language-outline"></ion-icon></div>
-        <h3>13 языков интерфейса</h3>
-        <p>Русский, английский, казахский, испанский, французский, немецкий, португальский, китайский, японский, арабский, хинди, турецкий, индонезийский.</p>
+        <h3>32 языка интерфейса</h3>
+        <p>Русский, английский, казахский, испанский, французский, немецкий, португальский, китайский, японский, арабский, хинди, турецкий, индонезийский, итальянский, польский, финский, иврит, румынский, украинский, белорусский, латышский, литовский, эстонский, азербайджанский, армянский, грузинский, узбекский, киргизский, таджикский, туркменский, корейский, монгольский.</p>
       </div>
       <div class="feat-card">
         <div class="feat-card-icon"><ion-icon name="camera-outline"></ion-icon></div>
@@ -1191,12 +1257,12 @@
   <div class="section-wrap">
     <div class="section-label" data-en="License plates" data-kz="Мемнөмірлер">Госномера</div>
     <h2 class="section-title" data-en="A real plate, right on your card" data-kz="Карточкаңыздағы нағыз нөмір">Настоящий номер на вашей карточке</h2>
-    <p class="section-sub" data-en="Type the number — see it exactly as it looks on the bumper. 17 countries, authentic fonts and formats." data-kz="Нөмірді енгізіңіз — оны бампердегідей дәл көресіз. 17 ел, дәл қаріптер мен форматтар.">Введите номер — увидите его таким же, каким он выглядит на бампере. 17 стран, точные шрифты и форматы.</p>
-    <div class="assist-feats">
+    <p class="section-sub" data-en="Type the number — see it exactly as it looks on the bumper. 19 countries, authentic fonts and formats." data-kz="Нөмірді енгізіңіз — оны бампердегідей дәл көресіз. 19 ел, дәл қаріптер мен форматтар.">Введите номер — увидите его таким же, каким он выглядит на бампере. 19 стран, точные шрифты и форматы.</p>
+    <div class="assist-feats assist-feats-4">
       <div class="assist-feat">
         <div class="assist-feat-ico"><ion-icon name="create-outline"></ion-icon></div>
         <h3 data-en="Live preview" data-kz="Тікелей алдын ала қарау">Живой предпросмотр</h3>
-        <p data-en="Pick a country — Kazakhstan, Russia, Kyrgyzstan and 14 more — and start typing the plate. The app spaces and hyphenates it automatically and renders it exactly like the real thing as you type." data-kz="Елді таңдаңыз — Қазақстан, Ресей, Қырғызстан және тағы 14 — және нөмірді теруді бастаңыз. Қосымша бос орындар мен дефистерді өзі қояды және сіз енгізіп жатқан кезде нөмірді дәл нағызындай сызып шығады.">Выберите страну — Казахстан, Россия, Кыргызстан и ещё 14 — и начинайте печатать номер. Приложение само расставляет пробелы и дефисы и сразу рисует номер точь-в-точь как настоящий, пока вы вводите.</p>
+        <p data-en="Pick a country — Kazakhstan, Russia, Kyrgyzstan and 16 more — and start typing the plate. The app spaces and hyphenates it automatically and renders it exactly like the real thing as you type." data-kz="Елді таңдаңыз — Қазақстан, Ресей, Қырғызстан және тағы 16 — және нөмірді теруді бастаңыз. Қосымша бос орындар мен дефистерді өзі қояды және сіз енгізіп жатқан кезде нөмірді дәл нағызындай сызып шығады.">Выберите страну — Казахстан, Россия, Кыргызстан и ещё 16 — и начинайте печатать номер. Приложение само расставляет пробелы и дефисы и сразу рисует номер точь-в-точь как настоящий, пока вы вводите.</p>
       </div>
       <div class="assist-feat">
         <div class="assist-feat-ico"><ion-icon name="shapes-outline"></ion-icon></div>
@@ -1208,6 +1274,11 @@
         <h3 data-en="On your car card" data-kz="Автомобиль карточкасында">На карточке авто</h3>
         <p data-en="Flip one switch and the plate shows up on your car card on the Home tab, next to the photo, mileage and consumption. Hidden by default — privacy is your call." data-kz="Бір қосқышты қосыңыз — нөмір басты экрандағы автомобиль карточкасында фото, жүріс және шығынның жанында пайда болады. Әдепкі бойынша жасырын — құпиялылық сіздің таңдауыңыз.">Включите один переключатель — и номер появится на карточке авто на главном экране рядом с фото, пробегом и расходом. По умолчанию скрыт — приватность на ваш выбор.</p>
       </div>
+      <div class="assist-feat">
+        <div class="assist-feat-ico"><ion-icon name="options-outline"></ion-icon></div>
+        <h3 data-en="You pick the plate format" data-kz="Нөмір форматын өзіңіз таңдайсыз">Формат знака выбираете вы</h3>
+        <p data-en="Belarus, China and South Korea have a “Plate format” row under the number field — standard, electric or new energy. The app used to guess the format from the number itself and got it wrong; now the choice is yours." data-kz="Беларусь, Қытай және Корея үшін нөмір өрісінің астында «Нөмір форматы» қатары бар — кәдімгі, электро немесе жаңа энергия. Бұрын қосымша форматты нөмірдің өзінен болжап, қателесетін; енді таңдау сізде.">У Беларуси, Китая и Кореи под полем номера есть ряд «Формат знака» — обычный, электро или новая энергия. Раньше приложение угадывало формат по самому номеру и ошибалось; теперь выбор за вами.</p>
+      </div>
     </div>
     <div class="plate-shots">
       <div class="plate-shot"><img src="screenshots/plate-rus.jpg" alt="Госномер Россия на карточке авто" loading="lazy" /></div>
@@ -1217,7 +1288,49 @@
       <div class="plate-shot"><img src="screenshots/plate-az.jpg" alt="Госномер Азербайджан на карточке авто" loading="lazy" /></div>
       <div class="plate-shot"><img src="screenshots/plate-uz.jpg" alt="Госномер Узбекистан на карточке авто" loading="lazy" /></div>
     </div>
+    <div class="plate-picker">
+      <div class="plate-chips" role="group" aria-label="Страна госномера">
+        <button type="button" class="plate-chip" data-plate="kz.svg" aria-pressed="false"><span class="plate-chip-flag" aria-hidden="true">🇰🇿</span><span data-en="Kazakhstan" data-kz="Қазақстан">Казахстан</span></button>
+        <button type="button" class="plate-chip" data-plate="rus.svg" aria-pressed="false"><span class="plate-chip-flag" aria-hidden="true">🇷🇺</span><span data-en="Russia" data-kz="Ресей">Россия</span></button>
+        <button type="button" class="plate-chip" data-plate="kg.svg" aria-pressed="false"><span class="plate-chip-flag" aria-hidden="true">🇰🇬</span><span data-en="Kyrgyzstan" data-kz="Қырғызстан">Кыргызстан</span></button>
+        <button type="button" class="plate-chip" data-plate="uz.svg" aria-pressed="false"><span class="plate-chip-flag" aria-hidden="true">🇺🇿</span><span data-en="Uzbekistan" data-kz="Өзбекстан">Узбекистан</span></button>
+        <button type="button" class="plate-chip" data-plate="by.svg" aria-pressed="false"><span class="plate-chip-flag" aria-hidden="true">🇧🇾</span><span data-en="Belarus" data-kz="Беларусь">Беларусь</span></button>
+        <button type="button" class="plate-chip" data-plate="az.svg" aria-pressed="false"><span class="plate-chip-flag" aria-hidden="true">🇦🇿</span><span data-en="Azerbaijan" data-kz="Әзірбайжан">Азербайджан</span></button>
+        <button type="button" class="plate-chip" data-plate="am.svg" aria-pressed="false"><span class="plate-chip-flag" aria-hidden="true">🇦🇲</span><span data-en="Armenia" data-kz="Армения">Армения</span></button>
+        <button type="button" class="plate-chip" data-plate="tj.svg" aria-pressed="false"><span class="plate-chip-flag" aria-hidden="true">🇹🇯</span><span data-en="Tajikistan" data-kz="Тәжікстан">Таджикистан</span></button>
+        <button type="button" class="plate-chip" data-plate="lv.svg" aria-pressed="false"><span class="plate-chip-flag" aria-hidden="true">🇱🇻</span><span data-en="Latvia" data-kz="Латвия">Латвия</span></button>
+        <button type="button" class="plate-chip" data-plate="ge.svg" aria-pressed="false"><span class="plate-chip-flag" aria-hidden="true">🇬🇪</span><span data-en="Georgia" data-kz="Грузия">Грузия</span></button>
+        <button type="button" class="plate-chip" data-plate="ua.svg" aria-pressed="false"><span class="plate-chip-flag" aria-hidden="true">🇺🇦</span><span data-en="Ukraine" data-kz="Украина">Украина</span></button>
+        <button type="button" class="plate-chip" data-plate="md.svg" aria-pressed="false"><span class="plate-chip-flag" aria-hidden="true">🇲🇩</span><span data-en="Moldova" data-kz="Молдова">Молдова</span></button>
+        <button type="button" class="plate-chip" data-plate="tm.svg" aria-pressed="false"><span class="plate-chip-flag" aria-hidden="true">🇹🇲</span><span data-en="Turkmenistan" data-kz="Түрікменстан">Туркменистан</span></button>
+        <button type="button" class="plate-chip" data-plate="de.svg" aria-pressed="false"><span class="plate-chip-flag" aria-hidden="true">🇩🇪</span><span data-en="Germany" data-kz="Германия">Германия</span></button>
+        <button type="button" class="plate-chip" data-plate="lt.svg" aria-pressed="false"><span class="plate-chip-flag" aria-hidden="true">🇱🇹</span><span data-en="Lithuania" data-kz="Литва">Литва</span></button>
+        <button type="button" class="plate-chip" data-plate="est.svg" aria-pressed="false"><span class="plate-chip-flag" aria-hidden="true">🇪🇪</span><span data-en="Estonia" data-kz="Эстония">Эстония</span></button>
+        <button type="button" class="plate-chip" data-plate="tr.svg" aria-pressed="false"><span class="plate-chip-flag" aria-hidden="true">🇹🇷</span><span data-en="Turkey" data-kz="Түркия">Турция</span></button>
+        <button type="button" class="plate-chip" data-plate="cn.svg" aria-pressed="false"><span class="plate-chip-flag" aria-hidden="true">🇨🇳</span><span data-en="China" data-kz="Қытай">Китай</span></button>
+        <button type="button" class="plate-chip" data-plate="kr.svg" aria-pressed="false"><span class="plate-chip-flag" aria-hidden="true">🇰🇷</span><span data-en="South Korea" data-kz="Оңтүстік Корея">Южная Корея</span></button>
+      </div>
+      <div class="plate-stage">
+        <img id="platePreview" src="plates/kz.svg" alt="" loading="lazy" />
+      </div>
+      <div class="plate-formats" id="plateFormats" hidden>
+        <span class="plate-formats-lab" data-en="Plate format" data-kz="Нөмір форматы">Формат знака</span>
+        <div class="plate-format-group" data-country="by" hidden>
+          <button type="button" class="plate-format" data-plate="by.svg" aria-pressed="true"><span data-en="Standard" data-kz="Кәдімгі">Обычный</span></button>
+          <button type="button" class="plate-format" data-plate="by-ev.svg" aria-pressed="false"><span data-en="Electric (EV)" data-kz="Электро (EV)">Электро (EV)</span></button>
+        </div>
+        <div class="plate-format-group" data-country="cn" hidden>
+          <button type="button" class="plate-format" data-plate="cn.svg" aria-pressed="true"><span data-en="Standard" data-kz="Кәдімгі">Обычный</span></button>
+          <button type="button" class="plate-format" data-plate="cn-nev.svg" aria-pressed="false"><span data-en="New energy" data-kz="Жаңа энергия">Новая энергия</span></button>
+        </div>
+        <div class="plate-format-group" data-country="kr" hidden>
+          <button type="button" class="plate-format" data-plate="kr.svg" aria-pressed="true"><span data-en="Standard" data-kz="Кәдімгі">Обычный</span></button>
+          <button type="button" class="plate-format" data-plate="kr-ev.svg" aria-pressed="false"><span data-en="Electric (EV)" data-kz="Электро (EV)">Электро (EV)</span></button>
+        </div>
+      </div>
+    </div>
   </div>
+
 </section>
 
 <!-- ── ВИДЖЕТ ── -->
@@ -1230,7 +1343,7 @@
       <div class="assist-feat">
         <div class="assist-feat-ico"><ion-icon name="color-palette-outline"></ion-icon></div>
         <h3 data-en="Follows your app style" data-kz="Қосымша стиліне сай келеді">Следует стилю приложения</h3>
-        <p data-en="Classic, Depth or Crystal — whichever style and theme you picked in the app, the widget matches it automatically and redraws instantly on change." data-kz="Classic, Тереңдік немесе Кристалл — қосымшада қандай стиль мен тема таңдасаңыз, виджет те сондай болады. Ауыстырған кезде бірден қайта сызылады.">Classic, Глубина или Кристалл — какой стиль и тему выбрали в приложении, такими будут и виджет. Перерисовывается мгновенно при смене.</p>
+        <p data-en="Classic, Depth or Crystal — whichever style and theme you picked in the app, the widget matches it automatically and redraws instantly on change." data-kz="Классика, Тереңдік немесе Кристалл — қосымшада қандай стиль мен тема таңдасаңыз, виджет те сондай болады. Ауыстырған кезде бірден қайта сызылады.">Классика, Глубина или Кристалл — какой стиль и тему выбрали в приложении, такими будут и виджет. Перерисовывается мгновенно при смене.</p>
       </div>
       <div class="assist-feat">
         <div class="assist-feat-ico"><ion-icon name="ellipse-outline"></ion-icon></div>
@@ -1253,7 +1366,7 @@
       <div><div class="sb-val gradient-text">100+</div><div class="sb-lab" data-en="makes & models" data-kz="марка мен модель">марок и моделей</div></div>
       <div><div class="sb-val gradient-text">62</div><div class="sb-lab" data-en="dashboard icons" data-kz="панель белгісі">значка приборки</div></div>
       <div><div class="sb-val gradient-text">20</div><div class="sb-lab" data-en="DIY guides" data-kz="Автогайдтар">автогайдов</div></div>
-      <div><div class="sb-val gradient-text">13</div><div class="sb-lab" data-en="languages" data-kz="интерфейс тілі">языков</div></div>
+      <div><div class="sb-val gradient-text">32</div><div class="sb-lab" data-en="languages" data-kz="интерфейс тілі">языков</div></div>
     </div>
   </div>
 </section>
@@ -1263,7 +1376,7 @@
   <div class="section-wrap">
     <div class="section-label" data-en="Personalization" data-kz="Дербестендіру">Персонализация</div>
     <h2 class="section-title" data-en="Make it yours" data-kz="Өзіңізге лайықтаңыз">Настройте под себя</h2>
-    <p class="section-sub" data-en="Three visual styles, 13 languages and flexible units." data-kz="Үш безендіру стилі, 13 тіл және икемді өлшем бірліктері.">Три стиля оформления, 13 языков и гибкие единицы измерения.</p>
+    <p class="section-sub" data-en="Three visual styles, 32 languages and flexible units." data-kz="Үш безендіру стилі, 32 тіл және икемді өлшем бірліктері.">Три стиля оформления, 32 языка и гибкие единицы измерения.</p>
 
     <div style="margin-top:48px;">
       <h3 style="font-size:16px;font-weight:700;margin-bottom:6px;color:var(--subtext);letter-spacing:0.05em;text-transform:uppercase;font-size:12px;">Стили оформления</h3>
@@ -1272,21 +1385,21 @@
           <div class="theme-preview" style="background:#1a1a1a;display:flex;align-items:center;justify-content:center;">
             <ion-icon name="square-outline" style="font-size:28px;color:#555;"></ion-icon>
           </div>
-          <h4>Classic</h4>
+          <h4 data-en="Classic" data-kz="Классика">Классика</h4>
           <p>Чистый плоский дизайн. Минимализм без лишних эффектов.</p>
         </div>
         <div class="theme-card theme-glass">
           <div class="theme-preview" style="background:rgba(79,125,255,0.15);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;border:1px solid rgba(79,125,255,0.2);">
             <ion-icon name="square-outline" style="font-size:28px;color:rgba(79,125,255,0.6);"></ion-icon>
           </div>
-          <h4>Glass</h4>
+          <h4 data-en="Depth" data-kz="Тереңдік">Глубина</h4>
           <p>Стеклянный эффект с размытием. Современный и лёгкий вид.</p>
         </div>
         <div class="theme-card theme-iris">
           <div class="theme-preview" style="background:linear-gradient(135deg,rgba(79,125,255,0.2),rgba(139,92,246,0.2));display:flex;align-items:center;justify-content:center;border:1px solid rgba(139,92,246,0.25);">
             <ion-icon name="square-outline" style="font-size:28px;color:rgba(139,92,246,0.7);"></ion-icon>
           </div>
-          <h4>Glass Iris</h4>
+          <h4 data-en="Crystal" data-kz="Кристалл">Кристалл</h4>
           <p>Стекло с радужным градиентом. Яркий и стильный вариант.</p>
         </div>
       </div>
@@ -1308,6 +1421,25 @@
         <div class="lang-item"><span>🇮🇳</span> हिन्दी</div>
         <div class="lang-item"><span>🇹🇷</span> Türkçe</div>
         <div class="lang-item"><span>🇮🇩</span> Indonesia</div>
+        <div class="lang-item"><span>🇮🇹</span> Italiano</div>
+        <div class="lang-item"><span>🇵🇱</span> Polski</div>
+        <div class="lang-item"><span>🇫🇮</span> Suomi</div>
+        <div class="lang-item"><span>🇮🇱</span> עברית</div>
+        <div class="lang-item"><span>🇷🇴</span> Română</div>
+        <div class="lang-item"><span>🇺🇦</span> Українська</div>
+        <div class="lang-item"><span>🇧🇾</span> Беларуская</div>
+        <div class="lang-item"><span>🇱🇻</span> Latviešu</div>
+        <div class="lang-item"><span>🇱🇹</span> Lietuvių</div>
+        <div class="lang-item"><span>🇪🇪</span> Eesti</div>
+        <div class="lang-item"><span>🇦🇿</span> Azərbaycan</div>
+        <div class="lang-item"><span>🇦🇲</span> Հայերեն</div>
+        <div class="lang-item"><span>🇬🇪</span> ქართული</div>
+        <div class="lang-item"><span>🇺🇿</span> Oʻzbek</div>
+        <div class="lang-item"><span>🇰🇬</span> Кыргызча</div>
+        <div class="lang-item"><span>🇹🇯</span> Тоҷикӣ</div>
+        <div class="lang-item"><span>🇹🇲</span> Türkmen</div>
+        <div class="lang-item"><span>🇰🇷</span> 한국어</div>
+        <div class="lang-item"><span>🇲🇳</span> Монгол</div>
       </div>
     </div>
 
@@ -1503,7 +1635,7 @@
       </div>
       <div class="faq-item">
         <button class="faq-q">На каких платформах работает? <span class="faq-ico">+</span></button>
-        <div class="faq-a"><p>AutoSup доступен на iOS и Android. Интерфейс переведён на 13 языков.</p></div>
+        <div class="faq-a"><p>AutoSup доступен на iOS и Android. Интерфейс переведён на 32 языка.</p></div>
       </div>
       <div class="faq-item">
         <button class="faq-q">Подходит для электромобилей и гибридов? <span class="faq-ico">+</span></button>
@@ -1725,6 +1857,74 @@
       setTimeout(function () { img.src = 'screenshots/' + t.dataset.img; img.style.opacity = '1'; }, 160);
     });
   });
+
+  // Выбор шаблона госномера: страна + исполнение (обычный / электро / новая энергия).
+  // Картинки лежат в plates/ и генерятся скриптом приложения gen-plate-samples.mjs.
+  (function () {
+    var picker = document.querySelector('.plate-picker');
+    if (!picker) return;
+    var img = document.getElementById('platePreview');
+    var formats = document.getElementById('plateFormats');
+    var chips = [].slice.call(picker.querySelectorAll('.plate-chip'));
+    var groups = [].slice.call(formats.querySelectorAll('.plate-format-group'));
+    var ALT = { ru: 'Образец госномера: ', en: 'Sample license plate: ', kz: 'Мемнөмір үлгісі: ' };
+
+    function countryName(chip) {
+      var span = chip.querySelector('[data-en]');
+      return span ? span.textContent : '';
+    }
+    function activeChip() {
+      for (var i = 0; i < chips.length; i++) {
+        if (chips[i].getAttribute('aria-pressed') === 'true') return chips[i];
+      }
+      return chips[0];
+    }
+    function showPlate(file) {
+      img.src = 'plates/' + file;
+      img.alt = (ALT[document.documentElement.lang] || ALT.ru) + countryName(activeChip());
+    }
+    function pressOnly(list, chosen) {
+      list.forEach(function (el) { el.setAttribute('aria-pressed', String(el === chosen)); });
+    }
+    function pickCountry(chip) {
+      pressOnly(chips, chip);
+      var code = chip.dataset.plate.replace('.svg', '');
+      var group = null;
+      groups.forEach(function (g) {
+        var mine = g.dataset.country === code;
+        g.hidden = !mine;
+        if (mine) {
+          group = g;
+          // Возврат к обычному исполнению при смене страны.
+          var btns = [].slice.call(g.querySelectorAll('.plate-format'));
+          pressOnly(btns, btns[0]);
+        }
+      });
+      formats.hidden = !group;
+      showPlate(chip.dataset.plate);
+    }
+
+    chips.forEach(function (chip) {
+      chip.addEventListener('click', function () { pickCountry(chip); });
+    });
+    formats.addEventListener('click', function (e) {
+      var btn = e.target.closest ? e.target.closest('.plate-format') : null;
+      if (!btn) return;
+      pressOnly([].slice.call(btn.parentElement.querySelectorAll('.plate-format')), btn);
+      showPlate(btn.dataset.plate);
+    });
+    pickCountry(chips[0]);
+    // Язык мог переключиться после старта — держим alt в актуальном языке.
+    // Обновление отложено на такт: этот обработчик зарегистрирован РАНЬШЕ
+    // языкового, и без отсрочки имя страны читалось бы ещё непереведённым.
+    document.querySelectorAll('.lang-opt').forEach(function (b) {
+      b.addEventListener('click', function () {
+        setTimeout(function () {
+          img.alt = (ALT[b.dataset.lang] || ALT.ru) + countryName(activeChip());
+        }, 0);
+      });
+    });
+  })();
 
   // Языковой переключатель RU/EN/KZ (data-en / data-kz атрибуты)
   (function () {
