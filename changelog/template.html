@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<!--
+  Шаблон страницы «История обновлений».
+
+  Сам changelog/index.html СОБИРАЕТСЯ АВТОМАТИЧЕСКИ и правится только здесь:
+  scripts/sync-site-changelog в репозитории AutoSupApp подставляет вместо
+  плейсхолдеров данные из окна «Что нового» приложения. Правки в index.html
+  затрёт ближайший запуск синхронизации.
+
+  Плейсхолдеры (в двойных фигурных скобках): RELEASES — лента версий, LATEST — свежая
+  версия, GENERATED — дата сборки. Писать их здесь буквально нельзя: подстановка не
+  разбирает разметку и вставит ленту второй раз прямо в комментарий.
+-->
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AutoSup — История обновлений</title>
+  <meta name="description" content="Что менялось в AutoSup от версии к версии: голосовой ввод, паспорт авто, госномера, виджет, напоминания о ТО. Полная история обновлений приложения." />
+  <link rel="icon" type="image/png" href="/icon.png" />
+  <link rel="apple-touch-icon" href="/icon.png" />
+  <meta name="theme-color" content="#080b18" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://autosup.app/changelog/" />
+  <meta property="og:title" content="AutoSup — История обновлений" />
+  <meta property="og:description" content="Что менялось в AutoSup от версии к версии. Последняя версия — {{LATEST}}." />
+  <meta property="og:image" content="https://autosup.app/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="AutoSup — История обновлений" />
+  <meta name="twitter:description" content="Что менялось в AutoSup от версии к версии." />
+  <meta name="twitter:image" content="https://autosup.app/og-image.png" />
+  <link rel="canonical" href="https://autosup.app/changelog/" />
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #080b18;
+      --surface: #0f1428;
+      --surface2: #141830;
+      --border: rgba(99, 120, 255, 0.14);
+      --border2: rgba(99, 120, 255, 0.25);
+      --accent1: #4f7dff;
+      --accent2: #8b5cf6;
+      --text: #e8eaf6;
+      --subtext: #8892b0;
+      --muted: #4a5270;
+      --green: #34d399;
+      --r-md: 12px; --r-lg: 16px; --r-pill: 999px;
+      --shadow-card: 0 18px 44px -14px rgba(79,125,255,0.28);
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, var(--accent1), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ── NAV (как на главной) ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(8, 11, 24, 0.88);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      height: 60px; display: flex; align-items: center;
+      padding: 0 24px; justify-content: space-between;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 9px; text-decoration: none; }
+    .nav-logo img { width: 30px; height: 30px; border-radius: 8px; }
+    .nav-logo span { font-size: 17px; font-weight: 700; }
+    .nav-right { display: flex; align-items: center; gap: 18px; }
+    .nav-links { display: flex; align-items: center; gap: 15px; }
+    .nav-links a { color: var(--subtext); text-decoration: none; font-size: 13px; white-space: nowrap; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta {
+      background: linear-gradient(135deg, var(--accent1), var(--accent2));
+      color: #fff !important; padding: 7px 16px; border-radius: 16px;
+      font-weight: 600; font-size: 13px; white-space: nowrap; text-decoration: none;
+    }
+    .lang-switch { display: flex; align-items: center; gap: 2px; flex-shrink: 0;
+      background: rgba(79,125,255,0.1); border: 1px solid var(--accent1); border-radius: var(--r-pill); padding: 3px; }
+    .lang-opt { background: none; border: none; color: var(--subtext); font-size: 12px; font-weight: 700;
+      font-family: inherit; padding: 5px 10px; border-radius: var(--r-pill); cursor: pointer; transition: background .2s, color .2s; }
+    .lang-opt:hover { color: var(--text); }
+    .lang-opt.active { background: var(--accent1); color: #fff; }
+
+    /* ── ШАПКА СТРАНИЦЫ ── */
+    .page-head { padding: 130px 24px 8px; text-align: center; position: relative; overflow: hidden; }
+    .page-head::before {
+      content: ''; position: absolute; width: 620px; height: 620px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(79,125,255,0.10) 0%, transparent 65%);
+      top: -220px; left: 50%; transform: translateX(-50%); pointer-events: none;
+    }
+    .page-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--accent1); margin-bottom: 10px;
+    }
+    .page-title { font-size: clamp(28px, 5vw, 44px); font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; }
+    .page-sub { font-size: 16px; color: var(--subtext); max-width: 540px; margin: 14px auto 0; }
+
+    /* ── ЛЕНТА ВЕРСИЙ ── */
+    .timeline { max-width: 780px; margin: 40px auto 0; padding: 0 24px 90px; }
+    .release { padding: 26px 0 8px; border-top: 1px solid var(--border); }
+    .release:first-child { border-top: none; }
+    .release-head { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 8px; }
+    .release-version { font-size: 24px; font-weight: 800; letter-spacing: -0.02em; }
+    .release-date { color: var(--subtext); font-size: 13px; }
+    .release-badge {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--green); background: rgba(52,211,153,0.10);
+      border: 1px solid rgba(52,211,153,0.35); padding: 4px 10px; border-radius: var(--r-pill);
+    }
+    .changes { list-style: none; }
+    .change { display: flex; gap: 14px; padding: 14px 0; }
+    .change-icon {
+      width: 38px; height: 38px; flex-shrink: 0; border-radius: var(--r-md);
+      display: grid; place-items: center; font-size: 20px; color: var(--accent1);
+      background: linear-gradient(135deg, rgba(79,125,255,0.18), rgba(139,92,246,0.18));
+      border: 1px solid var(--border2);
+    }
+    .change-title { font-size: 16px; font-weight: 700; line-height: 1.4; }
+    .change-desc { font-size: 14.5px; color: var(--subtext); margin-top: 5px; }
+
+    /* ── СТАРЫЕ ВЕРСИИ ── */
+    .older { margin-top: 28px; border-top: 1px solid var(--border); }
+    .older > summary {
+      list-style: none; cursor: pointer; padding: 22px 0 6px;
+      display: flex; align-items: center; gap: 10px;
+      font-size: 15px; font-weight: 600; color: var(--subtext); transition: color .2s;
+    }
+    .older > summary::-webkit-details-marker { display: none; }
+    .older > summary:hover { color: var(--text); }
+    .older > summary ion-icon { font-size: 18px; transition: transform .25s; }
+    .older[open] > summary ion-icon { transform: rotate(180deg); }
+    .older .release:first-child { border-top: 1px solid var(--border); }
+
+    /* ── ПОДВАЛ (как на главной) ── */
+    footer { padding: 40px 24px; border-top: 1px solid var(--border); }
+    .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+    .footer-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; }
+    .footer-logo img { width: 26px; height: 26px; border-radius: 7px; }
+    .footer-logo span { font-size: 15px; font-weight: 700; }
+    .footer-links { display: flex; gap: 22px; flex-wrap: wrap; }
+    .footer-links a { color: var(--subtext); text-decoration: none; font-size: 13px; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--text); }
+    .footer-copy { color: var(--muted); font-size: 12px; width: 100%; margin-top: 14px; text-align: center; }
+    .footer-generated { color: var(--muted); font-size: 11px; width: 100%; text-align: center; margin-top: 4px; }
+
+    @media (max-width: 1150px) { .nav-links { display: none; } }
+    @media (max-width: 700px) {
+      .page-head { padding-top: 110px; }
+      .change-icon { width: 34px; height: 34px; font-size: 18px; }
+      .footer-inner { flex-direction: column; align-items: center; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="/">
+    <img src="/icon.png" alt="AutoSup" />
+    <span class="gradient-text">AutoSup</span>
+  </a>
+  <div class="nav-right">
+    <div class="nav-links">
+      <a href="/" data-en="Home" data-kz="Басты бет">Главная</a>
+      <a href="/#features" data-en="Features" data-kz="Функциялар">Функции</a>
+      <a href="/#faq" data-en="FAQ" data-kz="Сұрақ-жауап">FAQ</a>
+    </div>
+    <div class="lang-switch" role="group" aria-label="Language">
+      <button class="lang-opt" data-lang="ru">RU</button>
+      <button class="lang-opt" data-lang="en">EN</button>
+      <button class="lang-opt" data-lang="kz">KZ</button>
+    </div>
+    <a href="/#download" class="nav-cta" data-en="Download" data-kz="Жүктеп алу">Скачать</a>
+  </div>
+</nav>
+
+<header class="page-head">
+  <div class="page-label" data-en="Changelog" data-kz="Жаңартулар тарихы">История обновлений</div>
+  <h1 class="page-title" data-en="What&rsquo;s new in <span class=&quot;gradient-text&quot;>AutoSup</span>" data-kz="<span class=&quot;gradient-text&quot;>AutoSup</span>-та не жаңалық">Что нового в <span class="gradient-text">AutoSup</span></h1>
+  <p class="page-sub" data-en="Every release, in plain words: what appeared, what got fixed, what changed." data-kz="Әр жаңарту адам тілінде: не пайда болды, не түзетілді, не өзгерді.">Каждое обновление человеческим языком: что появилось, что починили, что изменилось.</p>
+</header>
+
+<main class="timeline">
+{{RELEASES}}
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <a class="footer-logo" href="/">
+      <img src="/icon.png" alt="AutoSup" loading="lazy" />
+      <span class="gradient-text">AutoSup</span>
+    </a>
+    <div class="footer-links">
+      <a href="/" data-en="Home" data-kz="Басты бет">Главная</a>
+      <a href="/privacy" data-en="Privacy Policy" data-kz="Құпиялылық саясаты">Политика конфиденциальности</a>
+      <a href="/terms" data-en="Terms of Use" data-kz="Пайдалану шарттары">Условия использования</a>
+      <a href="mailto:autosup.app@gmail.com" data-en="Support" data-kz="Қолдау">Поддержка</a>
+    </div>
+    <div class="footer-copy">© 2026 AutoSup. Все права защищены.</div>
+    <div class="footer-generated">
+      <span data-en="Page updated" data-kz="Бет жаңартылды">Страница обновлена</span>
+      <span id="generated">{{GENERATED}}</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Языковой переключатель RU/EN/KZ — тот же механизм, что на главной:
+  // русский текст лежит в разметке, переводы в data-en / data-kz.
+  (function () {
+    var opts = document.querySelectorAll('.lang-opt');
+    function setLang(lang) {
+      document.querySelectorAll('[data-en]').forEach(function (el) {
+        if (el.dataset.ru === undefined) el.dataset.ru = el.innerHTML;
+        if (lang === 'en') el.innerHTML = el.dataset.en;
+        // Тексты изменений на казахский не переводились, поэтому казахская страница
+        // показывает русский, а не английский: на главной фолбэк идёт на data-en,
+        // здесь — на исходный русский текст. Иначе KZ читался бы по-английски.
+        else if (lang === 'kz') el.innerHTML = el.dataset.kz || el.dataset.ru;
+        else el.innerHTML = el.dataset.ru;
+      });
+      document.documentElement.lang = lang;
+      opts.forEach(function (b) { b.classList.toggle('active', b.dataset.lang === lang); });
+      try { localStorage.setItem('lang', lang); } catch (e) {}
+    }
+    opts.forEach(function (b) {
+      b.addEventListener('click', function () { setLang(b.dataset.lang); });
+    });
+    var saved = 'ru';
+    try { saved = localStorage.getItem('lang') || 'ru'; } catch (e) {}
+    setLang(saved);
+  })();
+
+  // Ссылка вида /changelog/#1.6.1 раскрывает старые версии, иначе якорь ведёт в пустоту.
+  (function () {
+    var target = decodeURIComponent(location.hash.slice(1));
+    if (!target) return;
+    var el = document.getElementById(target);
+    if (!el) return;
+    var box = el.closest('details');
+    if (box) box.open = true;
+    el.scrollIntoView();
+  })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<!--
+  Шаблон страницы «История обновлений».
+
+  Сам changelog/index.html СОБИРАЕТСЯ АВТОМАТИЧЕСКИ и правится только здесь:
+  scripts/sync-site-changelog в репозитории AutoSupApp подставляет вместо
+  плейсхолдеров данные из окна «Что нового» приложения. Правки в index.html
+  затрёт ближайший запуск синхронизации.
+
+  Плейсхолдеры (в двойных фигурных скобках): RELEASES — лента версий, LATEST — свежая
+  версия, GENERATED — дата сборки. Писать их здесь буквально нельзя: подстановка не
+  разбирает разметку и вставит ленту второй раз прямо в комментарий.
+-->
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AutoSup — История обновлений</title>
+  <meta name="description" content="Что менялось в AutoSup от версии к версии: голосовой ввод, паспорт авто, госномера, виджет, напоминания о ТО. Полная история обновлений приложения." />
+  <link rel="icon" type="image/png" href="/icon.png" />
+  <link rel="apple-touch-icon" href="/icon.png" />
+  <meta name="theme-color" content="#080b18" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://autosup.app/changelog/" />
+  <meta property="og:title" content="AutoSup — История обновлений" />
+  <meta property="og:description" content="Что менялось в AutoSup от версии к версии. Последняя версия — 1.6.1." />
+  <meta property="og:image" content="https://autosup.app/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="AutoSup — История обновлений" />
+  <meta name="twitter:description" content="Что менялось в AutoSup от версии к версии." />
+  <meta name="twitter:image" content="https://autosup.app/og-image.png" />
+  <link rel="canonical" href="https://autosup.app/changelog/" />
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #080b18;
+      --surface: #0f1428;
+      --surface2: #141830;
+      --border: rgba(99, 120, 255, 0.14);
+      --border2: rgba(99, 120, 255, 0.25);
+      --accent1: #4f7dff;
+      --accent2: #8b5cf6;
+      --text: #e8eaf6;
+      --subtext: #8892b0;
+      --muted: #4a5270;
+      --green: #34d399;
+      --r-md: 12px; --r-lg: 16px; --r-pill: 999px;
+      --shadow-card: 0 18px 44px -14px rgba(79,125,255,0.28);
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, var(--accent1), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ── NAV (как на главной) ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(8, 11, 24, 0.88);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      height: 60px; display: flex; align-items: center;
+      padding: 0 24px; justify-content: space-between;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 9px; text-decoration: none; }
+    .nav-logo img { width: 30px; height: 30px; border-radius: 8px; }
+    .nav-logo span { font-size: 17px; font-weight: 700; }
+    .nav-right { display: flex; align-items: center; gap: 18px; }
+    .nav-links { display: flex; align-items: center; gap: 15px; }
+    .nav-links a { color: var(--subtext); text-decoration: none; font-size: 13px; white-space: nowrap; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta {
+      background: linear-gradient(135deg, var(--accent1), var(--accent2));
+      color: #fff !important; padding: 7px 16px; border-radius: 16px;
+      font-weight: 600; font-size: 13px; white-space: nowrap; text-decoration: none;
+    }
+    .lang-switch { display: flex; align-items: center; gap: 2px; flex-shrink: 0;
+      background: rgba(79,125,255,0.1); border: 1px solid var(--accent1); border-radius: var(--r-pill); padding: 3px; }
+    .lang-opt { background: none; border: none; color: var(--subtext); font-size: 12px; font-weight: 700;
+      font-family: inherit; padding: 5px 10px; border-radius: var(--r-pill); cursor: pointer; transition: background .2s, color .2s; }
+    .lang-opt:hover { color: var(--text); }
+    .lang-opt.active { background: var(--accent1); color: #fff; }
+
+    /* ── ШАПКА СТРАНИЦЫ ── */
+    .page-head { padding: 130px 24px 8px; text-align: center; position: relative; overflow: hidden; }
+    .page-head::before {
+      content: ''; position: absolute; width: 620px; height: 620px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(79,125,255,0.10) 0%, transparent 65%);
+      top: -220px; left: 50%; transform: translateX(-50%); pointer-events: none;
+    }
+    .page-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--accent1); margin-bottom: 10px;
+    }
+    .page-title { font-size: clamp(28px, 5vw, 44px); font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; }
+    .page-sub { font-size: 16px; color: var(--subtext); max-width: 540px; margin: 14px auto 0; }
+
+    /* ── ЛЕНТА ВЕРСИЙ ── */
+    .timeline { max-width: 780px; margin: 40px auto 0; padding: 0 24px 90px; }
+    .release { padding: 26px 0 8px; border-top: 1px solid var(--border); }
+    .release:first-child { border-top: none; }
+    .release-head { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 8px; }
+    .release-version { font-size: 24px; font-weight: 800; letter-spacing: -0.02em; }
+    .release-date { color: var(--subtext); font-size: 13px; }
+    .release-badge {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--green); background: rgba(52,211,153,0.10);
+      border: 1px solid rgba(52,211,153,0.35); padding: 4px 10px; border-radius: var(--r-pill);
+    }
+    .changes { list-style: none; }
+    .change { display: flex; gap: 14px; padding: 14px 0; }
+    .change-icon {
+      width: 38px; height: 38px; flex-shrink: 0; border-radius: var(--r-md);
+      display: grid; place-items: center; font-size: 20px; color: var(--accent1);
+      background: linear-gradient(135deg, rgba(79,125,255,0.18), rgba(139,92,246,0.18));
+      border: 1px solid var(--border2);
+    }
+    .change-title { font-size: 16px; font-weight: 700; line-height: 1.4; }
+    .change-desc { font-size: 14.5px; color: var(--subtext); margin-top: 5px; }
+
+    /* ── СТАРЫЕ ВЕРСИИ ── */
+    .older { margin-top: 28px; border-top: 1px solid var(--border); }
+    .older > summary {
+      list-style: none; cursor: pointer; padding: 22px 0 6px;
+      display: flex; align-items: center; gap: 10px;
+      font-size: 15px; font-weight: 600; color: var(--subtext); transition: color .2s;
+    }
+    .older > summary::-webkit-details-marker { display: none; }
+    .older > summary:hover { color: var(--text); }
+    .older > summary ion-icon { font-size: 18px; transition: transform .25s; }
+    .older[open] > summary ion-icon { transform: rotate(180deg); }
+    .older .release:first-child { border-top: 1px solid var(--border); }
+
+    /* ── ПОДВАЛ (как на главной) ── */
+    footer { padding: 40px 24px; border-top: 1px solid var(--border); }
+    .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+    .footer-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; }
+    .footer-logo img { width: 26px; height: 26px; border-radius: 7px; }
+    .footer-logo span { font-size: 15px; font-weight: 700; }
+    .footer-links { display: flex; gap: 22px; flex-wrap: wrap; }
+    .footer-links a { color: var(--subtext); text-decoration: none; font-size: 13px; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--text); }
+    .footer-copy { color: var(--muted); font-size: 12px; width: 100%; margin-top: 14px; text-align: center; }
+    .footer-generated { color: var(--muted); font-size: 11px; width: 100%; text-align: center; margin-top: 4px; }
+
+    @media (max-width: 1150px) { .nav-links { display: none; } }
+    @media (max-width: 700px) {
+      .page-head { padding-top: 110px; }
+      .change-icon { width: 34px; height: 34px; font-size: 18px; }
+      .footer-inner { flex-direction: column; align-items: center; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="/">
+    <img src="/icon.png" alt="AutoSup" />
+    <span class="gradient-text">AutoSup</span>
+  </a>
+  <div class="nav-right">
+    <div class="nav-links">
+      <a href="/" data-en="Home" data-kz="Басты бет">Главная</a>
+      <a href="/#features" data-en="Features" data-kz="Функциялар">Функции</a>
+      <a href="/#faq" data-en="FAQ" data-kz="Сұрақ-жауап">FAQ</a>
+    </div>
+    <div class="lang-switch" role="group" aria-label="Language">
+      <button class="lang-opt" data-lang="ru">RU</button>
+      <button class="lang-opt" data-lang="en">EN</button>
+      <button class="lang-opt" data-lang="kz">KZ</button>
+    </div>
+    <a href="/#download" class="nav-cta" data-en="Download" data-kz="Жүктеп алу">Скачать</a>
+  </div>
+</nav>
+
+<header class="page-head">
+  <div class="page-label" data-en="Changelog" data-kz="Жаңартулар тарихы">История обновлений</div>
+  <h1 class="page-title" data-en="What&rsquo;s new in <span class=&quot;gradient-text&quot;>AutoSup</span>" data-kz="<span class=&quot;gradient-text&quot;>AutoSup</span>-та не жаңалық">Что нового в <span class="gradient-text">AutoSup</span></h1>
+  <p class="page-sub" data-en="Every release, in plain words: what appeared, what got fixed, what changed." data-kz="Әр жаңарту адам тілінде: не пайда болды, не түзетілді, не өзгерді.">Каждое обновление человеческим языком: что появилось, что починили, что изменилось.</p>
+</header>
+
+<main class="timeline">
+  <article class="release" id="1.6.1">
+    <div class="release-head">
+      <h2 class="release-version gradient-text">1.6.1</h2>
+      <time class="release-date" datetime="2026-09-01" data-en="September 1, 2026">1 сентября 2026</time>
+      <span class="release-badge" data-en="Latest">Актуальная</span>
+    </div>
+    <ul class="changes">
+      <li class="change">
+        <span class="change-icon" aria-hidden="true"><ion-icon name="return-down-back-outline"></ion-icon></span>
+        <div>
+          <h3 class="change-title" data-en="Opens where you left off">Открывается там, где вы остановились</h3>
+          <p class="change-desc" data-en="Stepped away for a call or a message and came back within half an hour? You land on the same tab instead of Home. After that the app opens normally — by then you have come with a new task.">Отвлеклись на звонок или мессенджер и вернулись в течение получаса — увидите ту же вкладку, а не «Главную». Если прошло больше, приложение открывается как обычно: вы уже пришли с новой задачей.</p>
+        </div>
+      </li>
+      <li class="change">
+        <span class="change-icon" aria-hidden="true"><ion-icon name="shield-checkmark-outline"></ion-icon></span>
+        <div>
+          <h3 class="change-title" data-en="No more closing on return">Не закрывается при возврате</h3>
+          <p class="change-desc" data-en="If the system dropped AutoSup from memory while you were in another app, it could close itself when you came back. On phones with modest memory this happened regularly. Not anymore.">Если система выгружала AutoSup из памяти, пока вы были в другом приложении, при возврате он мог закрыться сам. На телефонах со скромной памятью это случалось регулярно — больше не случается.</p>
+        </div>
+      </li>
+      <li class="change">
+        <span class="change-icon" aria-hidden="true"><ion-icon name="cube-outline"></ion-icon></span>
+        <div>
+          <h3 class="change-title" data-en="Almost 6 MB lighter">Приложение похудело почти на 6 МБ</h3>
+          <p class="change-desc" data-en="The app carried a barcode recognition engine that arrived with the development tools and never ran — AutoSup has no scanning. It is gone now.">Внутри лежал движок распознавания штрих-кодов: он приезжал вместе со средствами разработки и никогда не запускался, ведь сканирования в AutoSup нет. Теперь его нет и в приложении.</p>
+        </div>
+      </li>
+    </ul>
+  </article>
+  <article class="release" id="1.6.0">
+    <div class="release-head">
+      <h2 class="release-version gradient-text">1.6.0</h2>
+      <time class="release-date" datetime="2026-08-30" data-en="August 30, 2026">30 августа 2026</time>
+    </div>
+    <ul class="changes">
+      <li class="change">
+        <span class="change-icon" aria-hidden="true"><ion-icon name="language-outline"></ion-icon></span>
+        <div>
+          <h3 class="change-title" data-en="Voice entry now speaks English">Голосовой ввод понимает английский</h3>
+          <p class="change-desc" data-en="A third dictation language alongside Russian and Kazakh: “filled up 30 liters for 15000 at Shell”, “changed the oil 102300”, “car wash 3500”. Fuel, service, expenses, mileage and dates — gallons and miles included. Ending a phrase with “save” stores the record, while “changed the oil to save money” creates nothing.">Третий язык диктовки наравне с русским и казахским: «filled up 30 liters for 15000 at Shell», «changed the oil 102300», «car wash 3500». Заправки, ТО, расходы, пробег и даты — галлоны и мили тоже. Команда «save» в конце фразы сохраняет запись, а рассказ вроде «changed the oil to save money» записи не создаёт.</p>
+        </div>
+      </li>
+      <li class="change">
+        <span class="change-icon" aria-hidden="true"><ion-icon name="flash-outline"></ion-icon></span>
+        <div>
+          <h3 class="change-title" data-en="Kazakh dictation got faster">Казахская диктовка быстрее</h3>
+          <p class="change-desc" data-en="Transcription now uses every CPU core instead of half: 6.4 seconds instead of 7.5 on a Redmi Note 8. Installing the model no longer stalls either — the app stops freezing for 15–20 seconds after “100 %”, and your first phrase no longer waits an extra seven seconds.">Расшифровка использует все ядра процессора, а не половину: на Redmi Note 8 замер дал 6,4 секунды вместо 7,5. Установка модели тоже перестала подвисать — после «100 %» приложение больше не замирает на 15–20 секунд, а первая фраза не ждёт лишних семи секунд.</p>
+        </div>
+      </li>
+      <li class="change">
+        <span class="change-icon" aria-hidden="true"><ion-icon name="logo-apple"></ion-icon></span>
+        <div>
+          <h3 class="change-title" data-en="Your name survives Apple sign-in">Имя после входа через Apple не теряется</h3>
+          <p class="change-desc" data-en="Apple only sends your name on the very first authorization, and it used to go nowhere — the profile showed a dash. It is now saved right away. This will not help if you already signed in: Apple never sends the name twice.">Apple отдаёт имя только при первой авторизации, и раньше оно уходило в никуда — в профиле оставался прочерк. Теперь записывается сразу. Уже вошедшим не поможет: второй раз Apple имя не присылает.</p>
+        </div>
+      </li>
+    </ul>
+  </article>
+  <article class="release" id="1.5.0">
+    <div class="release-head">
+      <h2 class="release-version gradient-text">1.5.0</h2>
+      <time class="release-date" datetime="2026-08-29" data-en="August 29, 2026">29 августа 2026</time>
+    </div>
+    <ul class="changes">
+      <li class="change">
+        <span class="change-icon" aria-hidden="true"><ion-icon name="mic-outline"></ion-icon></span>
+        <div>
+          <h3 class="change-title" data-en="Log entries by voice">Записи голосом</h3>
+          <p class="change-desc" data-en="Say “filled 30 liters for 10,000, odometer 102,300” and the form opens already filled in — just check and save. Works for fuel, service, expenses and mileage; you can type the phrase instead. Everything is parsed on the phone: no internet needed, nothing leaves the device.">Скажите «залил 30 литров за 10 000, пробег 102 300» — форма откроется уже заполненной, останется проверить и сохранить. Работает для заправок, ТО, расходов и пробега; фразу можно и набрать текстом. Разбор идёт прямо на телефоне: интернет не нужен, фраза никуда не отправляется.</p>
+        </div>
+      </li>
+      <li class="change">
+        <span class="change-icon" aria-hidden="true"><ion-icon name="language-outline"></ion-icon></span>
+        <div>
+          <h3 class="change-title" data-en="Kazakh dictation, offline and its own">Казахская диктовка — своя, без интернета</h3>
+          <p class="change-desc" data-en="No iPhone recognizes Kazakh — the phone quietly listened in Russian. Now the app downloads its own model (53 MB) and hears Kazakh itself. The dictation language is chosen separately from the app language. On Android the mic now records louder and cleaner, so words come through noticeably more accurately.">Казахского распознавания нет ни на одном iPhone: телефон молча слушал по-русски. Теперь приложение скачивает собственную модель (53 МБ) и слышит казахский само — «отыз литр құйдым он мыңға» становится заправкой на 30 литров за 10 000. Язык диктовки выбирается отдельно от языка приложения. На Android звук с микрофона стал громче и чище, поэтому слова узнаются заметно точнее.</p>
+        </div>
+      </li>
+      <li class="change">
+        <span class="change-icon" aria-hidden="true"><ion-icon name="chatbubbles-outline"></ion-icon></span>
+        <div>
+          <h3 class="change-title" data-en="Add details by voice in an open form">Договаривание в открытой форме</h3>
+          <p class="change-desc" data-en="Open a form, tap the mic and add what you missed: “325 per liter”, “odometer 50,100”, “at Avtomir” — as many times as you need. Saving works by voice too: say “save” on its own, or end what you are adding with it — “325 per liter, save” fills the field and writes the entry.">Открыли форму, нажали микрофон и добавили пропущенное: «по 325», «пробег 50 100», «в Автомире». Столько раз, сколько нужно. Сохранить тоже можно голосом — «сохранить», «готово», по-казахски «сақта». Команду говорят отдельно или в конце договаривания: «за 25 000 сохрани» — поля заполнятся, и запись сохранится.</p>
+        </div>
+      </li>
+      <li class="change">
+        <span class="change-icon" aria-hidden="true"><ion-icon name="earth-outline"></ion-icon></span>
+        <div>
+          <h3 class="change-title" data-en="32 interface languages">32 языка интерфейса</h3>
+          <p class="change-desc" data-en="Added Italian, Polish, Finnish, Hebrew, Romanian, Ukrainian, Belarusian, Latvian, Lithuanian, Estonian, Azerbaijani, Armenian, Georgian, Uzbek, Kyrgyz, Tajik, Turkmen, Korean and Mongolian — every country whose license plate the app draws now has its own language.">Добавлены итальянский, польский, финский, иврит, румынский, украинский, белорусский, латышский, литовский, эстонский, азербайджанский, армянский, грузинский, узбекский, киргизский, таджикский, туркменский, корейский и монгольский — теперь родной язык есть у каждой страны, чей госномер приложение умеет рисовать.</p>
+        </div>
+      </li>
+      <li class="change">
+        <span class="change-icon" aria-hidden="true"><ion-icon name="car-sport-outline"></ion-icon></span>
+        <div>
+          <h3 class="change-title" data-en="Car card with your photo">Карточка автомобиля с вашим фото</h3>
+          <p class="change-desc" data-en="The photo fills the whole card as a background, with the make, plate and key numbers on top. After picking a photo you crop it: drag and zoom until the car sits right.">Снимок занимает всю карточку и служит фоном, поверх — марка, госномер и главные цифры. После загрузки открывается кадрирование: двигаете и приближаете, пока машина не встанет как надо.</p>
+        </div>
+      </li>
+      <li class="change">
+        <span class="change-icon" aria-hidden="true"><ion-icon name="ellipse-outline"></ion-icon></span>
+        <div>
+          <h3 class="change-title" data-en="Rings, bars and charts with depth">Объёмные кольца, полосы и графики</h3>
+          <p class="change-desc" data-en="Service rings on the home screen, the expense ring in the Journal, service bars and fuel chart columns are now dimensional: the track looks recessed into the card and the fill looks like a rounded cord.">Кольца остатка ресурса на плитках ТО, кольцо расходов в Журнале, полосы работ и столбцы графика заправок стали объёмными: дорожка выглядит утопленной в карточку, а заполнение — выпуклым жгутом.</p>
+        </div>
+      </li>
+      <li class="change">
+        <span class="change-icon" aria-hidden="true"><ion-icon name="person-circle-outline"></ion-icon></span>
+        <div>
+          <h3 class="change-title" data-en="A shorter Profile screen">Профиль стал короче</h3>
+          <p class="change-desc" data-en="The account card moved to the top, and the car list no longer fills the screen: the active car comes first, the rest expand on tap.">Карточка аккаунта переехала наверх, а список автомобилей больше не занимает весь экран: активная машина показывается первой, остальные разворачиваются по кнопке.</p>
+        </div>
+      </li>
+      <li class="change">
+        <span class="change-icon" aria-hidden="true"><ion-icon name="construct-outline"></ion-icon></span>
+        <div>
+          <h3 class="change-title" data-en="Everyday annoyances fixed">Мелочи, которые мешали каждый день</h3>
+          <p class="change-desc" data-en="The keyboard no longer covers fields in forms or on the last step of “Add car”; autofill suggestions stay out of mileage and amount fields; service tiles no longer collapse to two columns on Android; the Chinese plate no longer turns black in system dark mode.">Клавиатура больше не закрывает поля в формах и на последнем шаге «Добавить авто»; в поля пробега и сумм не лезут подсказки автозаполнения; плитки ТО не схлопываются в две колонки на Android; китайский госномер не чернеет при системной тёмной теме.</p>
+        </div>
+      </li>
+    </ul>
+  </article>
+
+  <details class="older">
+    <summary>
+      <ion-icon name="chevron-down-outline" aria-hidden="true"></ion-icon>
+      <span data-en="Earlier versions (9)">Более ранние версии (9)</span>
+    </summary>
+  <article class="release" id="1.4.5">
+    <div class="release-head">
+      <h2 class="release-version gradient-text">1.4.5</h2>
+      <time class="release-date" datetime="2026-08-19" data-en="August 19, 2026">19 августа 2026</time>
+    </div>
+    <ul class="changes">
+      <li class="change">
+        <span class="change-icon" aria-hidden="true"><ion-icon name="mic-outline"></ion-icon></span>
+        <div>
+          <h3 class="change-title" data-en="See the report before you send it">Отчёт видно до отправки</h3>
+          <p class="change-desc" data-en="Journal reports and the car passport in PDF now open full screen first — you see exactly what will be sent, and only then tap Share. CSV and XLSX are sent as before.">Отчёты из Журнала и паспорт авто в формате PDF теперь сначала открываются на весь экран — видно, что именно уйдёт, и только потом «Поделиться». CSV и XLSX отправляются как раньше.</p>
+        </div>
+      </li>
+      <li class="change">
+        <span class="change-icon" aria-hidden="true"><ion-icon name="search-outline"></ion-icon></span>
+        <div>
+          <h3 class="change-title" data-en="Search in the Journal">Поиск по журналу</h3>
+          <p class="change-desc" data-en="The magnifier in the Journal header searches every record at once: station, service type, workshop, category, note. It searches all records rather than only the selected month — when you are searching, you rarely remember the month.">Лупа в шапке Журнала ищет по всем записям сразу: АЗС, вид работ, мастерская, категория, примечание. Поиск идёт по всем записям, а не только за выбранный месяц, — когда ищешь, месяц обычно и не помнишь.</p>
+        </div>
+      </li>
+      <li class="change">
+        <span class="change-icon" aria-hidden="true"><ion-icon name="trending-up-outline"></ion-icon></span>
+        <div>
+          <h3 class="change-title" data-en="Mileage history">История пробега</h3>
+          <p class="change-desc" data-en="Every odometer change is now saved as its own entry. Open it from the &quot;Update mileage&quot; dialog: you can see when and by how much the mileage changed, and a wrong number can be fixed or deleted — previously a typo stayed forever.">Каждое изменение пробега сохраняется отдельной записью. Открывается из окна «Обновить пробег»: видно, когда и на сколько менялся пробег, а ошибочно введённое число можно исправить или удалить — раньше опечатка оставалась навсегда.</p>
+        </div>
+      </li>
+      <li class="change">
+        <span class="change-icon" aria-hidden="true"><ion-icon name="car-sport-outline"></ion-icon></span>
+        <div>
+          <h3 class="change-title" data-en="Korean plates and manual plate format">Госномер Кореи и выбор формата знака</h3>
+          <p class="change-desc" data-en="Added the South Korean plate — white and electric. Belarus, China and Korea now have a &quot;Plate format&quot; row under the number field: the app used to guess the format from the number itself and got it wrong — an EV showed a green plate, and the Chinese plate changed shape while you were still typing.">Добавлен номер Южной Кореи — белый и электро. У Беларуси, Китая и Кореи под полем номера появился ряд «Формат знака»: раньше приложение угадывало формат по самому номеру и ошибалось — электромобиль показывался зелёным знаком, а китайская плашка прыгала прямо во время набора.</p>
+        </div>
+      </li>
+      <li class="change">
+        <span class="change-icon" aria-hidden="true"><ion-icon name="notifications-outline"></ion-icon></span>
+        <div>
+          <h3 class="change-title" data-en="Service reminders are more accurate">Напоминания о ТО стали точнее</h3>
+          <p class="change-desc" data-en="A reminder stops arriving as soon as you log the work — previously it stayed queued and fired after the replacement was already done. And a back-dated record no longer rolls the mileage and status backwards: the latest work by date counts, not the last one entered.">Напоминание перестаёт приходить сразу после того, как работу внесли, — раньше оно оставалось в очереди и прилетало уже после замены. А запись задним числом больше не откатывает пробег и статус назад: считается самая поздняя работа по дате, а не последняя внесённая.</p>
+        </div>
+      </li>
+      <li class="change">
+        <span class="change-icon" aria-hidden="true"><ion-icon name="shield-checkmark-outline"></ion-icon></span>
+        <div>
+          <h3 class="change-title" data-en="No more Android crashes on long lists">Android больше не вылетает на длинных списках</h3>
+          <p class="change-desc" data-en="The app used to crash when picking a car make or model, a currency or a country, and on the date wheels — while scrolling fast or typing in search, when the list rebuilds on every letter.">Приложение падало при выборе марки и модели авто, валюты, страны и на барабанах даты — при быстрой прокрутке и при наборе в поиске, когда список пересобирается на каждую букву.</p>
+        </div>
+      </li>
+    </ul>
+  </article>
+  <article class="release" id="1.4.1">
+    <div class="release-head">
+      <h2 class="release-version gradient-text">1.4.1</h2>
+      <time class="release-date" datetime="2026-08-07" data-en="August 7, 2026">7 августа 2026</time>
+    </div>
+    <ul class="changes">
+      <li class="change">
+        <span class="change-icon" aria-hidden="true"><ion-icon name="ellipse-outline"></ion-icon></span>
+        <div>
+          <h3 class="change-title" data-en="Service items now show as rings">Техобслуживание на главной — кольцами</h3>
+          <p class="change-desc" data-en="Each service item has a ring instead of a bar: it is full right after a replacement and drains as you drive, turning green → yellow → red as the due date approaches. Below the ring — how many kilometres are left. The service screen shows the same figure (&quot;9,050 km left&quot;) instead of a percentage.">Вместо полоски у каждого вида работ теперь кольцо с остатком ресурса: сразу после замены оно полное, дальше убывает, а цвет идёт зелёный → жёлтый → красный по мере приближения срока. Под кольцом — сколько километров осталось. На экране ТО в списке работ тоже видно конкретное «Осталось: 9 050 км» вместо процента.</p>
+        </div>
+      </li>
+      <li class="change">
+        <span class="change-icon" aria-hidden="true"><ion-icon name="grid-outline"></ion-icon></span>
+        <div>
+          <h3 class="change-title" data-en="Widgets now match the app">Виджеты стали в стиле приложения</h3>
+          <p class="change-desc" data-en="Classic, Depth and Crystal on your home screen look like the app itself and change along with it. The widget border shows the state of the car: green, yellow or red. On iPhone the border of the large widget now runs all the way around, and the car name, fuel consumption and document dates no longer get cut off.">Классика, Глубина и Кристалл на домашнем экране выглядят так же, как экраны приложения, и меняются вместе с оформлением. Рамка виджета показывает состояние машины: зелёная, жёлтая или красная. На iPhone рамка большого виджета теперь идёт по всему периметру, а название авто, расход и сроки документов перестали обрезаться на ровном месте.</p>
+        </div>
+      </li>
+      <li class="change">
+        <span class="change-icon" aria-hidden="true"><ion-icon name="calendar-outline"></ion-icon></span>
+        <div>
+          <h3 class="change-title" data-en="You can fix the date of a record">Дату записи можно исправить</h3>
+          <p class="change-desc" data-en="Fuel and service records let you change the date when editing. Previously a wrong date meant deleting the record and filling the form in again.">В заправке и в записи ТО дата теперь меняется при редактировании. Раньше ошибку в дате приходилось исправлять удалением записи и заполнением формы заново.</p>
+        </div>
+      </li>
+      <li class="change">
+        <span class="change-icon" aria-hidden="true"><ion-icon name="car-outline"></ion-icon></span>
+        <div>
+          <h3 class="change-title" data-en="181 generations from the 2000s">181 поколение машин 2000-х</h3>
+          <p class="change-desc" data-en="The catalogue gained early generations for 40 makes: Prado 120 and 90, Santa Fe SM, Elantra XD, Golf Mk4 and Mk5, Astra G, Clio II and III, E-Class W210, S-Class W220, 5 Series E39, A6 C5, Impreza GD, Civic ES, Mazda3 BK, Range Rover L322, Grand Cherokee WJ and more.">Каталог пополнился ранними поколениями у 40 марок: Prado 120 и 90, Santa Fe SM, Elantra XD, Golf Mk4 и Mk5, Astra G, Clio II и III, E-Class W210, S-Class W220, 5 Series E39, A6 C5, Impreza GD, Civic ES, Mazda3 BK, Range Rover L322, Grand Cherokee WJ и другие.</p>
+        </div>
+      </li>
+    </ul>
+  </article>
+  <article class="release" id="1.4.0">
+    <div class="release-head">
+      <h2 class="release-version gradient-text">1.4.0</h2>
+      <time class="release-date" datetime="2026-08-05" data-en="August 5, 2026">5 августа 2026</time>
+    </div>
+    <ul class="changes">
+      <li class="change">
+        <span class="change-icon" aria-hidden="true"><ion-icon name="warning-outline"></ion-icon></span>
+        <div>
+          <h3 class="change-title" data-en="Accident mode">ДТП-режим</h3>
+          <p class="change-desc" data-en="A new section in the Car Assistant for when things go wrong. At the top — call the police or an ambulance in one tap: the numbers match the country you are in, not the language of the app. Below — seven steps: how to make the scene safe, how to help the injured, what to photograph, what details to take from the other driver, whether you can drive on, and what to tell your insurer. The &quot;Tow truck&quot; button opens a map with the nearest services.">Новый раздел в Автопомощнике на случай аварии. Сверху — вызов полиции и скорой в один тап: номера подставляются по стране, в которой вы находитесь, а не по языку приложения. Ниже — семь шагов: как обезопасить место, чем помочь пострадавшим, что обязательно снять на камеру, какие данные записать со второго участника, можно ли ехать дальше и что сообщить страховой. Кнопка «Эвакуатор» открывает карту с поиском ближайших служб.</p>
+        </div>
+      </li>
+      <li class="change">
+        <span class="change-icon" aria-hidden="true"><ion-icon name="car-sport-outline"></ion-icon></span>
+        <div>
+          <h3 class="change-title" data-en="Chinese licence plates">Госномер Китая</h3>
+          <p class="change-desc" data-en="The eighteenth country, and two plates at once: the regular blue one and the green &quot;new energy&quot; plate — it is 4 cm longer and carries an emblem. The right one is picked automatically by the length of the number. The province character cannot be typed on a keyboard, so you choose it from a list in the car details — all 31 of them.">Восемнадцатая страна, и сразу два знака: обычный синий и зелёный «новой энергии» — он длиннее на 4 см и рисуется с эмблемой. Нужный выбирается сам по длине номера. Иероглиф провинции с клавиатуры не набрать, поэтому он выбирается списком в карточке автомобиля — все 31.</p>
+        </div>
+      </li>
+      <li class="change">
+        <span class="change-icon" aria-hidden="true"><ion-icon name="download-outline"></ion-icon></span>
+        <div>
+          <h3 class="change-title" data-en="The app is lighter">Приложение стало легче</h3>
+          <p class="change-desc" data-en="Text recognition and camera modules are gone from the build: no screen ever used them, but they pulled in four recognition language models.">Из сборки убраны модули распознавания текста и камеры: они не использовались ни на одном экране, но тянули за собой четыре языковые модели распознавания.</p>
+        </div>
+      </li>
+    </ul>
+  </article>
+  <article class="release" id="1.3.0">
+    <div class="release-head">
+      <h2 class="release-version gradient-text">1.3.0</h2>
+      <time class="release-date" datetime="2026-07-31" data-en="July 31, 2026">31 июля 2026</time>
+    </div>
+    <ul class="changes">
+      <li class="change">
+        <span class="change-icon" aria-hidden="true"><ion-icon name="flash-outline"></ion-icon></span>
+        <div>
+          <h3 class="change-title" data-en="Belarus electric vehicle plate">Номер электромобиля Беларуси</h3>
+          <p class="change-desc" data-en="The &quot;E&quot; series is now drawn like the real thing — green characters and a green border. It switches on automatically when the number starts with &quot;E&quot;.">Знаки серии «E» рисуются как настоящие — зелёными символами и с зелёной окантовкой. Исполнение включается само, когда номер начинается с «E».</p>
+        </div>
+      </li>
+      <li class="change">
+        <span class="change-icon" aria-hidden="true"><ion-icon name="car-sport-outline"></ion-icon></span>
+        <div>
+          <h3 class="change-title" data-en="Licence plates look like real ones">Госномера стали похожи на настоящие</h3>
+          <p class="change-desc" data-en="On Android the characters drifted apart: gaps opened between letters and region digits overlapped. The plate is now drawn like a stamped sign and looks identical on Android and iPhone. Kazakhstan, Belarus, Azerbaijan, Armenia and Tajikistan were also matched against photos of real plates.">На Android знаки разъезжались: между буквами зияла дыра, цифры региона налезали друг на друга. Теперь номер рисуется как штамп и выглядит одинаково на Android и iPhone. Заодно выверены по фото реальных знаков Казахстан, Беларусь, Азербайджан, Армения и Таджикистан.</p>
+        </div>
+      </li>
+      <li class="change">
+        <span class="change-icon" aria-hidden="true"><ion-icon name="image-outline"></ion-icon></span>
+        <div>
+          <h3 class="change-title" data-en="Sharp plate artwork">Чёткие номерные плашки</h3>
+          <p class="change-desc" data-en="Belarus, Azerbaijan, Estonia, Latvia, Tajikistan and Uzbekistan used to be small blurry images. They are five times larger now: the flag ornament, the border and the rounded corners are all crisp.">Беларусь, Азербайджан, Эстония, Латвия, Таджикистан и Узбекистан были мелкими мыльными картинками. Стали в пять раз крупнее: видно орнамент на флаге, ровную рамку и скругления.</p>
+        </div>
+      </li>
+      <li class="change">
+        <span class="change-icon" aria-hidden="true"><ion-icon name="calculator-outline"></ion-icon></span>
+        <div>
+          <h3 class="change-title" data-en="Fuel-up: your input stays put">Заправка: введённое больше не сбивается</h3>
+          <p class="change-desc" data-en="The app fills in the price per litre from your last fill-up, and it used to outrank what you typed yourself: entering the total from the receipt silently recalculated the litres. Now only the field you did not touch is calculated — enter total, litres and price in any order.">Приложение подставляет цену за литр из прошлой заправки, и раньше она была главнее того, что вы ввели сами: стоило вписать сумму с чека, как литры молча пересчитывались. Теперь считается только то поле, которого вы не касались, — сумму, литры и цену можно вводить в любом порядке.</p>
+        </div>
+      </li>
+      <li class="change">
+        <span class="change-icon" aria-hidden="true"><ion-icon name="cash-outline"></ion-icon></span>
+        <div>
+          <h3 class="change-title" data-en="Amounts accept cents">Суммы принимают копейки</h3>
+          <p class="change-desc" data-en="Expenses and service costs would not let you type a decimal point at all. Cents also stopped disappearing when you reopened a saved record.">В расходах и стоимости ТО точку просто не давали поставить. Заодно копейки перестали теряться при открытии уже сохранённой записи.</p>
+        </div>
+      </li>
+      <li class="change">
+        <span class="change-icon" aria-hidden="true"><ion-icon name="keypad-outline"></ion-icon></span>
+        <div>
+          <h3 class="change-title" data-en="Android: keyboard no longer covers fields">Android: клавиатура не закрывает поля</h3>
+          <p class="change-desc" data-en="The keyboard hid input fields and the save button when adding a car, a fill-up, service, expenses and in the feedback form. The content now moves above it.">На экранах с вводом клавиатура перекрывала поля и кнопку сохранения — при добавлении авто, заправки, ТО, расходов и в обратной связи. Теперь контент поднимается над ней.</p>
+        </div>
+      </li>
+      <li class="change">
+        <span class="change-icon" aria-hidden="true"><ion-icon name="phone-portrait-outline"></ion-icon></span>
+        <div>
+          <h3 class="change-title" data-en="Android: navigation buttons out of the way">Android: кнопки телефона не мешают</h3>
+          <p class="change-desc" data-en="The bottom of lists and buttons such as &quot;Delete car&quot; were hidden behind the system navigation bar.">Низ списков и кнопки — например, «Удалить автомобиль» — прятались за системной панелью навигации.</p>
+        </div>
+      </li>
+      <li class="change">
+        <span class="change-icon" aria-hidden="true"><ion-icon name="download-outline"></ion-icon></span>
+        <div>
+          <h3 class="change-title" data-en="Almost a megabyte lighter">Приложение стало легче почти на мегабайт</h3>
+          <p class="change-desc" data-en="Nine licence-plate fonts no longer ship with the app: the characters are drawn as vectors, so the fonts are not needed.">Девять шрифтов номерных знаков больше не входят в сборку: знаки рисуются векторами, шрифты для этого не нужны.</p>
+        </div>
+      </li>
+    </ul>
+  </article>
+  <article class="release" id="1.2.1">
+    <div class="release-head">
+      <h2 class="release-version gradient-text">1.2.1</h2>
+      <time class="release-date" datetime="2026-07-25" data-en="July 25, 2026">25 июля 2026</time>
+    </div>
+    <ul class="changes">
+      <li class="change">
+        <span class="change-icon" aria-hidden="true"><ion-icon name="bug-outline"></ion-icon></span>
+        <div>
+          <h3 class="change-title" data-en="Bottom menu fixed">Нижнее меню снова в порядке</h3>
+          <p class="change-desc" data-en="Version 1.2.0 showed three extra tabs in the navigation bar, which cut off the section names. Fixed.">В версии 1.2.0 в панели навигации появлялись три лишние вкладки, из-за чего названия разделов обрезались. Исправлено.</p>
+        </div>
+      </li>
+      <li class="change">
+        <span class="change-icon" aria-hidden="true"><ion-icon name="images-outline"></ion-icon></span>
+        <div>
+          <h3 class="change-title" data-en="Receipts and photos are finally visible">Чеки и фото наконец видно</h3>
+          <p class="change-desc" data-en="You could attach a photo to a refuel or service record, but it was never shown afterwards. Attachments now appear right in the record and open full screen on tap — with swiping and a Share button. PDFs open in a viewer.">Раньше фото можно было приложить к заправке или ТО, но потом оно нигде не показывалось. Теперь вложения видны прямо в записи, а по тапу открываются на весь экран — с листанием и кнопкой «Поделиться». PDF открывается в просмотрщике.</p>
+        </div>
+      </li>
+      <li class="change">
+        <span class="change-icon" aria-hidden="true"><ion-icon name="keypad-outline"></ion-icon></span>
+        <div>
+          <h3 class="change-title" data-en="The keyboard no longer gets in the way">Клавиатура не мешает вводу</h3>
+          <p class="change-desc" data-en="On several screens the keyboard covered the fields and the save button — for example when entering engine details manually. The form now moves above it.">На нескольких экранах клавиатура закрывала поля и кнопку сохранения — например, при ручном вводе двигателя. Теперь форма поднимается над ней.</p>
+        </div>
+      </li>
+      <li class="change">
+        <span class="change-icon" aria-hidden="true"><ion-icon name="language-outline"></ion-icon></span>
+        <div>
+          <h3 class="change-title" data-en="Fully translated interface">Полный перевод интерфейса</h3>
+          <p class="change-desc" data-en="A few screens showed Russian text regardless of the selected language: the service record delete prompt, document due dates and the What’s New window. Now everything follows your language.">Несколько экранов показывали русский текст независимо от выбранного языка: подтверждение удаления записи ТО, сроки документов и окно «Что нового». Теперь всё на твоём языке.</p>
+        </div>
+      </li>
+      <li class="change">
+        <span class="change-icon" aria-hidden="true"><ion-icon name="speedometer-outline"></ion-icon></span>
+        <div>
+          <h3 class="change-title" data-en="Accurate hybrid consumption">Точный расход для гибридов</h3>
+          <p class="change-desc" data-en="If a charge happened between two refuels, fuel consumption came out overstated. Petrol and electricity are now counted separately.">Если между двумя заправками была зарядка, расход по бензину считался завышенным. Теперь бензин и электричество учитываются раздельно.</p>
+        </div>
+      </li>
+      <li class="change">
+        <span class="change-icon" aria-hidden="true"><ion-icon name="trash-outline"></ion-icon></span>
+        <div>
+          <h3 class="change-title" data-en="The app takes up less space">Приложение занимает меньше места</h3>
+          <p class="change-desc" data-en="Photos and receipts of deleted records used to stay in your phone storage forever. They are now removed together with the record.">Фото и чеки удалённых записей раньше навсегда оставались в памяти телефона. Теперь они удаляются вместе с записью.</p>
+        </div>
+      </li>
+      <li class="change">
+        <span class="change-icon" aria-hidden="true"><ion-icon name="notifications-outline"></ion-icon></span>
+        <div>
+          <h3 class="change-title" data-en="Reminders are no longer lost">Напоминания не теряются</h3>
+          <p class="change-desc" data-en="If a service or document became due after you had already opened the app that morning, the reminder only arrived the next day. Now it arrives the same day.">Если срок ТО или документа подходил уже после того, как ты открыл приложение утром, напоминание приходило только на следующий день. Теперь — в тот же день.</p>
+        </div>
+      </li>
+      <li class="change">
+        <span class="change-icon" aria-hidden="true"><ion-icon name="shield-checkmark-outline"></ion-icon></span>
+        <div>
+          <h3 class="change-title" data-en="Safer shared access">Безопаснее общий доступ</h3>
+          <p class="change-desc" data-en="A view-only invitation can no longer be turned into edit access. And opening an invitation link now asks for confirmation before adding you to the group.">Приглашение «только просмотр» больше нельзя превратить в доступ с правом изменения. А переход по ссылке-приглашению теперь спрашивает подтверждение, прежде чем добавить тебя в группу.</p>
+        </div>
+      </li>
+    </ul>
+  </article>
+  <article class="release" id="1.2.0">
+    <div class="release-head">
+      <h2 class="release-version gradient-text">1.2.0</h2>
+      <time class="release-date" datetime="2026-07-24" data-en="July 24, 2026">24 июля 2026</time>
+    </div>
+    <ul class="changes">
+      <li class="change">
+        <span class="change-icon" aria-hidden="true"><ion-icon name="phone-portrait-outline"></ion-icon></span>
+        <div>
+          <h3 class="change-title" data-en="Home screen widget">Виджет на домашнем экране</h3>
+          <p class="change-desc" data-en="Mileage, fuel use and your next service status — right on your phone’s home screen, without opening the app. Small and medium sizes, with a border that changes color by car status (green / yellow / red). The widget adapts to your chosen theme (Classic / Depth / Crystal).">Пробег, расход топлива и статус ближайшего ТО — прямо на рабочем столе телефона, без открытия приложения. Есть маленький и средний размеры, а рамка виджета меняет цвет по статусу авто (зелёный / жёлтый / красный). Виджет подстраивается под выбранный стиль оформления (Классика / Глубина / Кристалл).</p>
+        </div>
+      </li>
+      <li class="change">
+        <span class="change-icon" aria-hidden="true"><ion-icon name="card-outline"></ion-icon></span>
+        <div>
+          <h3 class="change-title" data-en="Realistic license plates">Реалистичные гос номера</h3>
+          <p class="change-desc" data-en="Your car’s plate now appears on the card as a real license plate — in your country’s style: its own font, colors and format. 17 countries supported: Kazakhstan, Russia, Kyrgyzstan, Uzbekistan, Belarus, Azerbaijan, Armenia, Tajikistan, Turkmenistan, Georgia, Ukraine, Moldova, Latvia, Lithuania, Estonia, Germany and Turkey. Input adapts to your country’s format.">Номер твоего авто теперь показывается на карточке как настоящий номерной знак — в стиле твоей страны: свой шрифт, цвета и формат. Поддержаны 17 стран: Казахстан, Россия, Кыргызстан, Узбекистан, Беларусь, Азербайджан, Армения, Таджикистан, Туркменистан, Грузия, Украина, Молдова, Латвия, Литва, Эстония, Германия и Турция. При вводе номер подстраивается под формат выбранной страны.</p>
+        </div>
+      </li>
+      <li class="change">
+        <span class="change-icon" aria-hidden="true"><ion-icon name="cash-outline"></ion-icon></span>
+        <div>
+          <h3 class="change-title" data-en="Every world currency">Все валюты мира</h3>
+          <p class="change-desc" data-en="160 world currencies by the international ISO 4217 standard. Pick yours — and your expenses, fuel and service amounts are shown and calculated in it.">160 мировых валют по международному стандарту ISO 4217. Выбери свою — и суммы расходов, топлива и ТО будут отображаться и считаться именно в ней.</p>
+        </div>
+      </li>
+      <li class="change">
+        <span class="change-icon" aria-hidden="true"><ion-icon name="add-circle-outline"></ion-icon></span>
+        <div>
+          <h3 class="change-title" data-en="Any car, even outside the catalog">Любая машина, даже вне каталога</h3>
+          <p class="change-desc" data-en="Didn’t find your make or model in the list? Now you can add them manually — along with engine size, transmission, fuel type and horsepower.">Не нашёл свою марку или модель в списке? Теперь можно добавить их вручную — вместе с объёмом двигателя, коробкой передач, типом топлива и мощностью в лошадиных силах.</p>
+        </div>
+      </li>
+      <li class="change">
+        <span class="change-icon" aria-hidden="true"><ion-icon name="car-sport-outline"></ion-icon></span>
+        <div>
+          <h3 class="change-title" data-en="+105 models in the catalog">+105 моделей в каталоге</h3>
+          <p class="change-desc" data-en="Added more Chinese, Japanese and European cars, including EVs and hybrids.">Добавили больше китайских, японских и европейских автомобилей, включая электромобили и гибриды.</p>
+        </div>
+      </li>
+      <li class="change">
+        <span class="change-icon" aria-hidden="true"><ion-icon name="document-text-outline"></ion-icon></span>
+        <div>
+          <h3 class="change-title" data-en="Advanced reports">Продвинутые отчёты</h3>
+          <p class="change-desc" data-en="Detailed PDF and Excel reports for fuel, service and expenses — with key metrics and breakdowns. For fleets — driver and document-deadline reports. Plus a “Car Passport” — a ready history document for resale.">Подробные PDF- и Excel-отчёты по топливу, ТО и расходам — с ключевыми показателями и разбивкой. Для автопарков — отчёты по водителям и срокам документов. А ещё «Паспорт автомобиля» — готовый документ истории для продажи.</p>
+        </div>
+      </li>
+      <li class="change">
+        <span class="change-icon" aria-hidden="true"><ion-icon name="people-outline"></ion-icon></span>
+        <div>
+          <h3 class="change-title" data-en="Shared access: see who added what">Общий доступ: видно, кто что внёс</h3>
+          <p class="change-desc" data-en="On cars with shared access, every record (fuel, service, expense) now shows who added it. You can give members friendly names. “Family sharing” is now called “Shared access”.">В машинах с общим доступом на каждой записи (заправка, ТО, расход) теперь видно, кто её добавил. Участникам можно задавать понятные имена. Раздел «Семейный доступ» переименован в «Общий доступ».</p>
+        </div>
+      </li>
+      <li class="change">
+        <span class="change-icon" aria-hidden="true"><ion-icon name="notifications-outline"></ion-icon></span>
+        <div>
+          <h3 class="change-title" data-en="Smart reminders">Умные напоминания</h3>
+          <p class="change-desc" data-en="The app gently reminds you to update your mileage and get back to tracking if you haven’t opened it in a while — so your history stays complete and accurate.">Приложение мягко напомнит обновить пробег и вернуться к учёту, если вы давно не заглядывали — чтобы история оставалась полной и точной.</p>
+        </div>
+      </li>
+    </ul>
+  </article>
+  <article class="release" id="1.1.1">
+    <div class="release-head">
+      <h2 class="release-version gradient-text">1.1.1</h2>
+      <time class="release-date" datetime="2026-07-09" data-en="July 9, 2026">9 июля 2026</time>
+    </div>
+    <ul class="changes">
+      <li class="change">
+        <span class="change-icon" aria-hidden="true"><ion-icon name="notifications-outline"></ion-icon></span>
+        <div>
+          <h3 class="change-title" data-en="Service reminders arrive ahead of time">Напоминания о ТО приходят заранее</h3>
+          <p class="change-desc" data-en="Before, you had to open the app to find out about upcoming maintenance. Now your phone reminds you a few days early — even if you haven’t opened the app in a while. You won’t miss an oil change or other service.">Раньше о плановом ТО можно было узнать, только открыв приложение. Теперь телефон сам напомнит за несколько дней до срока — даже если вы давно не заходили. Так вы не пропустите замену масла или другое обслуживание.</p>
+        </div>
+      </li>
+      <li class="change">
+        <span class="change-icon" aria-hidden="true"><ion-icon name="link-outline"></ion-icon></span>
+        <div>
+          <h3 class="change-title" data-en="Invites open straight from the link">Приглашения открываются по ссылке</h3>
+          <p class="change-desc" data-en="Just open a family-sharing invite on your phone — the app launches and accepts it automatically. No more typing codes by hand.">Приглашение в семейный доступ теперь достаточно просто открыть на телефоне — приложение запустится и само примет его. Больше не нужно вручную вводить код.</p>
+        </div>
+      </li>
+      <li class="change">
+        <span class="change-icon" aria-hidden="true"><ion-icon name="people-outline"></ion-icon></span>
+        <div>
+          <h3 class="change-title" data-en="Family sharing is more reliable">Семейный доступ стал надёжнее</h3>
+          <p class="change-desc" data-en="Invites are accepted more consistently, and if something goes wrong (an expired or already-used link) you’ll see a clear message in your language instead of a technical error.">Приглашения принимаются стабильнее, а если что-то пошло не так (ссылка устарела или уже использована) — вы увидите понятное сообщение на своём языке, а не техническую ошибку.</p>
+        </div>
+      </li>
+      <li class="change">
+        <span class="change-icon" aria-hidden="true"><ion-icon name="shield-checkmark-outline"></ion-icon></span>
+        <div>
+          <h3 class="change-title" data-en="Fewer sync glitches">Меньше сбоев синхронизации</h3>
+          <p class="change-desc" data-en="Fixed duplicate entries appearing in the cloud and improved overall stability, so your data syncs across devices more accurately.">Исправили появление дублей записей в облаке и улучшили общую стабильность — ваши данные синхронизируются между устройствами точнее.</p>
+        </div>
+      </li>
+    </ul>
+  </article>
+  <article class="release" id="1.1.0">
+    <div class="release-head">
+      <h2 class="release-version gradient-text">1.1.0</h2>
+      <time class="release-date" datetime="2026-07" data-en="July 2026">июль 2026</time>
+    </div>
+    <ul class="changes">
+      <li class="change">
+        <span class="change-icon" aria-hidden="true"><ion-icon name="flash-outline"></ion-icon></span>
+        <div>
+          <h3 class="change-title" data-en="Electric and hybrid car support">Поддержка электромобилей и гибридов</h3>
+        </div>
+      </li>
+      <li class="change">
+        <span class="change-icon" aria-hidden="true"><ion-icon name="battery-charging-outline"></ion-icon></span>
+        <div>
+          <h3 class="change-title" data-en="Charging in kWh, battery capacity &amp; level">Зарядки в кВт·ч, ёмкость и заряд батареи</h3>
+        </div>
+      </li>
+      <li class="change">
+        <span class="change-icon" aria-hidden="true"><ion-icon name="speedometer-outline"></ion-icon></span>
+        <div>
+          <h3 class="change-title" data-en="Hybrid — dual consumption: fuel + electric">Гибрид — раздельный расход: бензин + электро</h3>
+        </div>
+      </li>
+      <li class="change">
+        <span class="change-icon" aria-hidden="true"><ion-icon name="construct-outline"></ion-icon></span>
+        <div>
+          <h3 class="change-title" data-en="New service works for EV &amp; hybrid">Новые работы ТО для электро и гибридов</h3>
+        </div>
+      </li>
+      <li class="change">
+        <span class="change-icon" aria-hidden="true"><ion-icon name="globe-outline"></ion-icon></span>
+        <div>
+          <h3 class="change-title" data-en="Country search in any language">Поиск страны на любом языке</h3>
+        </div>
+      </li>
+    </ul>
+  </article>
+  <article class="release" id="1.0.1">
+    <div class="release-head">
+      <h2 class="release-version gradient-text">1.0.1</h2>
+      <time class="release-date" datetime="2026-07" data-en="July 2026">июль 2026</time>
+    </div>
+    <ul class="changes">
+      <li class="change">
+        <span class="change-icon" aria-hidden="true"><ion-icon name="notifications-outline"></ion-icon></span>
+        <div>
+          <h3 class="change-title" data-en="Push notifications for family sharing">Push-уведомления семейного доступа</h3>
+        </div>
+      </li>
+      <li class="change">
+        <span class="change-icon" aria-hidden="true"><ion-icon name="time-outline"></ion-icon></span>
+        <div>
+          <h3 class="change-title" data-en="Notification history — tap the bell icon">История уведомлений — нажми на колокольчик</h3>
+        </div>
+      </li>
+      <li class="change">
+        <span class="change-icon" aria-hidden="true"><ion-icon name="sync-outline"></ion-icon></span>
+        <div>
+          <h3 class="change-title" data-en="Fixed duplicate entries in cloud sync">Исправлены дубли при облачной синхронизации</h3>
+        </div>
+      </li>
+      <li class="change">
+        <span class="change-icon" aria-hidden="true"><ion-icon name="shield-checkmark-outline"></ion-icon></span>
+        <div>
+          <h3 class="change-title" data-en="Improved app stability">Улучшена стабильность приложения</h3>
+        </div>
+      </li>
+    </ul>
+  </article>
+  </details>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <a class="footer-logo" href="/">
+      <img src="/icon.png" alt="AutoSup" loading="lazy" />
+      <span class="gradient-text">AutoSup</span>
+    </a>
+    <div class="footer-links">
+      <a href="/" data-en="Home" data-kz="Басты бет">Главная</a>
+      <a href="/privacy" data-en="Privacy Policy" data-kz="Құпиялылық саясаты">Политика конфиденциальности</a>
+      <a href="/terms" data-en="Terms of Use" data-kz="Пайдалану шарттары">Условия использования</a>
+      <a href="mailto:autosup.app@gmail.com" data-en="Support" data-kz="Қолдау">Поддержка</a>
+    </div>
+    <div class="footer-copy">© 2026 AutoSup. Все права защищены.</div>
+    <div class="footer-generated">
+      <span data-en="Page updated" data-kz="Бет жаңартылды">Страница обновлена</span>
+      <span id="generated">2026-09-02</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Языковой переключатель RU/EN/KZ — тот же механизм, что на главной:
+  // русский текст лежит в разметке, переводы в data-en / data-kz.
+  (function () {
+    var opts = document.querySelectorAll('.lang-opt');
+    function setLang(lang) {
+      document.querySelectorAll('[data-en]').forEach(function (el) {
+        if (el.dataset.ru === undefined) el.dataset.ru = el.innerHTML;
+        if (lang === 'en') el.innerHTML = el.dataset.en;
+        // Тексты изменений на казахский не переводились, поэтому казахская страница
+        // показывает русский, а не английский: на главной фолбэк идёт на data-en,
+        // здесь — на исходный русский текст. Иначе KZ читался бы по-английски.
+        else if (lang === 'kz') el.innerHTML = el.dataset.kz || el.dataset.ru;
+        else el.innerHTML = el.dataset.ru;
+      });
+      document.documentElement.lang = lang;
+      opts.forEach(function (b) { b.classList.toggle('active', b.dataset.lang === lang); });
+      try { localStorage.setItem('lang', lang); } catch (e) {}
+    }
+    opts.forEach(function (b) {
+      b.addEventListener('click', function () { setLang(b.dataset.lang); });
+    });
+    var saved = 'ru';
+    try { saved = localStorage.getItem('lang') || 'ru'; } catch (e) {}
+    setLang(saved);
+  })();
+
+  // Ссылка вида /changelog/#1.6.1 раскрывает старые версии, иначе якорь ведёт в пустоту.
+  (function () {
+    var target = decodeURIComponent(location.hash.slice(1));
+    if (!target) return;
+    var el = document.getElementById(target);
+    if (!el) return;
+    var box = el.closest('details');
+    if (box) box.open = true;
+    el.scrollIntoView();
+  })();
+</script>
+
+</body>
+</html>

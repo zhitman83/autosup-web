@@ -1,0 +1,720 @@
+[
+  {
+    "version": "1.6.1",
+    "date": "2026-09-01",
+    "ru": [
+      {
+        "icon": "return-down-back-outline",
+        "text": "Открывается там, где вы остановились",
+        "desc": "Отвлеклись на звонок или мессенджер и вернулись в течение получаса — увидите ту же вкладку, а не «Главную». Если прошло больше, приложение открывается как обычно: вы уже пришли с новой задачей."
+      },
+      {
+        "icon": "shield-checkmark-outline",
+        "text": "Не закрывается при возврате",
+        "desc": "Если система выгружала AutoSup из памяти, пока вы были в другом приложении, при возврате он мог закрыться сам. На телефонах со скромной памятью это случалось регулярно — больше не случается."
+      },
+      {
+        "icon": "cube-outline",
+        "text": "Приложение похудело почти на 6 МБ",
+        "desc": "Внутри лежал движок распознавания штрих-кодов: он приезжал вместе со средствами разработки и никогда не запускался, ведь сканирования в AutoSup нет. Теперь его нет и в приложении."
+      }
+    ],
+    "en": [
+      {
+        "icon": "return-down-back-outline",
+        "text": "Opens where you left off",
+        "desc": "Stepped away for a call or a message and came back within half an hour? You land on the same tab instead of Home. After that the app opens normally — by then you have come with a new task."
+      },
+      {
+        "icon": "shield-checkmark-outline",
+        "text": "No more closing on return",
+        "desc": "If the system dropped AutoSup from memory while you were in another app, it could close itself when you came back. On phones with modest memory this happened regularly. Not anymore."
+      },
+      {
+        "icon": "cube-outline",
+        "text": "Almost 6 MB lighter",
+        "desc": "The app carried a barcode recognition engine that arrived with the development tools and never ran — AutoSup has no scanning. It is gone now."
+      }
+    ]
+  },
+  {
+    "version": "1.6.0",
+    "date": "2026-08-30",
+    "ru": [
+      {
+        "icon": "language-outline",
+        "text": "Голосовой ввод понимает английский",
+        "desc": "Третий язык диктовки наравне с русским и казахским: «filled up 30 liters for 15000 at Shell», «changed the oil 102300», «car wash 3500». Заправки, ТО, расходы, пробег и даты — галлоны и мили тоже. Команда «save» в конце фразы сохраняет запись, а рассказ вроде «changed the oil to save money» записи не создаёт."
+      },
+      {
+        "icon": "flash-outline",
+        "text": "Казахская диктовка быстрее",
+        "desc": "Расшифровка использует все ядра процессора, а не половину: на Redmi Note 8 замер дал 6,4 секунды вместо 7,5. Установка модели тоже перестала подвисать — после «100 %» приложение больше не замирает на 15–20 секунд, а первая фраза не ждёт лишних семи секунд."
+      },
+      {
+        "icon": "logo-apple",
+        "text": "Имя после входа через Apple не теряется",
+        "desc": "Apple отдаёт имя только при первой авторизации, и раньше оно уходило в никуда — в профиле оставался прочерк. Теперь записывается сразу. Уже вошедшим не поможет: второй раз Apple имя не присылает."
+      }
+    ],
+    "en": [
+      {
+        "icon": "language-outline",
+        "text": "Voice entry now speaks English",
+        "desc": "A third dictation language alongside Russian and Kazakh: “filled up 30 liters for 15000 at Shell”, “changed the oil 102300”, “car wash 3500”. Fuel, service, expenses, mileage and dates — gallons and miles included. Ending a phrase with “save” stores the record, while “changed the oil to save money” creates nothing."
+      },
+      {
+        "icon": "flash-outline",
+        "text": "Kazakh dictation got faster",
+        "desc": "Transcription now uses every CPU core instead of half: 6.4 seconds instead of 7.5 on a Redmi Note 8. Installing the model no longer stalls either — the app stops freezing for 15–20 seconds after “100 %”, and your first phrase no longer waits an extra seven seconds."
+      },
+      {
+        "icon": "logo-apple",
+        "text": "Your name survives Apple sign-in",
+        "desc": "Apple only sends your name on the very first authorization, and it used to go nowhere — the profile showed a dash. It is now saved right away. This will not help if you already signed in: Apple never sends the name twice."
+      }
+    ]
+  },
+  {
+    "version": "1.5.0",
+    "date": "2026-08-29",
+    "ru": [
+      {
+        "icon": "mic-outline",
+        "text": "Записи голосом",
+        "desc": "Скажите «залил 30 литров за 10 000, пробег 102 300» — форма откроется уже заполненной, останется проверить и сохранить. Работает для заправок, ТО, расходов и пробега; фразу можно и набрать текстом. Разбор идёт прямо на телефоне: интернет не нужен, фраза никуда не отправляется."
+      },
+      {
+        "icon": "language-outline",
+        "text": "Казахская диктовка — своя, без интернета",
+        "desc": "Казахского распознавания нет ни на одном iPhone: телефон молча слушал по-русски. Теперь приложение скачивает собственную модель (53 МБ) и слышит казахский само — «отыз литр құйдым он мыңға» становится заправкой на 30 литров за 10 000. Язык диктовки выбирается отдельно от языка приложения. На Android звук с микрофона стал громче и чище, поэтому слова узнаются заметно точнее."
+      },
+      {
+        "icon": "chatbubbles-outline",
+        "text": "Договаривание в открытой форме",
+        "desc": "Открыли форму, нажали микрофон и добавили пропущенное: «по 325», «пробег 50 100», «в Автомире». Столько раз, сколько нужно. Сохранить тоже можно голосом — «сохранить», «готово», по-казахски «сақта». Команду говорят отдельно или в конце договаривания: «за 25 000 сохрани» — поля заполнятся, и запись сохранится."
+      },
+      {
+        "icon": "earth-outline",
+        "text": "32 языка интерфейса",
+        "desc": "Добавлены итальянский, польский, финский, иврит, румынский, украинский, белорусский, латышский, литовский, эстонский, азербайджанский, армянский, грузинский, узбекский, киргизский, таджикский, туркменский, корейский и монгольский — теперь родной язык есть у каждой страны, чей госномер приложение умеет рисовать."
+      },
+      {
+        "icon": "car-sport-outline",
+        "text": "Карточка автомобиля с вашим фото",
+        "desc": "Снимок занимает всю карточку и служит фоном, поверх — марка, госномер и главные цифры. После загрузки открывается кадрирование: двигаете и приближаете, пока машина не встанет как надо."
+      },
+      {
+        "icon": "ellipse-outline",
+        "text": "Объёмные кольца, полосы и графики",
+        "desc": "Кольца остатка ресурса на плитках ТО, кольцо расходов в Журнале, полосы работ и столбцы графика заправок стали объёмными: дорожка выглядит утопленной в карточку, а заполнение — выпуклым жгутом."
+      },
+      {
+        "icon": "person-circle-outline",
+        "text": "Профиль стал короче",
+        "desc": "Карточка аккаунта переехала наверх, а список автомобилей больше не занимает весь экран: активная машина показывается первой, остальные разворачиваются по кнопке."
+      },
+      {
+        "icon": "construct-outline",
+        "text": "Мелочи, которые мешали каждый день",
+        "desc": "Клавиатура больше не закрывает поля в формах и на последнем шаге «Добавить авто»; в поля пробега и сумм не лезут подсказки автозаполнения; плитки ТО не схлопываются в две колонки на Android; китайский госномер не чернеет при системной тёмной теме."
+      }
+    ],
+    "en": [
+      {
+        "icon": "mic-outline",
+        "text": "Log entries by voice",
+        "desc": "Say “filled 30 liters for 10,000, odometer 102,300” and the form opens already filled in — just check and save. Works for fuel, service, expenses and mileage; you can type the phrase instead. Everything is parsed on the phone: no internet needed, nothing leaves the device."
+      },
+      {
+        "icon": "language-outline",
+        "text": "Kazakh dictation, offline and its own",
+        "desc": "No iPhone recognizes Kazakh — the phone quietly listened in Russian. Now the app downloads its own model (53 MB) and hears Kazakh itself. The dictation language is chosen separately from the app language. On Android the mic now records louder and cleaner, so words come through noticeably more accurately."
+      },
+      {
+        "icon": "chatbubbles-outline",
+        "text": "Add details by voice in an open form",
+        "desc": "Open a form, tap the mic and add what you missed: “325 per liter”, “odometer 50,100”, “at Avtomir” — as many times as you need. Saving works by voice too: say “save” on its own, or end what you are adding with it — “325 per liter, save” fills the field and writes the entry."
+      },
+      {
+        "icon": "earth-outline",
+        "text": "32 interface languages",
+        "desc": "Added Italian, Polish, Finnish, Hebrew, Romanian, Ukrainian, Belarusian, Latvian, Lithuanian, Estonian, Azerbaijani, Armenian, Georgian, Uzbek, Kyrgyz, Tajik, Turkmen, Korean and Mongolian — every country whose license plate the app draws now has its own language."
+      },
+      {
+        "icon": "car-sport-outline",
+        "text": "Car card with your photo",
+        "desc": "The photo fills the whole card as a background, with the make, plate and key numbers on top. After picking a photo you crop it: drag and zoom until the car sits right."
+      },
+      {
+        "icon": "ellipse-outline",
+        "text": "Rings, bars and charts with depth",
+        "desc": "Service rings on the home screen, the expense ring in the Journal, service bars and fuel chart columns are now dimensional: the track looks recessed into the card and the fill looks like a rounded cord."
+      },
+      {
+        "icon": "person-circle-outline",
+        "text": "A shorter Profile screen",
+        "desc": "The account card moved to the top, and the car list no longer fills the screen: the active car comes first, the rest expand on tap."
+      },
+      {
+        "icon": "construct-outline",
+        "text": "Everyday annoyances fixed",
+        "desc": "The keyboard no longer covers fields in forms or on the last step of “Add car”; autofill suggestions stay out of mileage and amount fields; service tiles no longer collapse to two columns on Android; the Chinese plate no longer turns black in system dark mode."
+      }
+    ]
+  },
+  {
+    "version": "1.4.5",
+    "date": "2026-08-19",
+    "ru": [
+      {
+        "icon": "mic-outline",
+        "text": "Отчёт видно до отправки",
+        "desc": "Отчёты из Журнала и паспорт авто в формате PDF теперь сначала открываются на весь экран — видно, что именно уйдёт, и только потом «Поделиться». CSV и XLSX отправляются как раньше."
+      },
+      {
+        "icon": "search-outline",
+        "text": "Поиск по журналу",
+        "desc": "Лупа в шапке Журнала ищет по всем записям сразу: АЗС, вид работ, мастерская, категория, примечание. Поиск идёт по всем записям, а не только за выбранный месяц, — когда ищешь, месяц обычно и не помнишь."
+      },
+      {
+        "icon": "trending-up-outline",
+        "text": "История пробега",
+        "desc": "Каждое изменение пробега сохраняется отдельной записью. Открывается из окна «Обновить пробег»: видно, когда и на сколько менялся пробег, а ошибочно введённое число можно исправить или удалить — раньше опечатка оставалась навсегда."
+      },
+      {
+        "icon": "car-sport-outline",
+        "text": "Госномер Кореи и выбор формата знака",
+        "desc": "Добавлен номер Южной Кореи — белый и электро. У Беларуси, Китая и Кореи под полем номера появился ряд «Формат знака»: раньше приложение угадывало формат по самому номеру и ошибалось — электромобиль показывался зелёным знаком, а китайская плашка прыгала прямо во время набора."
+      },
+      {
+        "icon": "notifications-outline",
+        "text": "Напоминания о ТО стали точнее",
+        "desc": "Напоминание перестаёт приходить сразу после того, как работу внесли, — раньше оно оставалось в очереди и прилетало уже после замены. А запись задним числом больше не откатывает пробег и статус назад: считается самая поздняя работа по дате, а не последняя внесённая."
+      },
+      {
+        "icon": "shield-checkmark-outline",
+        "text": "Android больше не вылетает на длинных списках",
+        "desc": "Приложение падало при выборе марки и модели авто, валюты, страны и на барабанах даты — при быстрой прокрутке и при наборе в поиске, когда список пересобирается на каждую букву."
+      }
+    ],
+    "en": [
+      {
+        "icon": "mic-outline",
+        "text": "See the report before you send it",
+        "desc": "Journal reports and the car passport in PDF now open full screen first — you see exactly what will be sent, and only then tap Share. CSV and XLSX are sent as before."
+      },
+      {
+        "icon": "search-outline",
+        "text": "Search in the Journal",
+        "desc": "The magnifier in the Journal header searches every record at once: station, service type, workshop, category, note. It searches all records rather than only the selected month — when you are searching, you rarely remember the month."
+      },
+      {
+        "icon": "trending-up-outline",
+        "text": "Mileage history",
+        "desc": "Every odometer change is now saved as its own entry. Open it from the \"Update mileage\" dialog: you can see when and by how much the mileage changed, and a wrong number can be fixed or deleted — previously a typo stayed forever."
+      },
+      {
+        "icon": "car-sport-outline",
+        "text": "Korean plates and manual plate format",
+        "desc": "Added the South Korean plate — white and electric. Belarus, China and Korea now have a \"Plate format\" row under the number field: the app used to guess the format from the number itself and got it wrong — an EV showed a green plate, and the Chinese plate changed shape while you were still typing."
+      },
+      {
+        "icon": "notifications-outline",
+        "text": "Service reminders are more accurate",
+        "desc": "A reminder stops arriving as soon as you log the work — previously it stayed queued and fired after the replacement was already done. And a back-dated record no longer rolls the mileage and status backwards: the latest work by date counts, not the last one entered."
+      },
+      {
+        "icon": "shield-checkmark-outline",
+        "text": "No more Android crashes on long lists",
+        "desc": "The app used to crash when picking a car make or model, a currency or a country, and on the date wheels — while scrolling fast or typing in search, when the list rebuilds on every letter."
+      }
+    ]
+  },
+  {
+    "version": "1.4.1",
+    "date": "2026-08-07",
+    "ru": [
+      {
+        "icon": "ellipse-outline",
+        "text": "Техобслуживание на главной — кольцами",
+        "desc": "Вместо полоски у каждого вида работ теперь кольцо с остатком ресурса: сразу после замены оно полное, дальше убывает, а цвет идёт зелёный → жёлтый → красный по мере приближения срока. Под кольцом — сколько километров осталось. На экране ТО в списке работ тоже видно конкретное «Осталось: 9 050 км» вместо процента."
+      },
+      {
+        "icon": "grid-outline",
+        "text": "Виджеты стали в стиле приложения",
+        "desc": "Классика, Глубина и Кристалл на домашнем экране выглядят так же, как экраны приложения, и меняются вместе с оформлением. Рамка виджета показывает состояние машины: зелёная, жёлтая или красная. На iPhone рамка большого виджета теперь идёт по всему периметру, а название авто, расход и сроки документов перестали обрезаться на ровном месте."
+      },
+      {
+        "icon": "calendar-outline",
+        "text": "Дату записи можно исправить",
+        "desc": "В заправке и в записи ТО дата теперь меняется при редактировании. Раньше ошибку в дате приходилось исправлять удалением записи и заполнением формы заново."
+      },
+      {
+        "icon": "car-outline",
+        "text": "181 поколение машин 2000-х",
+        "desc": "Каталог пополнился ранними поколениями у 40 марок: Prado 120 и 90, Santa Fe SM, Elantra XD, Golf Mk4 и Mk5, Astra G, Clio II и III, E-Class W210, S-Class W220, 5 Series E39, A6 C5, Impreza GD, Civic ES, Mazda3 BK, Range Rover L322, Grand Cherokee WJ и другие."
+      }
+    ],
+    "en": [
+      {
+        "icon": "ellipse-outline",
+        "text": "Service items now show as rings",
+        "desc": "Each service item has a ring instead of a bar: it is full right after a replacement and drains as you drive, turning green → yellow → red as the due date approaches. Below the ring — how many kilometres are left. The service screen shows the same figure (\"9,050 km left\") instead of a percentage."
+      },
+      {
+        "icon": "grid-outline",
+        "text": "Widgets now match the app",
+        "desc": "Classic, Depth and Crystal on your home screen look like the app itself and change along with it. The widget border shows the state of the car: green, yellow or red. On iPhone the border of the large widget now runs all the way around, and the car name, fuel consumption and document dates no longer get cut off."
+      },
+      {
+        "icon": "calendar-outline",
+        "text": "You can fix the date of a record",
+        "desc": "Fuel and service records let you change the date when editing. Previously a wrong date meant deleting the record and filling the form in again."
+      },
+      {
+        "icon": "car-outline",
+        "text": "181 generations from the 2000s",
+        "desc": "The catalogue gained early generations for 40 makes: Prado 120 and 90, Santa Fe SM, Elantra XD, Golf Mk4 and Mk5, Astra G, Clio II and III, E-Class W210, S-Class W220, 5 Series E39, A6 C5, Impreza GD, Civic ES, Mazda3 BK, Range Rover L322, Grand Cherokee WJ and more."
+      }
+    ]
+  },
+  {
+    "version": "1.4.0",
+    "date": "2026-08-05",
+    "ru": [
+      {
+        "icon": "warning-outline",
+        "text": "ДТП-режим",
+        "desc": "Новый раздел в Автопомощнике на случай аварии. Сверху — вызов полиции и скорой в один тап: номера подставляются по стране, в которой вы находитесь, а не по языку приложения. Ниже — семь шагов: как обезопасить место, чем помочь пострадавшим, что обязательно снять на камеру, какие данные записать со второго участника, можно ли ехать дальше и что сообщить страховой. Кнопка «Эвакуатор» открывает карту с поиском ближайших служб."
+      },
+      {
+        "icon": "car-sport-outline",
+        "text": "Госномер Китая",
+        "desc": "Восемнадцатая страна, и сразу два знака: обычный синий и зелёный «новой энергии» — он длиннее на 4 см и рисуется с эмблемой. Нужный выбирается сам по длине номера. Иероглиф провинции с клавиатуры не набрать, поэтому он выбирается списком в карточке автомобиля — все 31."
+      },
+      {
+        "icon": "download-outline",
+        "text": "Приложение стало легче",
+        "desc": "Из сборки убраны модули распознавания текста и камеры: они не использовались ни на одном экране, но тянули за собой четыре языковые модели распознавания."
+      }
+    ],
+    "en": [
+      {
+        "icon": "warning-outline",
+        "text": "Accident mode",
+        "desc": "A new section in the Car Assistant for when things go wrong. At the top — call the police or an ambulance in one tap: the numbers match the country you are in, not the language of the app. Below — seven steps: how to make the scene safe, how to help the injured, what to photograph, what details to take from the other driver, whether you can drive on, and what to tell your insurer. The \"Tow truck\" button opens a map with the nearest services."
+      },
+      {
+        "icon": "car-sport-outline",
+        "text": "Chinese licence plates",
+        "desc": "The eighteenth country, and two plates at once: the regular blue one and the green \"new energy\" plate — it is 4 cm longer and carries an emblem. The right one is picked automatically by the length of the number. The province character cannot be typed on a keyboard, so you choose it from a list in the car details — all 31 of them."
+      },
+      {
+        "icon": "download-outline",
+        "text": "The app is lighter",
+        "desc": "Text recognition and camera modules are gone from the build: no screen ever used them, but they pulled in four recognition language models."
+      }
+    ]
+  },
+  {
+    "version": "1.3.0",
+    "date": "2026-07-31",
+    "ru": [
+      {
+        "icon": "flash-outline",
+        "text": "Номер электромобиля Беларуси",
+        "desc": "Знаки серии «E» рисуются как настоящие — зелёными символами и с зелёной окантовкой. Исполнение включается само, когда номер начинается с «E»."
+      },
+      {
+        "icon": "car-sport-outline",
+        "text": "Госномера стали похожи на настоящие",
+        "desc": "На Android знаки разъезжались: между буквами зияла дыра, цифры региона налезали друг на друга. Теперь номер рисуется как штамп и выглядит одинаково на Android и iPhone. Заодно выверены по фото реальных знаков Казахстан, Беларусь, Азербайджан, Армения и Таджикистан."
+      },
+      {
+        "icon": "image-outline",
+        "text": "Чёткие номерные плашки",
+        "desc": "Беларусь, Азербайджан, Эстония, Латвия, Таджикистан и Узбекистан были мелкими мыльными картинками. Стали в пять раз крупнее: видно орнамент на флаге, ровную рамку и скругления."
+      },
+      {
+        "icon": "calculator-outline",
+        "text": "Заправка: введённое больше не сбивается",
+        "desc": "Приложение подставляет цену за литр из прошлой заправки, и раньше она была главнее того, что вы ввели сами: стоило вписать сумму с чека, как литры молча пересчитывались. Теперь считается только то поле, которого вы не касались, — сумму, литры и цену можно вводить в любом порядке."
+      },
+      {
+        "icon": "cash-outline",
+        "text": "Суммы принимают копейки",
+        "desc": "В расходах и стоимости ТО точку просто не давали поставить. Заодно копейки перестали теряться при открытии уже сохранённой записи."
+      },
+      {
+        "icon": "keypad-outline",
+        "text": "Android: клавиатура не закрывает поля",
+        "desc": "На экранах с вводом клавиатура перекрывала поля и кнопку сохранения — при добавлении авто, заправки, ТО, расходов и в обратной связи. Теперь контент поднимается над ней."
+      },
+      {
+        "icon": "phone-portrait-outline",
+        "text": "Android: кнопки телефона не мешают",
+        "desc": "Низ списков и кнопки — например, «Удалить автомобиль» — прятались за системной панелью навигации."
+      },
+      {
+        "icon": "download-outline",
+        "text": "Приложение стало легче почти на мегабайт",
+        "desc": "Девять шрифтов номерных знаков больше не входят в сборку: знаки рисуются векторами, шрифты для этого не нужны."
+      }
+    ],
+    "en": [
+      {
+        "icon": "flash-outline",
+        "text": "Belarus electric vehicle plate",
+        "desc": "The \"E\" series is now drawn like the real thing — green characters and a green border. It switches on automatically when the number starts with \"E\"."
+      },
+      {
+        "icon": "car-sport-outline",
+        "text": "Licence plates look like real ones",
+        "desc": "On Android the characters drifted apart: gaps opened between letters and region digits overlapped. The plate is now drawn like a stamped sign and looks identical on Android and iPhone. Kazakhstan, Belarus, Azerbaijan, Armenia and Tajikistan were also matched against photos of real plates."
+      },
+      {
+        "icon": "image-outline",
+        "text": "Sharp plate artwork",
+        "desc": "Belarus, Azerbaijan, Estonia, Latvia, Tajikistan and Uzbekistan used to be small blurry images. They are five times larger now: the flag ornament, the border and the rounded corners are all crisp."
+      },
+      {
+        "icon": "calculator-outline",
+        "text": "Fuel-up: your input stays put",
+        "desc": "The app fills in the price per litre from your last fill-up, and it used to outrank what you typed yourself: entering the total from the receipt silently recalculated the litres. Now only the field you did not touch is calculated — enter total, litres and price in any order."
+      },
+      {
+        "icon": "cash-outline",
+        "text": "Amounts accept cents",
+        "desc": "Expenses and service costs would not let you type a decimal point at all. Cents also stopped disappearing when you reopened a saved record."
+      },
+      {
+        "icon": "keypad-outline",
+        "text": "Android: keyboard no longer covers fields",
+        "desc": "The keyboard hid input fields and the save button when adding a car, a fill-up, service, expenses and in the feedback form. The content now moves above it."
+      },
+      {
+        "icon": "phone-portrait-outline",
+        "text": "Android: navigation buttons out of the way",
+        "desc": "The bottom of lists and buttons such as \"Delete car\" were hidden behind the system navigation bar."
+      },
+      {
+        "icon": "download-outline",
+        "text": "Almost a megabyte lighter",
+        "desc": "Nine licence-plate fonts no longer ship with the app: the characters are drawn as vectors, so the fonts are not needed."
+      }
+    ]
+  },
+  {
+    "version": "1.2.1",
+    "date": "2026-07-25",
+    "ru": [
+      {
+        "icon": "bug-outline",
+        "text": "Нижнее меню снова в порядке",
+        "desc": "В версии 1.2.0 в панели навигации появлялись три лишние вкладки, из-за чего названия разделов обрезались. Исправлено."
+      },
+      {
+        "icon": "images-outline",
+        "text": "Чеки и фото наконец видно",
+        "desc": "Раньше фото можно было приложить к заправке или ТО, но потом оно нигде не показывалось. Теперь вложения видны прямо в записи, а по тапу открываются на весь экран — с листанием и кнопкой «Поделиться». PDF открывается в просмотрщике."
+      },
+      {
+        "icon": "keypad-outline",
+        "text": "Клавиатура не мешает вводу",
+        "desc": "На нескольких экранах клавиатура закрывала поля и кнопку сохранения — например, при ручном вводе двигателя. Теперь форма поднимается над ней."
+      },
+      {
+        "icon": "language-outline",
+        "text": "Полный перевод интерфейса",
+        "desc": "Несколько экранов показывали русский текст независимо от выбранного языка: подтверждение удаления записи ТО, сроки документов и окно «Что нового». Теперь всё на твоём языке."
+      },
+      {
+        "icon": "speedometer-outline",
+        "text": "Точный расход для гибридов",
+        "desc": "Если между двумя заправками была зарядка, расход по бензину считался завышенным. Теперь бензин и электричество учитываются раздельно."
+      },
+      {
+        "icon": "trash-outline",
+        "text": "Приложение занимает меньше места",
+        "desc": "Фото и чеки удалённых записей раньше навсегда оставались в памяти телефона. Теперь они удаляются вместе с записью."
+      },
+      {
+        "icon": "notifications-outline",
+        "text": "Напоминания не теряются",
+        "desc": "Если срок ТО или документа подходил уже после того, как ты открыл приложение утром, напоминание приходило только на следующий день. Теперь — в тот же день."
+      },
+      {
+        "icon": "shield-checkmark-outline",
+        "text": "Безопаснее общий доступ",
+        "desc": "Приглашение «только просмотр» больше нельзя превратить в доступ с правом изменения. А переход по ссылке-приглашению теперь спрашивает подтверждение, прежде чем добавить тебя в группу."
+      }
+    ],
+    "en": [
+      {
+        "icon": "bug-outline",
+        "text": "Bottom menu fixed",
+        "desc": "Version 1.2.0 showed three extra tabs in the navigation bar, which cut off the section names. Fixed."
+      },
+      {
+        "icon": "images-outline",
+        "text": "Receipts and photos are finally visible",
+        "desc": "You could attach a photo to a refuel or service record, but it was never shown afterwards. Attachments now appear right in the record and open full screen on tap — with swiping and a Share button. PDFs open in a viewer."
+      },
+      {
+        "icon": "keypad-outline",
+        "text": "The keyboard no longer gets in the way",
+        "desc": "On several screens the keyboard covered the fields and the save button — for example when entering engine details manually. The form now moves above it."
+      },
+      {
+        "icon": "language-outline",
+        "text": "Fully translated interface",
+        "desc": "A few screens showed Russian text regardless of the selected language: the service record delete prompt, document due dates and the What’s New window. Now everything follows your language."
+      },
+      {
+        "icon": "speedometer-outline",
+        "text": "Accurate hybrid consumption",
+        "desc": "If a charge happened between two refuels, fuel consumption came out overstated. Petrol and electricity are now counted separately."
+      },
+      {
+        "icon": "trash-outline",
+        "text": "The app takes up less space",
+        "desc": "Photos and receipts of deleted records used to stay in your phone storage forever. They are now removed together with the record."
+      },
+      {
+        "icon": "notifications-outline",
+        "text": "Reminders are no longer lost",
+        "desc": "If a service or document became due after you had already opened the app that morning, the reminder only arrived the next day. Now it arrives the same day."
+      },
+      {
+        "icon": "shield-checkmark-outline",
+        "text": "Safer shared access",
+        "desc": "A view-only invitation can no longer be turned into edit access. And opening an invitation link now asks for confirmation before adding you to the group."
+      }
+    ]
+  },
+  {
+    "version": "1.2.0",
+    "date": "2026-07-24",
+    "ru": [
+      {
+        "icon": "phone-portrait-outline",
+        "text": "Виджет на домашнем экране",
+        "desc": "Пробег, расход топлива и статус ближайшего ТО — прямо на рабочем столе телефона, без открытия приложения. Есть маленький и средний размеры, а рамка виджета меняет цвет по статусу авто (зелёный / жёлтый / красный). Виджет подстраивается под выбранный стиль оформления (Классика / Глубина / Кристалл)."
+      },
+      {
+        "icon": "card-outline",
+        "text": "Реалистичные гос номера",
+        "desc": "Номер твоего авто теперь показывается на карточке как настоящий номерной знак — в стиле твоей страны: свой шрифт, цвета и формат. Поддержаны 17 стран: Казахстан, Россия, Кыргызстан, Узбекистан, Беларусь, Азербайджан, Армения, Таджикистан, Туркменистан, Грузия, Украина, Молдова, Латвия, Литва, Эстония, Германия и Турция. При вводе номер подстраивается под формат выбранной страны."
+      },
+      {
+        "icon": "cash-outline",
+        "text": "Все валюты мира",
+        "desc": "160 мировых валют по международному стандарту ISO 4217. Выбери свою — и суммы расходов, топлива и ТО будут отображаться и считаться именно в ней."
+      },
+      {
+        "icon": "add-circle-outline",
+        "text": "Любая машина, даже вне каталога",
+        "desc": "Не нашёл свою марку или модель в списке? Теперь можно добавить их вручную — вместе с объёмом двигателя, коробкой передач, типом топлива и мощностью в лошадиных силах."
+      },
+      {
+        "icon": "car-sport-outline",
+        "text": "+105 моделей в каталоге",
+        "desc": "Добавили больше китайских, японских и европейских автомобилей, включая электромобили и гибриды."
+      },
+      {
+        "icon": "document-text-outline",
+        "text": "Продвинутые отчёты",
+        "desc": "Подробные PDF- и Excel-отчёты по топливу, ТО и расходам — с ключевыми показателями и разбивкой. Для автопарков — отчёты по водителям и срокам документов. А ещё «Паспорт автомобиля» — готовый документ истории для продажи."
+      },
+      {
+        "icon": "people-outline",
+        "text": "Общий доступ: видно, кто что внёс",
+        "desc": "В машинах с общим доступом на каждой записи (заправка, ТО, расход) теперь видно, кто её добавил. Участникам можно задавать понятные имена. Раздел «Семейный доступ» переименован в «Общий доступ»."
+      },
+      {
+        "icon": "notifications-outline",
+        "text": "Умные напоминания",
+        "desc": "Приложение мягко напомнит обновить пробег и вернуться к учёту, если вы давно не заглядывали — чтобы история оставалась полной и точной."
+      }
+    ],
+    "en": [
+      {
+        "icon": "phone-portrait-outline",
+        "text": "Home screen widget",
+        "desc": "Mileage, fuel use and your next service status — right on your phone’s home screen, without opening the app. Small and medium sizes, with a border that changes color by car status (green / yellow / red). The widget adapts to your chosen theme (Classic / Depth / Crystal)."
+      },
+      {
+        "icon": "card-outline",
+        "text": "Realistic license plates",
+        "desc": "Your car’s plate now appears on the card as a real license plate — in your country’s style: its own font, colors and format. 17 countries supported: Kazakhstan, Russia, Kyrgyzstan, Uzbekistan, Belarus, Azerbaijan, Armenia, Tajikistan, Turkmenistan, Georgia, Ukraine, Moldova, Latvia, Lithuania, Estonia, Germany and Turkey. Input adapts to your country’s format."
+      },
+      {
+        "icon": "cash-outline",
+        "text": "Every world currency",
+        "desc": "160 world currencies by the international ISO 4217 standard. Pick yours — and your expenses, fuel and service amounts are shown and calculated in it."
+      },
+      {
+        "icon": "add-circle-outline",
+        "text": "Any car, even outside the catalog",
+        "desc": "Didn’t find your make or model in the list? Now you can add them manually — along with engine size, transmission, fuel type and horsepower."
+      },
+      {
+        "icon": "car-sport-outline",
+        "text": "+105 models in the catalog",
+        "desc": "Added more Chinese, Japanese and European cars, including EVs and hybrids."
+      },
+      {
+        "icon": "document-text-outline",
+        "text": "Advanced reports",
+        "desc": "Detailed PDF and Excel reports for fuel, service and expenses — with key metrics and breakdowns. For fleets — driver and document-deadline reports. Plus a “Car Passport” — a ready history document for resale."
+      },
+      {
+        "icon": "people-outline",
+        "text": "Shared access: see who added what",
+        "desc": "On cars with shared access, every record (fuel, service, expense) now shows who added it. You can give members friendly names. “Family sharing” is now called “Shared access”."
+      },
+      {
+        "icon": "notifications-outline",
+        "text": "Smart reminders",
+        "desc": "The app gently reminds you to update your mileage and get back to tracking if you haven’t opened it in a while — so your history stays complete and accurate."
+      }
+    ]
+  },
+  {
+    "version": "1.1.1",
+    "date": "2026-07-09",
+    "ru": [
+      {
+        "icon": "notifications-outline",
+        "text": "Напоминания о ТО приходят заранее",
+        "desc": "Раньше о плановом ТО можно было узнать, только открыв приложение. Теперь телефон сам напомнит за несколько дней до срока — даже если вы давно не заходили. Так вы не пропустите замену масла или другое обслуживание."
+      },
+      {
+        "icon": "link-outline",
+        "text": "Приглашения открываются по ссылке",
+        "desc": "Приглашение в семейный доступ теперь достаточно просто открыть на телефоне — приложение запустится и само примет его. Больше не нужно вручную вводить код."
+      },
+      {
+        "icon": "people-outline",
+        "text": "Семейный доступ стал надёжнее",
+        "desc": "Приглашения принимаются стабильнее, а если что-то пошло не так (ссылка устарела или уже использована) — вы увидите понятное сообщение на своём языке, а не техническую ошибку."
+      },
+      {
+        "icon": "shield-checkmark-outline",
+        "text": "Меньше сбоев синхронизации",
+        "desc": "Исправили появление дублей записей в облаке и улучшили общую стабильность — ваши данные синхронизируются между устройствами точнее."
+      }
+    ],
+    "en": [
+      {
+        "icon": "notifications-outline",
+        "text": "Service reminders arrive ahead of time",
+        "desc": "Before, you had to open the app to find out about upcoming maintenance. Now your phone reminds you a few days early — even if you haven’t opened the app in a while. You won’t miss an oil change or other service."
+      },
+      {
+        "icon": "link-outline",
+        "text": "Invites open straight from the link",
+        "desc": "Just open a family-sharing invite on your phone — the app launches and accepts it automatically. No more typing codes by hand."
+      },
+      {
+        "icon": "people-outline",
+        "text": "Family sharing is more reliable",
+        "desc": "Invites are accepted more consistently, and if something goes wrong (an expired or already-used link) you’ll see a clear message in your language instead of a technical error."
+      },
+      {
+        "icon": "shield-checkmark-outline",
+        "text": "Fewer sync glitches",
+        "desc": "Fixed duplicate entries appearing in the cloud and improved overall stability, so your data syncs across devices more accurately."
+      }
+    ]
+  },
+  {
+    "version": "1.1.0",
+    "date": "2026-07",
+    "ru": [
+      {
+        "icon": "flash-outline",
+        "text": "Поддержка электромобилей и гибридов"
+      },
+      {
+        "icon": "battery-charging-outline",
+        "text": "Зарядки в кВт·ч, ёмкость и заряд батареи"
+      },
+      {
+        "icon": "speedometer-outline",
+        "text": "Гибрид — раздельный расход: бензин + электро"
+      },
+      {
+        "icon": "construct-outline",
+        "text": "Новые работы ТО для электро и гибридов"
+      },
+      {
+        "icon": "globe-outline",
+        "text": "Поиск страны на любом языке"
+      }
+    ],
+    "en": [
+      {
+        "icon": "flash-outline",
+        "text": "Electric and hybrid car support"
+      },
+      {
+        "icon": "battery-charging-outline",
+        "text": "Charging in kWh, battery capacity & level"
+      },
+      {
+        "icon": "speedometer-outline",
+        "text": "Hybrid — dual consumption: fuel + electric"
+      },
+      {
+        "icon": "construct-outline",
+        "text": "New service works for EV & hybrid"
+      },
+      {
+        "icon": "globe-outline",
+        "text": "Country search in any language"
+      }
+    ]
+  },
+  {
+    "version": "1.0.1",
+    "date": "2026-07",
+    "ru": [
+      {
+        "icon": "notifications-outline",
+        "text": "Push-уведомления семейного доступа"
+      },
+      {
+        "icon": "time-outline",
+        "text": "История уведомлений — нажми на колокольчик"
+      },
+      {
+        "icon": "sync-outline",
+        "text": "Исправлены дубли при облачной синхронизации"
+      },
+      {
+        "icon": "shield-checkmark-outline",
+        "text": "Улучшена стабильность приложения"
+      }
+    ],
+    "en": [
+      {
+        "icon": "notifications-outline",
+        "text": "Push notifications for family sharing"
+      },
+      {
+        "icon": "time-outline",
+        "text": "Notification history — tap the bell icon"
+      },
+      {
+        "icon": "sync-outline",
+        "text": "Fixed duplicate entries in cloud sync"
+      },
+      {
+        "icon": "shield-checkmark-outline",
+        "text": "Improved app stability"
+      }
+    ]
+  }
+]

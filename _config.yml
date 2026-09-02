@@ -1,2 +1,7 @@
 include:
   - ".well-known"
+
+# Шаблон страницы «История обновлений» — исходник для генератора, а не страница сайта.
+# Готовый changelog/index.html собирает scripts/sync-site-changelog в репозитории AutoSupApp.
+exclude:
+  - "changelog/template.html"
