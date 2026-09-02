@@ -532,6 +532,12 @@
     /* ── RESPONSIVE ── */
     /* Ссылки в шапке не помещаются с длинными казахскими словами уже с ~1150px */
     @media (max-width: 1150px) { .nav-links { display: none; } }
+    /* Казахские подписи заметно шире русских и английских: на 1151–1280px меню
+       выталкивало кнопку «Скачать» за правый край экрана, и она пропадала под
+       обрезкой body. Порог задан отдельно для казахского, чтобы не отнимать меню
+       у остальных языков — им места хватает до ~1130px. Язык живёт в <html lang>,
+       его проставляет переключатель RU/EN/KZ. */
+    @media (max-width: 1280px) { html[lang="kz"] .nav-links { display: none; } }
     @media (max-width: 700px) {
       .screen-grid, .mini-cards { grid-template-columns: 1fr; }
       .screen-main { grid-column: 1; }
@@ -708,9 +714,9 @@
       <a href="#passport" data-en="Car passport" data-kz="Көлік паспорты">Паспорт авто</a>
       <a href="#plates" data-en="License plates" data-kz="Мемнөмірлер">Госномера</a>
       <a href="#widget" data-en="Widget" data-kz="Виджет">Виджет</a>
-      <a href="#customize" data-en="Settings" data-kz="Параметрлер">Настройки</a>
       <a href="#faq" data-en="FAQ" data-kz="Сұрақ-жауап">FAQ</a>
       <a href="#reviews" data-en="Reviews" data-kz="Пікірлер">Отзывы</a>
+      <a href="/changelog" data-en="Changelog" data-kz="Жаңартулар">Обновления</a>
     </div>
     <div class="lang-switch" role="group" aria-label="Language">
       <button class="lang-opt" data-lang="ru">RU</button>
