@@ -1,5 +1,53 @@
 [
   {
+    "version": "1.6.2",
+    "date": "2026-09-04",
+    "ru": [
+      {
+        "icon": "volume-high-outline",
+        "text": "Телефон подтверждает голосом, что заполнил",
+        "desc": "После диктовки — «залил 30 литров за 15000» — приложение вслух повторяет, что попало в поля, и чего не хватает для сохранения: в заправке, ТО, расходе и в модалке «Обновить пробег» на главной. Рядом с микрофоном появился значок озвучки: включена, выключена вами или молчит по обстоятельствам — скажем, при включённом экранном дикторе или когда для языка диктовки на телефоне нет голоса. Нажатие объясняет причину и ведёт в настройку, где озвучку можно выключить одним тумблером."
+      },
+      {
+        "icon": "person-circle-outline",
+        "text": "Голос озвучки теперь выбираете вы",
+        "desc": "Настройки → «Голос озвучки» → язык → список голосов, что реально стоят на телефоне. У каждого кнопка «Прослушать»: системные имена вроде «ru-RU-language» на слух понятнее, чем на вид. Для каждого языка диктовки свой голос — русскую фразу английский голос читать не будет. Голосов в списке мало? Их доустанавливают в настройках телефона, приложение подскажет где."
+      },
+      {
+        "icon": "speedometer-outline",
+        "text": "Пробег из любой формы поднимает текущий",
+        "desc": "Раньше текущий пробег машины двигала только заправка. Теперь число, введённое в обслуживании или расходе, тоже поднимает его, если оно больше, — напоминания о ТО считаются от свежего пробега, а не от прошлогоднего. Запись задним числом ничего не откатывает, а в журнале пробега появляется своей строкой."
+      },
+      {
+        "icon": "checkmark-circle-outline",
+        "text": "Выбранное в настройках видно с первого взгляда",
+        "desc": "Списки, где выбирают одно из нескольких — язык, тема, стиль, единицы, валюта и страна, а ещё язык диктовки и голос озвучки, — помечают выбор одинаково: строка обведена рамкой, слегка подсвечена, справа галочка в круге. Раньше в каждом списке выбор выглядел по-своему, а где-то угадывался только по цвету текста. Валюты и страны встали ровными столбцами — значки, флаги и названия идут один под другим, а не плавают по строке, склеенной пробелами: у части валют вместо значка стоят буквы, и раньше ничего не сходилось. Рядом с языками интерфейса появились флаги, а сам список лежит в аккуратной рамке."
+      }
+    ],
+    "en": [
+      {
+        "icon": "volume-high-outline",
+        "text": "The phone confirms aloud what it filled in",
+        "desc": "After dictating — \"filled 30 liters for 15,000\" — the app reads back what landed in the fields and what is still missing: in fuel, service and expense forms, and in the \"Update mileage\" popup. A small icon next to the microphone shows the state of read-back: on, switched off by you, or silent for a reason — a screen reader is running, say, or the phone has no voice for your dictation language. Tapping it explains the reason and opens the setting where read-back can be switched off with one toggle."
+      },
+      {
+        "icon": "person-circle-outline",
+        "text": "You pick the read-back voice",
+        "desc": "Settings → \"Read-back voice\" → language → the voices actually installed on your phone, each with a Preview button: system names like \"en-US-language\" tell you nothing, but one tap does. Every dictation language keeps its own voice — an English voice will not read a Russian phrase. Short list? Phones ship with a single voice; the app points you to where more are installed."
+      },
+      {
+        "icon": "speedometer-outline",
+        "text": "Mileage from any form moves the odometer",
+        "desc": "Until now only a fill-up updated the current mileage of the car. A number entered in a service or expense record now raises it too, if it is higher — so service reminders count from fresh mileage, not from a year-old figure. Back-dated entries never roll it back, and each update shows up as its own line in the mileage log."
+      },
+      {
+        "icon": "checkmark-circle-outline",
+        "text": "Your choice is obvious at a glance",
+        "desc": "Every settings list where you pick one option — language, theme, style, units, currency and country, plus the dictation language and the read-back voice — now marks the choice the same way: the row is outlined, gently tinted, with a check in a circle on the right. Each list used to mark it differently, and in places the only clue was the color of the text. Currencies and countries now line up in even columns — symbols, flags and names sit one under another instead of drifting along a row held together by spaces, which never matched up since some currencies show letters where others show a symbol. Interface languages got their flags, and the list itself sits in a neat frame."
+      }
+    ]
+  },
+  {
     "version": "1.6.1",
     "date": "2026-09-01",
     "ru": [
