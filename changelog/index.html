@@ -23,7 +23,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://autosup.app/changelog/" />
   <meta property="og:title" content="AutoSup — История обновлений" />
-  <meta property="og:description" content="Что менялось в AutoSup от версии к версии. Последняя версия — 1.6.2." />
+  <meta property="og:description" content="Что менялось в AutoSup от версии к версии. Последняя версия — 1.7.0." />
   <meta property="og:image" content="https://autosup.app/og-image.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -195,11 +195,54 @@
 </header>
 
 <main class="timeline">
+  <article class="release" id="1.7.0">
+    <div class="release-head">
+      <h2 class="release-version gradient-text">1.7.0</h2>
+      <time class="release-date" datetime="2026-09-07" data-en="September 7, 2026">7 сентября 2026</time>
+      <span class="release-badge" data-en="Latest">Актуальная</span>
+    </div>
+    <ul class="changes">
+      <li class="change">
+        <span class="change-icon" aria-hidden="true"><ion-icon name="wallet-outline"></ion-icon></span>
+        <div>
+          <h3 class="change-title" data-en="New &quot;Spending&quot; section — where the money goes">Новый раздел «Траты» — куда уходят деньги на машину</h3>
+          <p class="change-desc" data-en="Fuel, service and other expenses as one figure for any period, compared with the period before it and broken down by type: you can see what got more expensive and what you simply started doing more often. Open it with the &quot;Spending&quot; button on Home, or from the Journal — the green &quot;Details for the period&quot; button under the expense chart. Inside a type you can tick the entries you need — fuel grade, station, kind of work, expense category, and on a shared car the person who added the record — and export what you ticked to PDF, CSV or Excel. Here and in the Journal export the whole history of the car is now available, not just the last 12 months.">Топливо, обслуживание и прочие расходы одной суммой за любой период, со сравнением к прошлому периоду и разбивкой по каждому виду: видно, что подорожало, а что вы просто стали делать чаще. Открывается кнопкой «Траты» на главной и из Журнала — зелёной кнопкой «Подробнее за период» под графиком расходов. Внутри вида можно отметить галочками нужные позиции — марку топлива, АЗС, вид работ, категорию расхода, а на общей машине ещё и того, кто внёс запись, — и выгрузить отмеченное в PDF, CSV или Excel. И здесь, и в экспорте из Журнала теперь доступна вся история машины, а не только последние 12 месяцев.</p>
+        </div>
+      </li>
+      <li class="change">
+        <span class="change-icon" aria-hidden="true"><ion-icon name="apps-outline"></ion-icon></span>
+        <div>
+          <h3 class="change-title" data-en="Three buttons on Home lead to three different places">Три кнопки на главной ведут в три разных места</h3>
+          <p class="change-desc" data-en="They used to read &quot;+ Fuel&quot;, &quot;+ Service&quot; and &quot;+ Expense&quot; — the same entry point repeated three times, while the round &quot;+&quot; at the bottom of the screen already adds a record. The middle one is now &quot;Add&quot;: a tap unfolds a menu of three right under the button — fuel (charge on an electric car), service, expense. On the left, &quot;Spending&quot; opens expenses for the period; on the right, &quot;Assistant&quot; — dashboard warning lights, car guides, service search on the map and what to do after an accident, until now buried in the Profile.">Раньше под последней заправкой стояли «+ Заправка», «+ ТО» и «+ Доп. расходы» — по сути один и тот же вход, повторённый трижды, хотя круглая «+» внизу экрана и так добавляет запись. Теперь по центру стоит «Добавить»: тап раскрывает прямо под кнопкой меню из трёх — заправка (у электромобиля зарядка), ТО, расход. Слева «Траты» открывают расходы за период, справа «Автопомощник» — значки на приборной панели, автогайды, поиск сервисов на карте и порядок действий при ДТП; до этого он лежал только в Профиле.</p>
+        </div>
+      </li>
+      <li class="change">
+        <span class="change-icon" aria-hidden="true"><ion-icon name="construct-outline"></ion-icon></span>
+        <div>
+          <h3 class="change-title" data-en="Service tiles are bigger and turn like pages">Плитки обслуживания крупнее и листаются</h3>
+          <p class="change-desc" data-en="Always three in a row, six to a page, with pages swiped sideways — the dots under the grid show which one you are on. The &quot;Show all&quot; button is gone for good: every job lives in one strip, the most urgent still on the first page, and the service block keeps the same height on screen no matter how many jobs you have set up.">Теперь их всегда три в ряд, по шесть на странице, а страницы перелистываются вбок — под сеткой видно точки и то, на какой странице вы сейчас. Кнопка «Показать все» больше не нужна: все работы лежат одной лентой, самое срочное по-прежнему на первой странице, а блок обслуживания занимает на экране одну и ту же высоту, сколько бы работ ни было заведено.</p>
+        </div>
+      </li>
+      <li class="change">
+        <span class="change-icon" aria-hidden="true"><ion-icon name="speedometer-outline"></ion-icon></span>
+        <div>
+          <h3 class="change-title" data-en="Mileage no longer drops in silence">Пробег больше не уменьшается молча</h3>
+          <p class="change-desc" data-en="The moment the number you type falls below the current mileage, the line under the field turns red and swaps the speedometer for a down arrow — in fuel, service and expense forms, and in the &quot;Update mileage&quot; popup on Home. Lowering it cannot be forbidden, it is how a typo like 1,000,000 instead of 100,000 gets fixed, so the app does not block you but asks: &quot;Now 102,300 km, will become 102,000 km&quot;. A corrected odometer reading finally reaches Home as well — both when you edit a record and when you delete one; a wrong number could stay there forever before.">Как только вводимое число оказывается ниже текущего пробега, строка под полем краснеет и меняет спидометр на стрелку вниз — в заправке, обслуживании, расходе и в окне «Обновить пробег» на главной. Запрещать уменьшение нельзя, им же исправляют опечатку вроде 1 000 000 вместо 100 000, поэтому приложение не мешает, а переспрашивает: «Сейчас 102 300 км, станет 102 000 км». Заодно исправленный в записи пробег наконец доходит до главной — и при правке, и при удалении: раньше ошибочное число могло остаться там навсегда.</p>
+        </div>
+      </li>
+      <li class="change">
+        <span class="change-icon" aria-hidden="true"><ion-icon name="chatbubble-ellipses-outline"></ion-icon></span>
+        <div>
+          <h3 class="change-title" data-en="Feedback reaches us again">Отзывы и предложения снова доходят</h3>
+          <p class="change-desc" data-en="If you wrote to us from the app and got &quot;Could not send, please try again later&quot;, your message never arrived — and it was not your connection, the fault was on our side. Sending works again: Profile → System → &quot;Feedback and suggestions&quot;. Sorry for the silence — if you gave up back then, please write once more, we read every message.">Если вы писали нам из приложения и получали «Не удалось отправить, попробуйте позже» — обращение не доходило, и дело было не в вашей связи: ошибка была на нашей стороне. Теперь отправка работает, и написать можно снова: Профиль → Система → «Отзывы и предложения». Извините за молчание — если вы тогда сдались, напишите ещё раз, мы прочитаем каждое письмо.</p>
+        </div>
+      </li>
+    </ul>
+  </article>
   <article class="release" id="1.6.2">
     <div class="release-head">
       <h2 class="release-version gradient-text">1.6.2</h2>
       <time class="release-date" datetime="2026-09-04" data-en="September 4, 2026">4 сентября 2026</time>
-      <span class="release-badge" data-en="Latest">Актуальная</span>
     </div>
     <ul class="changes">
       <li class="change">
@@ -261,6 +304,12 @@
       </li>
     </ul>
   </article>
+
+  <details class="older">
+    <summary>
+      <ion-icon name="chevron-down-outline" aria-hidden="true"></ion-icon>
+      <span data-en="Earlier versions (11)">Более ранние версии (11)</span>
+    </summary>
   <article class="release" id="1.6.0">
     <div class="release-head">
       <h2 class="release-version gradient-text">1.6.0</h2>
@@ -290,12 +339,6 @@
       </li>
     </ul>
   </article>
-
-  <details class="older">
-    <summary>
-      <ion-icon name="chevron-down-outline" aria-hidden="true"></ion-icon>
-      <span data-en="Earlier versions (10)">Более ранние версии (10)</span>
-    </summary>
   <article class="release" id="1.5.0">
     <div class="release-head">
       <h2 class="release-version gradient-text">1.5.0</h2>
@@ -791,7 +834,7 @@
     <div class="footer-copy">© 2026 AutoSup. Все права защищены.</div>
     <div class="footer-generated">
       <span data-en="Page updated" data-kz="Бет жаңартылды">Страница обновлена</span>
-      <span id="generated">2026-09-04</span>
+      <span id="generated">2026-09-07</span>
     </div>
   </div>
 </footer>

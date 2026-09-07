@@ -1,5 +1,63 @@
 [
   {
+    "version": "1.7.0",
+    "date": "2026-09-07",
+    "ru": [
+      {
+        "icon": "wallet-outline",
+        "text": "Новый раздел «Траты» — куда уходят деньги на машину",
+        "desc": "Топливо, обслуживание и прочие расходы одной суммой за любой период, со сравнением к прошлому периоду и разбивкой по каждому виду: видно, что подорожало, а что вы просто стали делать чаще. Открывается кнопкой «Траты» на главной и из Журнала — зелёной кнопкой «Подробнее за период» под графиком расходов. Внутри вида можно отметить галочками нужные позиции — марку топлива, АЗС, вид работ, категорию расхода, а на общей машине ещё и того, кто внёс запись, — и выгрузить отмеченное в PDF, CSV или Excel. И здесь, и в экспорте из Журнала теперь доступна вся история машины, а не только последние 12 месяцев."
+      },
+      {
+        "icon": "apps-outline",
+        "text": "Три кнопки на главной ведут в три разных места",
+        "desc": "Раньше под последней заправкой стояли «+ Заправка», «+ ТО» и «+ Доп. расходы» — по сути один и тот же вход, повторённый трижды, хотя круглая «+» внизу экрана и так добавляет запись. Теперь по центру стоит «Добавить»: тап раскрывает прямо под кнопкой меню из трёх — заправка (у электромобиля зарядка), ТО, расход. Слева «Траты» открывают расходы за период, справа «Автопомощник» — значки на приборной панели, автогайды, поиск сервисов на карте и порядок действий при ДТП; до этого он лежал только в Профиле."
+      },
+      {
+        "icon": "construct-outline",
+        "text": "Плитки обслуживания крупнее и листаются",
+        "desc": "Теперь их всегда три в ряд, по шесть на странице, а страницы перелистываются вбок — под сеткой видно точки и то, на какой странице вы сейчас. Кнопка «Показать все» больше не нужна: все работы лежат одной лентой, самое срочное по-прежнему на первой странице, а блок обслуживания занимает на экране одну и ту же высоту, сколько бы работ ни было заведено."
+      },
+      {
+        "icon": "speedometer-outline",
+        "text": "Пробег больше не уменьшается молча",
+        "desc": "Как только вводимое число оказывается ниже текущего пробега, строка под полем краснеет и меняет спидометр на стрелку вниз — в заправке, обслуживании, расходе и в окне «Обновить пробег» на главной. Запрещать уменьшение нельзя, им же исправляют опечатку вроде 1 000 000 вместо 100 000, поэтому приложение не мешает, а переспрашивает: «Сейчас 102 300 км, станет 102 000 км». Заодно исправленный в записи пробег наконец доходит до главной — и при правке, и при удалении: раньше ошибочное число могло остаться там навсегда."
+      },
+      {
+        "icon": "chatbubble-ellipses-outline",
+        "text": "Отзывы и предложения снова доходят",
+        "desc": "Если вы писали нам из приложения и получали «Не удалось отправить, попробуйте позже» — обращение не доходило, и дело было не в вашей связи: ошибка была на нашей стороне. Теперь отправка работает, и написать можно снова: Профиль → Система → «Отзывы и предложения». Извините за молчание — если вы тогда сдались, напишите ещё раз, мы прочитаем каждое письмо."
+      }
+    ],
+    "en": [
+      {
+        "icon": "wallet-outline",
+        "text": "New \"Spending\" section — where the money goes",
+        "desc": "Fuel, service and other expenses as one figure for any period, compared with the period before it and broken down by type: you can see what got more expensive and what you simply started doing more often. Open it with the \"Spending\" button on Home, or from the Journal — the green \"Details for the period\" button under the expense chart. Inside a type you can tick the entries you need — fuel grade, station, kind of work, expense category, and on a shared car the person who added the record — and export what you ticked to PDF, CSV or Excel. Here and in the Journal export the whole history of the car is now available, not just the last 12 months."
+      },
+      {
+        "icon": "apps-outline",
+        "text": "Three buttons on Home lead to three different places",
+        "desc": "They used to read \"+ Fuel\", \"+ Service\" and \"+ Expense\" — the same entry point repeated three times, while the round \"+\" at the bottom of the screen already adds a record. The middle one is now \"Add\": a tap unfolds a menu of three right under the button — fuel (charge on an electric car), service, expense. On the left, \"Spending\" opens expenses for the period; on the right, \"Assistant\" — dashboard warning lights, car guides, service search on the map and what to do after an accident, until now buried in the Profile."
+      },
+      {
+        "icon": "construct-outline",
+        "text": "Service tiles are bigger and turn like pages",
+        "desc": "Always three in a row, six to a page, with pages swiped sideways — the dots under the grid show which one you are on. The \"Show all\" button is gone for good: every job lives in one strip, the most urgent still on the first page, and the service block keeps the same height on screen no matter how many jobs you have set up."
+      },
+      {
+        "icon": "speedometer-outline",
+        "text": "Mileage no longer drops in silence",
+        "desc": "The moment the number you type falls below the current mileage, the line under the field turns red and swaps the speedometer for a down arrow — in fuel, service and expense forms, and in the \"Update mileage\" popup on Home. Lowering it cannot be forbidden, it is how a typo like 1,000,000 instead of 100,000 gets fixed, so the app does not block you but asks: \"Now 102,300 km, will become 102,000 km\". A corrected odometer reading finally reaches Home as well — both when you edit a record and when you delete one; a wrong number could stay there forever before."
+      },
+      {
+        "icon": "chatbubble-ellipses-outline",
+        "text": "Feedback reaches us again",
+        "desc": "If you wrote to us from the app and got \"Could not send, please try again later\", your message never arrived — and it was not your connection, the fault was on our side. Sending works again: Profile → System → \"Feedback and suggestions\". Sorry for the silence — if you gave up back then, please write once more, we read every message."
+      }
+    ]
+  },
+  {
     "version": "1.6.2",
     "date": "2026-09-04",
     "ru": [
