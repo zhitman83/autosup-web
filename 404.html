@@ -3,7 +3,20 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>AutoSup — приглашение</title>
+  <title>AutoSup</title>
+  <!--
+    GitHub Pages отдаёт эту страницу на ЛЮБОЙ несуществующий путь, а ссылки
+    приглашения выглядят как /invite/{groupId}_{inviteId} — своей страницы у них
+    нет и быть не может: статический хостинг не умеет подстановочные пути.
+    Поэтому один файл обслуживает два случая и различает их по адресу.
+    Класс ставится в <head>, до отрисовки, — иначе на долю секунды мелькал бы
+    чужой текст. Без JavaScript видно обычную «страница не найдена»: это
+    безопасный вариант по умолчанию, приглашение и так открывается в приложении.
+  -->
+  <script>
+    document.documentElement.className =
+      location.pathname.indexOf('/invite/') === 0 ? 'is-invite' : 'is-404';
+  </script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -25,25 +38,45 @@
     .btn.secondary { background: rgba(255,255,255,0.1); color: #eaf2ff; }
     .footer { margin-top: 36px; font-size: 12px; color: #5f7591; }
     .footer a { color: #9fb3cc; }
+
+    /* По умолчанию — «не найдено»; приглашение показывается только по адресу. */
+    #invite { display: none; }
+    .is-invite #invite { display: block; }
+    .is-invite #notfound { display: none; }
   </style>
 </head>
 <body>
-  <div class="card">
+  <div class="card" id="invite">
     <div class="logo">AutoSup</div>
-    <div class="title">Вас пригласили в семейный доступ</div>
+    <div class="title">Вас пригласили вести машину вместе</div>
     <div class="desc">
-      Чтобы принять приглашение, установите приложение AutoSup и откройте эту ссылку снова.
+      Установите приложение AutoSup и откройте эту ссылку ещё раз — приглашение
+      примется внутри приложения.
     </div>
     <div class="hint">
-      Уже установили? Откройте приложение → Профиль → Аккаунт → «Принять приглашение»
-      и введите код из ссылки.
+      Уже установили? Откройте ссылку заново или отсканируйте код у того, кто вас
+      пригласил. Приглашение действует 7 дней и срабатывает один раз.
     </div>
     <div class="stores">
-      <a class="btn" href="#">App Store</a>
-      <a class="btn secondary" href="#">Google Play</a>
+      <a class="btn" href="https://apps.apple.com/app/id6776712725">App Store</a>
+      <a class="btn secondary" href="https://play.google.com/store/apps/details?id=com.autosup.app">Google Play</a>
     </div>
     <div class="footer">
       <a href="/">autosup.app</a>
+    </div>
+  </div>
+
+  <div class="card" id="notfound">
+    <div class="logo">AutoSup</div>
+    <div class="title">Страница не найдена</div>
+    <div class="desc">
+      Такой страницы нет — возможно, ссылка устарела или в адресе опечатка.
+    </div>
+    <div class="stores">
+      <a class="btn" href="/">На главную</a>
+    </div>
+    <div class="footer">
+      <a href="/privacy">Политика конфиденциальности</a>
     </div>
   </div>
 </body>
