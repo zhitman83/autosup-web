@@ -1,5 +1,73 @@
 [
   {
+    "version": "1.9.1",
+    "date": "2026-10-05",
+    "ru": [
+      {
+        "icon": "chatbubbles-outline",
+        "text": "Вопросы голосом",
+        "desc": "«Сколько потратил на бензин в сентябре», «когда ТО», «какой расход», «какие сроки у документов» — ответ сразу на экране, с кнопкой «Подробнее». Ответ вслух — в подписке Про."
+      },
+      {
+        "icon": "navigate-outline",
+        "text": "Голосом — куда нужно",
+        "desc": "«Открой страховку», «перейди в траты», «найди ближайший шиномонтаж» — откроется экран или карта. «Переключись на Ласточку» делает машину активной, а «продлил страховку до 1 марта» откроет документ с уже подставленным сроком."
+      },
+      {
+        "icon": "bookmark-outline",
+        "text": "Голос запоминает ваши категории",
+        "desc": "Поправили «Дворники» на «Расходники» — в следующий раз голос поставит «Расходники» сам. Выученные слова видны и удаляются в «Категориях расходов»."
+      },
+      {
+        "icon": "document-text-outline",
+        "text": "Документ открывается для чтения",
+        "desc": "Карточка документа сначала показывает данные, править — по кнопке «Редактировать». Шаблонные документы теперь называются на языке приложения и после смены языка."
+      },
+      {
+        "icon": "calendar-outline",
+        "text": "«Траты» за любые даты",
+        "desc": "Свой период — любые даты: день, неделя, с 3 по 12 число. Сравнение идёт с таким же отрезком перед ним."
+      },
+      {
+        "icon": "construct-outline",
+        "text": "Исправления",
+        "desc": "Казахская диктовка на Android — в 2–2,5 раза быстрее и точнее с пробегом. Озвучка согласует слово с числом («2 литра»). Виджет Android снова рисуется у машины без эмблемы марки. Форма ТО и напоминания — на языке приложения. Цены подписок пишутся как суммы в приложении."
+      }
+    ],
+    "en": [
+      {
+        "icon": "chatbubbles-outline",
+        "text": "Ask by voice",
+        "desc": "\"How much did I spend on fuel in September\", \"when is service due\", \"what is my consumption\", \"when do my documents expire\" — the answer shows right away, with a \"Details\" button. Spoken answers come with the Pro subscription. Voice questions and commands work in Russian and Kazakh for now."
+      },
+      {
+        "icon": "navigate-outline",
+        "text": "Go anywhere by voice",
+        "desc": "\"Open insurance\", \"go to spending\", \"find the nearest tyre shop\" — the screen or the map opens. \"Switch to Swallow\" makes that car active, and \"renewed insurance until March 1\" opens the document with the new date filled in."
+      },
+      {
+        "icon": "bookmark-outline",
+        "text": "Voice remembers your categories",
+        "desc": "Corrected \"Wipers\" to \"Consumables\" once — next time voice picks \"Consumables\" by itself. Learned words are listed and can be removed in \"Expense categories\"."
+      },
+      {
+        "icon": "document-text-outline",
+        "text": "Documents open for reading",
+        "desc": "A document now opens showing its data; editing is behind the \"Edit\" button. Template documents are named in the app language, even after you switch languages."
+      },
+      {
+        "icon": "calendar-outline",
+        "text": "Spending for any dates",
+        "desc": "Pick any custom period — a day, a week, from the 3rd to the 12th. It is compared with an equal stretch right before it."
+      },
+      {
+        "icon": "construct-outline",
+        "text": "Fixes",
+        "desc": "Kazakh dictation on Android is 2–2.5 times faster and catches mileage better. Spoken confirmations agree words with numbers. The Android widget draws again for cars without a brand emblem. The service form and reminders follow the app language. Subscription prices are formatted like other amounts in the app."
+      }
+    ]
+  },
+  {
     "version": "1.9.0",
     "date": "2026-09-28",
     "ru": [
