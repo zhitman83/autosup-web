@@ -1,5 +1,23 @@
 [
   {
+    "version": "1.9.2",
+    "date": "2026-10-06",
+    "ru": [
+      {
+        "icon": "construct-outline",
+        "text": "Исправления",
+        "desc": "Приложение больше не вылетает, если открыть его кнопкой «Пробег» на виджете."
+      }
+    ],
+    "en": [
+      {
+        "icon": "construct-outline",
+        "text": "Fixes",
+        "desc": "The app no longer crashes when opened with the Mileage button on the widget."
+      }
+    ]
+  },
+  {
     "version": "1.9.1",
     "date": "2026-10-05",
     "ru": [
