@@ -1,5 +1,63 @@
 [
   {
+    "version": "1.10.0",
+    "date": "2026-10-09",
+    "ru": [
+      {
+        "icon": "alarm-outline",
+        "text": "Свои напоминания",
+        "desc": "Разовые по дате, по пробегу или «что раньше» и повторяющиеся — «Настройки → Уведомления → Мои напоминания». Голосом: «напомни через 500 км проверить давление»."
+      },
+      {
+        "icon": "notifications-outline",
+        "text": "Свой порог у работы ТО",
+        "desc": "Напомнить о масле за 300 км, об антифризе — за 2 недели. Голосом: «напомни про замену масла за 300 км»."
+      },
+      {
+        "icon": "chatbubbles-outline",
+        "text": "Новые вопросы голосом",
+        "desc": "Пробег за период, стоимость километра, последняя заправка с ценой литра, «сколько раз менял», сравнение трат, «кто заправлял последним». Ответ вслух — в подписке Про."
+      },
+      {
+        "icon": "mail-outline",
+        "text": "Отзывы с черновиком и фото",
+        "desc": "Недописанный отзыв сохраняется, а к письму можно приложить до 3 фото."
+      },
+      {
+        "icon": "construct-outline",
+        "text": "Исправления",
+        "desc": "iOS показывает напоминания баннером и при открытом приложении; на Android шапка выбора даты и времени не уходит под статус-бар."
+      }
+    ],
+    "en": [
+      {
+        "icon": "alarm-outline",
+        "text": "Your own reminders",
+        "desc": "One-off by date, by mileage or whichever comes first, and repeating ones — Settings → Notifications → My reminders. By voice: \"remind me in 500 km to check the tyre pressure\"."
+      },
+      {
+        "icon": "notifications-outline",
+        "text": "Your own threshold per service item",
+        "desc": "Be reminded about oil 300 km ahead, about coolant 2 weeks ahead. By voice: \"remind me about the oil change 300 km before\"."
+      },
+      {
+        "icon": "chatbubbles-outline",
+        "text": "New voice questions",
+        "desc": "Mileage for a period, cost per kilometre, the last fill-up with the price per litre, \"how many times did I change\", spending comparison, \"who filled up last\". Spoken answers come with the Pro subscription."
+      },
+      {
+        "icon": "mail-outline",
+        "text": "Feedback with a draft and photos",
+        "desc": "An unfinished message is saved, and you can attach up to 3 photos to it."
+      },
+      {
+        "icon": "construct-outline",
+        "text": "Fixes",
+        "desc": "iOS shows reminders as a banner even while the app is open; on Android the date and time picker header no longer slides under the status bar."
+      }
+    ]
+  },
+  {
     "version": "1.9.2",
     "date": "2026-10-06",
     "ru": [
