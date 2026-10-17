@@ -1,5 +1,63 @@
 [
   {
+    "version": "1.11.0",
+    "date": "2026-10-16",
+    "ru": [
+      {
+        "icon": "download-outline",
+        "text": "Импорт из Fuelio",
+        "desc": "Перенесите заправки и расходы из файла CSV: перед записью виден предпросмотр, а импорт можно отменить. «Настройки → Импорт из Fuelio»."
+      },
+      {
+        "icon": "time-outline",
+        "text": "Время у записей",
+        "desc": "У новых заправок, ТО и расходов можно выбрать не только дату, но и время — оно видно в истории. У старых записей время не показывается."
+      },
+      {
+        "icon": "call-outline",
+        "text": "Визитница",
+        "desc": "Свои СТО, магазины и сервисы с телефоном, адресом и маршрутом. Мастерская в ТО и расходах выбирается из визитницы, а новое место можно сохранить визиткой."
+      },
+      {
+        "icon": "mic-outline",
+        "text": "Визитница голосом",
+        "desc": "«Позвони в Автомир», «маршрут до шиномонтажа», «сколько потратил в Автомире за год», «когда был в Автомире»."
+      },
+      {
+        "icon": "language-outline",
+        "text": "Визитница по-казахски и вперемешку",
+        "desc": "«Автомирге қоңырау шал», «Автомирге звонда», «Автомирге маршрут сал» — можно говорить по-казахски или смешивать с русским."
+      }
+    ],
+    "en": [
+      {
+        "icon": "download-outline",
+        "text": "Import from Fuelio",
+        "desc": "Bring fill-ups and expenses over from a CSV file: you see a preview before saving, and an import can be undone. Settings → Import from Fuelio."
+      },
+      {
+        "icon": "time-outline",
+        "text": "Time on records",
+        "desc": "For new fill-ups, service and expenses you can pick the time as well as the date, and it shows in the history. Older records do not show a time."
+      },
+      {
+        "icon": "call-outline",
+        "text": "Contacts book",
+        "desc": "Your own service stations, shops and workshops with phone, address and route. The workshop in service and expenses is picked from the book, and a new place can be saved as a card."
+      },
+      {
+        "icon": "mic-outline",
+        "text": "Contacts by voice",
+        "desc": "\"Call Avtomir\", \"route to the tyre shop\", \"how much did I spend at Avtomir this year\", \"when was I at Avtomir\". Voice commands work in Russian and Kazakh."
+      },
+      {
+        "icon": "language-outline",
+        "text": "Contacts in Kazakh and mixed speech",
+        "desc": "Speak Kazakh or mix it with Russian: \"Avtomirge qońyrau shal\", \"Avtomirge zvonda\", \"Avtomirge marshrut sal\"."
+      }
+    ]
+  },
+  {
     "version": "1.10.0",
     "date": "2026-10-09",
     "ru": [
