@@ -1,5 +1,63 @@
 [
   {
+    "version": "1.12.0",
+    "date": "2026-10-22",
+    "ru": [
+      {
+        "icon": "calculator-outline",
+        "text": "Калькулятор поездки",
+        "desc": "Сколько стоит поездка, на сколько хватит топлива, какой вышел расход и когда окупится ГБО. Расход и цена подставляются из ваших заправок. Вход: значок в шапке «Топлива» и «Автопомощник». Голосом: «сколько стоит доехать 1200 км», «на сколько хватит 30 литров»."
+      },
+      {
+        "icon": "briefcase-outline",
+        "text": "Нагрузка в поездке",
+        "desc": "Отметьте пассажиров, багаж, груз на крыше, прицеп, город или трассу, и калькулятор пересчитает расход и стоимость поездки с примерной поправкой."
+      },
+      {
+        "icon": "water-outline",
+        "text": "Топливо вашей страны",
+        "desc": "В форме заправки марки топлива называются так, как на заправках вашей страны (Regular 87, Super E10, 92#). Появились АИ-100, E10, E85, дизель премиум и другие: кнопка «Ещё…» рядом с видами топлива."
+      },
+      {
+        "icon": "volume-high-outline",
+        "text": "Звуки голосового ввода",
+        "desc": "Короткие сигналы «слушаю», «записал» и «не понял», чтобы не смотреть в экран. Выключить или сделать тише: «Настройки → Звуковые эффекты»."
+      },
+      {
+        "icon": "sparkles-outline",
+        "text": "Метка «Новое»",
+        "desc": "Новые разделы подсвечены точкой и плашкой «Новое». Метка гаснет, когда вы туда заглянете."
+      }
+    ],
+    "en": [
+      {
+        "icon": "calculator-outline",
+        "text": "Trip calculator",
+        "desc": "How much a trip costs, how far your fuel will take you, what your consumption was and when an LPG kit pays off. Consumption and price come from your own fill-ups. Open it from the icon at the top of the Fuel tab or from Car Assistant. Voice questions like \"how much to drive 1200 km\" work in Russian and Kazakh."
+      },
+      {
+        "icon": "briefcase-outline",
+        "text": "Load on a trip",
+        "desc": "Mark passengers, luggage, a roof load, a trailer, city or highway driving, and the calculator adjusts consumption and trip cost with an approximate correction."
+      },
+      {
+        "icon": "water-outline",
+        "text": "Fuel names for your country",
+        "desc": "The fill-up form names fuel grades the way stations in your country do (Regular 87, Super E10, 92#). New grades such as AI-100, E10, E85 and premium diesel are under the More… button next to the fuel types."
+      },
+      {
+        "icon": "volume-high-outline",
+        "text": "Voice input sounds",
+        "desc": "Short \"listening\", \"saved\" and \"didn't catch that\" signals, so you don't have to look at the screen. Turn them off or lower the volume in Settings → Sound effects."
+      },
+      {
+        "icon": "sparkles-outline",
+        "text": "\"New\" marks",
+        "desc": "New sections are highlighted with a dot and a \"New\" badge. The mark goes away once you open the section."
+      }
+    ]
+  },
+  {
     "version": "1.11.0",
     "date": "2026-10-16",
     "ru": [
