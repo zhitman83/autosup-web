@@ -23,6 +23,11 @@
 
   <p>AutoSup (“we,” “us,” or “the app”) respects your privacy. This policy explains what data we collect and how we use it.</p>
 
+  <h2>Who we are</h2>
+  <p>AutoSup is operated by an individual developer, Almas Zhanggabatyr (Kazakhstan), who is
+  responsible for your personal information. Privacy contact:
+  <a href="mailto:support@autosup.app">support@autosup.app</a>.</p>
+
   <h2>What data we collect</h2>
   <ul>
     <li>Information about your cars, fuel-ups, maintenance, and expenses that you enter yourself.</li>
@@ -33,6 +38,10 @@
     <li>Whatever you enter into your vehicle documents: the registration certificate number,
       the insurance policy number and expiration date, the name of the driver’s license holder.
       This information may relate to people other than you.</li>
+    <li>Details of your places in the contacts book — the names, phone numbers, addresses, and map
+      links of repair shops, stores, car washes, and other businesses, plus your notes about them.
+      You enter this yourself; the app does not read your phone’s address book. The contacts book
+      is stored on your phone and, if you use the cloud, in your personal cloud backup.</li>
     <li>When you send feedback or a suggestion — the contact method you provide (email or
       phone number), the text of your message, and the app version and platform.</li>
     <li>If you subscribe to AutoSup Pro or AutoSup Business — your subscription details (which
@@ -93,16 +102,34 @@
       group will see it. Only add such documents to a shared car if the people named in them are
       okay with it.</li>
     <li><strong>PDF files are not uploaded</strong> — they stay on your phone only.</li>
-    <li><strong>Photos of a personal car are not uploaded to the cloud.</strong> Only the file name
-      goes into your backup; the image itself never leaves your device.</li>
+    <li>For how photos of a <strong>personal</strong> car are handled, see “Photos of a personal
+      car” below.</li>
     <li>Photo upload for shared cars is not turned on right away or for everyone: while it is off,
       photos stay on your phone.</li>
   </ul>
 
+  <h2>Photos of a personal car</h2>
+  <p>On the free plan, photos of a personal car — the photo of the car itself, receipts, and
+  document photos — stay on your phone only: just the file name goes into your backup.</p>
+
+  <p>With an AutoSup Pro or AutoSup Business subscription, they are uploaded to cloud storage (Google
+  Firebase Cloud Storage) — to your personal folder, which only you can access. This lets you get your
+  photos back on a new phone. Storage is limited: 2 GB with Pro, 10 GB with Business.</p>
+  <ul>
+    <li>Automatic upload is turned on and off with the “Automatic backup” switch on the account
+      screen. The “Save to cloud” button uploads photos manually.</li>
+    <li><strong>PDF files are not uploaded</strong> — they stay on your phone only.</li>
+    <li>A photo is kept in the cloud as long as its record exists. If you delete the photo or the
+      record, the file is erased from storage about <strong>14 days</strong> later.</li>
+    <li>When you delete your account, your personal photo folder is deleted.</li>
+  </ul>
+
   <h2>Data retention</h2>
   <p>Your records stay on your device and, if you use the cloud, in the cloud until you delete them
-  or delete your account. The specific periods described in this policy — for photos of shared cars
-  (see “Account deletion”) and for voice phrases (up to 12 months) — apply on top of that.</p>
+  or delete your account. The specific periods described in this policy — for photos of a personal car (about 14 days after
+  deletion), for photos of shared cars (see “Account deletion”), and for voice phrases (up to 12
+  months) — apply on top of that. Feedback messages are kept after account deletion only in anonymized
+  form (see “Account deletion”).</p>
 
   <h2>Account deletion</h2>
   <p>You can delete all of your data and your account at any time in the app under
@@ -118,6 +145,10 @@
   same rule. Photos you uploaded to someone else’s group stay with that group: they are part of the
   shared history of a car that the other members keep using.</p>
 
+  <p>When you delete your account, your feedback messages and support requests are anonymized: the
+  contact you provided and your account identifier are removed. The message text, the app version, and
+  the platform remain — no longer linked to you.</p>
+
   <p>Deleting your account also erases the record of your subscription in our database. It does not
   cancel the subscription itself — the App Store or Google Play will keep charging you for it until
   you cancel it in your account settings in that app store.</p>
@@ -127,11 +158,18 @@
     <li><strong>Camera</strong> — to take photos of your car and documents.</li>
     <li><strong>Photo library</strong> — to attach photos from your library.</li>
     <li><strong>Notifications</strong> — for maintenance and document expiration reminders.</li>
+    <li><strong>Microphone</strong> — for adding records by voice.</li>
+    <li><strong>Speech recognition</strong> (iPhone) — to turn what you say into the text of a record.</li>
   </ul>
 
+  <h2>Voice input</h2>
+  <p>To turn speech into text, the app uses the system speech recognizer — Apple’s on iPhone or
+  Google’s on Android. It may process audio on Apple’s or Google’s servers under their own policies.
+  Kazakh dictation runs on a model downloaded to your phone, so the audio never leaves the device. The
+  recognized text is turned into a record on your phone; we do not receive or store any audio.</p>
+
   <h2>Voice phrases to improve recognition</h2>
-  <p><strong>Off by default.</strong> Speech recognition in AutoSup runs on the device itself: the app
-  does not need to send your phrase anywhere to understand it. Separately, and only with your explicit
+  <p><strong>Off by default.</strong> Recognized phrases do not reach us. Separately, and only with your explicit
   consent, you can help us make recognition more accurate — in that case, your phrase log is sent to
   us.</p>
 
@@ -167,7 +205,9 @@
   is right next to the list, so you can see exactly what will be sent before you turn it on.</p>
 
   <h2>California residents (CCPA/CPRA)</h2>
-  <p>This section describes our practices using the categories of the California Consumer Privacy Act,
+  <p>AutoSup is operated by an individual developer, Almas Zhanggabatyr (Kazakhstan); for any request
+  under this section, contact <a href="mailto:support@autosup.app">support@autosup.app</a>. This section
+  describes our practices using the categories of the California Consumer Privacy Act,
   as amended by the California Privacy Rights Act. It does not change how the app works; it
   describes the same data listed above.</p>
 
@@ -178,7 +218,8 @@
       device’s advertising identifier.</li>
     <li><strong>Personal information described in Cal. Civ. Code § 1798.80(e)</strong> — names and
       document numbers you enter into vehicle documents (registration certificate, insurance policy,
-      driver’s license), which may belong to people other than you.</li>
+      driver’s license), which may belong to people other than you; names, phone numbers, and
+      addresses you save in the contacts book.</li>
     <li><strong>Commercial information</strong> — your subscription plan, period, and status; the
       vehicle expenses and fuel-ups you record.</li>
     <li><strong>Internet or other electronic network activity information</strong> — app usage
@@ -238,6 +279,9 @@
 
   <h2>Canadian users (PIPEDA)</h2>
   <ul>
+    <li><strong>Accountability.</strong> The person accountable for your personal information is the
+      developer, Almas Zhanggabatyr (Kazakhstan):
+      <a href="mailto:support@autosup.app">support@autosup.app</a>.</li>
     <li><strong>Consent.</strong> We collect and use your personal information for the purposes
       described in this policy, which you accept by using the app. Optional collection — such as
       voice phrases — happens only if you turn it on. You can withdraw your consent at any time: turn
@@ -252,7 +296,8 @@
   </ul>
 
   <h2>International transfers</h2>
-  <p>Your cloud data is stored with Google Firebase (Google Cloud) on servers in Europe. Our other
+  <p>Your cloud data is stored with Google Firebase (Google Cloud) on servers in Europe. The system speech
+  recognizer (Apple or Google) may process audio on its own servers. Our other
   service providers — Sentry, RevenueCat, and, for the Android advertising identifier, Meta — may
   process data in the United States or other countries. This means your information may be processed
   outside the country where you live, where privacy laws may differ.</p>
