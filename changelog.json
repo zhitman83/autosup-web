@@ -1,5 +1,73 @@
 [
   {
+    "version": "1.13.0",
+    "date": "2026-10-30",
+    "ru": [
+      {
+        "icon": "water-outline",
+        "text": "Стиль «Стекло»",
+        "desc": "Новый стиль оформления в подписке Про: прозрачные карточки и панели, как в iOS 26, и девять фонов на выбор. На Android и прежних версиях iOS — упрощённый вид."
+      },
+      {
+        "icon": "eye-outline",
+        "text": "Примерка стилей",
+        "desc": "Глубину, Кристалл и Стекло можно примерить до оформления подписки Про: включите стиль в Настройках и походите по приложению. Выход из примерки возвращает ваш стиль."
+      },
+      {
+        "icon": "car-sport-outline",
+        "text": "Больше машин в каталоге",
+        "desc": "+29 марок и +245 моделей: Chevrolet Cobalt, Hyundai Solaris, новая Camry и RAV4, Lotus, Xiaomi и другие. Модель находится и по другому имени: «Sedona» — это Kia Carnival, «Triton» — L200, «KGM» — SsangYong."
+      },
+      {
+        "icon": "phone-portrait-outline",
+        "text": "Выключатель вибрации",
+        "desc": "В Настройках появился тумблер «Вибрация»: он выключает отклик при нажатиях, сохранении записей и в голосовой панели."
+      },
+      {
+        "icon": "mic-outline",
+        "text": "Голос быстрее",
+        "desc": "Микрофон начинает слушать примерно через секунду вместо двух. Голос понимает и английский: вопросы, напоминания, звонок в свою визитку."
+      },
+      {
+        "icon": "construct-outline",
+        "text": "Удобнее формы",
+        "desc": "Над клавиатурой — кнопка «скрыть клавиатуру», в списке видов работ ТО — поиск, а дату документа выбирает системный выбор даты телефона."
+      }
+    ],
+    "en": [
+      {
+        "icon": "mic-outline",
+        "text": "Voice in English",
+        "desc": "Log a fill-up, ask \"What's my gas mileage?\" or \"When did I last change the oil?\", set a reminder, switch cars or call your mechanic, all by voice. See \"How to speak\" for examples."
+      },
+      {
+        "icon": "globe-outline",
+        "text": "Made for your country",
+        "desc": "Miles, gallons, mpg and your currency are picked from your phone's region on a new install, with familiar words: Gas, Tire, Registration. Registration renewal reminders work where your country renews it."
+      },
+      {
+        "icon": "water-outline",
+        "text": "The Glass style",
+        "desc": "A new look in the Pro subscription: see-through cards and panels like iOS 26, with nine backgrounds to choose from. Android and older iOS get a simplified version."
+      },
+      {
+        "icon": "eye-outline",
+        "text": "Try styles before you subscribe",
+        "desc": "Depth, Crystal and Glass can be tried before you get the Pro subscription: pick a style in Settings and look around. Leaving the preview brings your style back."
+      },
+      {
+        "icon": "car-sport-outline",
+        "text": "More cars",
+        "desc": "29 more makes and 245 more models. Search also finds other names: \"Sedona\" is the Kia Carnival, \"Triton\" is the L200, \"Mirage\" is the Space Star."
+      },
+      {
+        "icon": "phone-portrait-outline",
+        "text": "Vibration switch",
+        "desc": "Turn haptic feedback on or off for taps, saving records and the voice panel in Settings."
+      }
+    ]
+  },
+  {
     "version": "1.12.0",
     "date": "2026-10-22",
     "ru": [
